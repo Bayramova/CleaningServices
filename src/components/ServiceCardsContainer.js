@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ServiceCard from "./ServiceCard";
-import data from "./data/service_types.js";
+import data from "../data/service_types.js";
 
 class ServiceCardsContainer extends Component {
   state = {
