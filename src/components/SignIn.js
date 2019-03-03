@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Input, Icon } from "antd";
-import isEmail from 'validator/lib/isEmail';
+import isEmail from "validator/lib/isEmail";
+
+import { Form, Icon, Input, Button, Checkbox } from "antd";
 
 class SignIn extends Component {
   state = {
@@ -8,7 +9,7 @@ class SignIn extends Component {
       login: "",
       password: ""
     },
-    fieldErrors: {},
+    fieldErrors: {}
   };
 
   onInputChange = event => {
@@ -22,7 +23,7 @@ class SignIn extends Component {
   onFormSubmit = event => {
     const user = this.state.fields;
     const fieldErrors = this.validate(user);
-    this.setState({fieldErrors});
+    this.setState({ fieldErrors });
     event.preventDefault();
 
     if (Object.keys(fieldErrors).length) return;
@@ -33,27 +34,26 @@ class SignIn extends Component {
     `);
     this.setState({
       fields: {
-        login: '',
-        password: '',
+        login: "",
+        password: ""
       }
     });
-    
   };
 
   validate = user => {
     const errors = {};
-    if (!user.login) errors.login = 'Email/phone Required';
-    if (!user.password) errors.password = 'Password Required';
-    if (user.login && !isEmail(user.login)) errors.login = 'Invalid Email';
+    if (!user.login) errors.login = "Email/phone Required";
+    if (!user.password) errors.password = "Password Required";
+    if (user.login && !isEmail(user.login)) errors.login = "Invalid Email";
     return errors;
-  }
+  };
 
   render() {
     return (
       <main className="main">
         <div className="sign-in-container">
           <div className="sign-in">
-            <h1 className="sign-in__title">Sign in to Your Account</h1>
+            <h1 className="sign-in__title">Sign in to your account</h1>
             <div className="sign-in__sign-up-info">
               Don't have an account?
               <a className="sign-in__sign-up-link"> Create one</a>.
@@ -76,7 +76,6 @@ class SignIn extends Component {
                 <span className='field-errors'>{this.state.fieldErrors.login}</span>
               </fieldset>
 
-
               <fieldset className="sign-in__fieldset">
                 <label className="sign-in__form__label" htmlFor="password">
                   Your Password
@@ -86,7 +85,7 @@ class SignIn extends Component {
                   type="Input.Password"
                   value={this.state.fields.password}
                   onChange={this.onInputChange}
-                  placeholder="input password"
+                  placeholder="Password"
                 />
                 <span className='field-errors'>{this.state.fieldErrors.password}</span>
               </fieldset>
@@ -105,5 +104,85 @@ class SignIn extends Component {
     );
   }
 }
+
+// class SignIn extends Component {
+//   handleSubmit = e => {
+//     e.preventDefault();
+//     this.props.form.validateFields((err, values) => {
+//       if (!err) {
+//         console.log("Received values of form: ", values);
+//       }
+//     });
+//   };
+
+//   render() {
+//     const { getFieldDecorator } = this.props.form;
+//     return (
+//       <main className="main">
+//         <div className="sign-in-container">
+//           <div className="sign-in">
+//             <h1 className="sign-in__title">Sign in to your account</h1>
+
+//             <Form onSubmit={this.handleSubmit} className="login-form">
+//               <Form.Item>
+//                 {getFieldDecorator("userName", {
+//                   rules: [
+//                     { required: true, message: "Please input your username!" }
+//                   ]
+//                 })(
+//                   <Input
+//                   name="login"
+//                   type="Input.Text"
+//                   placeholder="name@example.com"
+//                   prefix={
+//                     <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+//                   }
+//                   />
+//                 )}
+//               </Form.Item>
+//               <Form.Item>
+//                 {getFieldDecorator("password", {
+//                   rules: [
+//                     { required: true, message: "Please input your Password!" }
+//                   ]
+//                 })(
+//                   <Input
+//                     prefix={
+//                       <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+//                     }
+//                     name="password"
+//                     type="Input.Password"
+//                     placeholder="Password"
+//                   />
+//                 )}
+//               </Form.Item>
+//               <Form.Item>
+//                 {getFieldDecorator("remember", {
+//                   valuePropName: "checked",
+//                   initialValue: true
+//                 })(<Checkbox>Remember me</Checkbox>)}
+//                 <a className="login-form-forgot" href="">
+//                   Forgot password
+//                 </a>
+//                 <Button
+//                   type="primary"
+//                   htmlType="submit"
+//                   className="login-form-button"
+//                 >
+//                   Log in
+//                 </Button>
+//                 Or <a href="">register now!</a>
+//               </Form.Item>
+//             </Form>
+//           </div>
+//         </div>
+//       </main>
+//     );
+//   }
+// }
+
+// const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(SignIn);
+
+// export default WrappedNormalLoginForm;
 
 export default SignIn;

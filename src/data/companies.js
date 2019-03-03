@@ -5,6 +5,7 @@ const companies = [
     name: "Fresh Perspectives",
     adress: "1600 Pennsylvania Avenue, Washington",
     rating: "4",
+    orders: "50",
     services: "[standartcleaning, generalcleaning, repaircleaning]"
   },
   {
@@ -13,6 +14,7 @@ const companies = [
     name: "Uborka Kvartir",
     adress: "11 Wall Street New York, NY",
     rating: "5",
+    orders: "30",
     services: "[standartcleaning, officecleaning, furniturecleaning]"
   },
   {
@@ -21,6 +23,7 @@ const companies = [
     name: "Sparkling Palaces",
     adress: "350 Fifth Avenue New York, NY",
     rating: "4",
+    orders: "77",
     services: "[industrialcleaning, poolcleaning, officecleaning]"
   },
   {
@@ -29,6 +32,7 @@ const companies = [
     name: "House Cleaners",
     adress: "221 B Baker St, London",
     rating: "3",
+    orders: "15",
     services: "[standartcleaning, generalcleaning, carpetcleaning, furniturecleaning]"
   },
   {
@@ -37,6 +41,7 @@ const companies = [
     name: "Roga&Kopyta",
     adress: "Tour Eiffel Champ de Mars, Paris",
     rating: "5",
+    orders: "32",
     services: "[standartcleaning, generalcleaning, repaircleaning, officecleaning, carpetcleaning, furniturecleaning, industrialcleaning, poolcleaning]"
   },
   {
@@ -45,6 +50,7 @@ const companies = [
     name: "Cowboys Cleaning",
     adress: "4059 Mt Lee Dr. Hollywood, CA",
     rating: "4",
+    orders: "30",
     services: "[carpetcleaning, furniturecleaning]"
   },
   {
@@ -53,6 +59,7 @@ const companies = [
     name: "RamClean Cleaning Services",
     adress: "Buckingham Palace, London",
     rating: "3",
+    orders: "10",
     services: "[repaircleaning, industrialcleaning]"
   },
   {
@@ -61,6 +68,7 @@ const companies = [
     name: "Stormy's Cleaning Service",
     adress: "Statue of Liberty, Liberty Island New York, NY",
     rating: "3",
+    orders: "70",
     services: "[standartcleaning, generalcleaning, furniturecleaning, carpetcleaning]"
   },
   {
@@ -69,6 +77,7 @@ const companies = [
     name: "A&A Cleaning Services",
     adress: "Manager Square, Bethlehem, West Bank",
     rating: "4",
+    orders: "66",
     services: "[standartcleaning, poolcleaning]"
   },
   {
@@ -77,6 +86,7 @@ const companies = [
     name: "GoClean",
     adress: "2 Macquarie Street, Sydney",
     rating: "5",
+    orders: "85",
     services: "[repaircleaning, generalcleaning]"
   },
   {
@@ -85,6 +95,7 @@ const companies = [
     name: "Chrisparkle Cleaning Services",
     adress: "99, rue de Rivoli, Paris",
     rating: "4",
+    orders: "20",
     services: "[standartcleaning, generalcleaning, poolcleaning]"
   },
   {
@@ -93,6 +104,7 @@ const companies = [
     name: "Chistogoliki",
     adress: "Piazza della Scala, Milano",
     rating: "3",
+    orders: "60",
     services: "[standartcleaning, generalcleaning, repaircleaning, officecleaning]"
   },
   {
@@ -101,6 +113,7 @@ const companies = [
     name: "Gryazi net",
     adress: "263 Prinsengracht, Amsterdam",
     rating: "3",
+    orders: "10",
     services: "[standartcleaning, generalcleaning, carpetcleaning, furniturecleaning]"
   },
   {
@@ -109,6 +122,7 @@ const companies = [
     name: "Blesk",
     adress: "1060 West Addison Street, Chigaco",
     rating: "5",
+    orders: "20",
     services: "[standartcleaning, generalcleaning, carpetcleaning, furniturecleaning, poolcleaning]"
   },
   {
@@ -117,6 +131,7 @@ const companies = [
     name: "City Cleaning",
     adress: "10 Downing Street, London",
     rating: "4",
+    orders: "30",
     services: "[repaircleaning, officecleaning, industrialcleaning]"
   },
   {
@@ -125,6 +140,7 @@ const companies = [
     name: "Merry Maids",
     adress: "30 Rockefeller Plaza, Manhattan, NY",
     rating: "4",
+    orders: "40",
     services: "[standartcleaning, generalcleaning, repaircleaning, officecleaning, carpetcleaning, furniturecleaning, industrialcleaning, poolcleaning]"
   },
   {
@@ -133,6 +149,7 @@ const companies = [
     name: "Molly Maid",
     adress: "6925 Hollywood Boulevard, Hollywood, CA",
     rating: "5",
+    orders: "50",
     services: "[standartcleaning, generalcleaning, repaircleaning, officecleaning, carpetcleaning, furniturecleaning, industrialcleaning, poolcleaning]"
   },
   {
@@ -141,6 +158,7 @@ const companies = [
     name: "Fresh Carpet",
     adress: "Off A344 Road, Amesbury, Wiltshire",
     rating: "5",
+    orders: "60",
     services: "[carpetcleaning, furniturecleaning]"
   },
   {
@@ -149,6 +167,7 @@ const companies = [
     name: "Krasniy Uborshik",
     adress: "Red Square, Moscow",
     rating: "3",
+    orders: "70",
     services: "[officecleaning, standartcleaning]"
   },
   {
@@ -157,6 +176,7 @@ const companies = [
     name: "Wendi's Cleaning Service",
     adress: "Number 4, Privet Drive, Little Whinging",
     rating: "4",
+    orders: "80",
     services: "[standartcleaning, generalcleaning]"
   },
   {
@@ -165,6 +185,7 @@ const companies = [
     name: "Residential Cleaning Service",
     adress: "42 Wallaby Way, Sydney",
     rating: "3",
+    orders: "30",
     services: "[officecleaning]"
   },
   {
@@ -173,6 +194,7 @@ const companies = [
     name: "Horns&Hooves",
     adress: "11 Derby Street, Nawton",
     rating: "4",
+    orders: "90",
     services: "[carpetcleaning, furniturecleaning, poolcleaning]"
   },
   {
@@ -181,6 +203,7 @@ const companies = [
     name: "Heh&Hah",
     adress: "ul. Tolstogo 10, Minsk",
     rating: "5",
+    orders: "35",
     services: "[repaircleaning, industrialcleaning, poolcleaning]"
   }
 ];

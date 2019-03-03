@@ -9,6 +9,7 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import SignIn from "./SignIn";
+import CompaniesList from "./CompaniesList";
 
 class App extends Component {
   render() {
@@ -20,7 +21,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Main} />
             <Route exact path="/sign_in" component={SignIn} />
-            <Route exact path="/service/:title" />
+            <Route exact path="/:title" component={CompaniesList}/>
             <Route render={() => <Redirect to="/" />} />
           </Switch>
 
