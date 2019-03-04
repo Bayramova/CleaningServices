@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Rate } from "antd";
-import { List, Avatar, Icon } from "antd";
+import { Link } from "react-router-dom";
 
 const Company = props => {
   const { id, logo, name, adress, rating } = props;
   return (
     <div className="company__card">
-      <a>
+      <Link to={`/company/${id}`}>
         <img className="company__card__image" src={logo} />
         <div className="company__card__content">
           <div className="company__card-title"><a>{name}</a></div>
@@ -15,9 +15,9 @@ const Company = props => {
           </div>
           <div className="company__card-description">{adress}</div>
         </div>
-      </a>
+      </Link>
       <div className="company__card__order-link">
-        <a>Make order</a>
+        <Link to={'/make_order'}>Make order</Link>
       </div>
     </div>
   );

@@ -216,7 +216,7 @@ class SignUpForm extends React.Component {
                   )}
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
-                  <Button type="primary" htmlType="submit">
+                  <Button style={{ width: "50%" }} type="primary" htmlType="submit">
                     Register
                   </Button>
                 </Form.Item>

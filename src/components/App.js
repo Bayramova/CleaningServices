@@ -12,6 +12,7 @@ import OrderForm from "./OrderForm";
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 import CompaniesList from "./CompaniesList";
+import CompanyInfo from "./CompanyInfo";
 
 class App extends Component {
   render() {
@@ -19,13 +20,13 @@ class App extends Component {
       <Router>
         <div className="container">
           <Header />
-          
           <Switch>
             <Route exact path="/" component={Main} />
             <Route exact path="/make_order" component={OrderForm} />
             <Route exact path="/sign_in" component={SignInForm} />
             <Route exact path="/sign_up" component={SignUpForm} />
-            <Route exact path="/:title" component={CompaniesList}/>
+            <Route exact path="/service/:title" component={CompaniesList}/>
+            <Route exact path="/company/:company" component={CompanyInfo}/>
             <Route render={() => <Redirect to="/" />} />
           </Switch>
 

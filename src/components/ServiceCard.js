@@ -5,7 +5,7 @@ const ServiceCard = props => {
   const { id, image, title, description } = props;
   return (
     <div className="catalogue__card">
-      <Link to={`/${id}`}>
+      <Link to={`/service/${id}`}>
         <img className="catalogue__card__image" src={image} />
         <div className="catalogue__card__content">
           <div className="catalogue__card-title">{title}</div>
