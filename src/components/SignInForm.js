@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import isEmail from "validator/lib/isEmail";
-
+import {Link} from "react-router-dom";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 
-class SignIn extends Component {
+class SignInForm extends Component {
   state = {
     fields: {
       login: "",
@@ -56,7 +56,7 @@ class SignIn extends Component {
             <h1 className="sign-in__title">Sign in to your account</h1>
             <div className="sign-in__sign-up-info">
               Don't have an account?
-              <a className="sign-in__sign-up-link"> Create one</a>.
+              <Link to={"/sign_up"} className="sign-in__sign-up-link"> Create one</Link>.
             </div>
             <form className="sign-in__form" onSubmit={this.onFormSubmit}>
               <fieldset className="sign-in__fieldset">
@@ -185,4 +185,4 @@ class SignIn extends Component {
 
 // export default WrappedNormalLoginForm;
 
-export default SignIn;
+export default SignInForm;

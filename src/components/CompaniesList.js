@@ -39,7 +39,7 @@ class CompaniesList extends Component {
 
         <section className="section">
           <div className="catalogue catalogue--companies">
-            <div className="catalogue__cards">
+            <div className="catalogue__cards catalogue__cards--companies">
               <CompaniesListContainer />
             </div>
           </div>
