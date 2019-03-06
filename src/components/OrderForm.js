@@ -148,20 +148,20 @@ class MakeOrderForm extends React.Component {
                   )}
                 </Form.Item>
 
-                <Form.Item label="Number of small/large rooms/bathrooms">
+                <Form.Item label="Number of rooms">
                   {getFieldDecorator("rooms", {
                     rules: [
                       {
                         required: true,
                         message:
-                          "Please input number of small/large rooms, number of bathrooms!"
+                          "Please input number of rooms!"
                       }
                     ]
                   })(
                     <Input.Group>
-                      <Input style={{ width: "33%" }} defaultValue="2" />
-                      <Input style={{ width: "33%" }} defaultValue="0" />
-                      <Input style={{ width: "33%" }} defaultValue="1" />
+                      <Input style={{ width: "33%" }} placeholder="small rooms"/>
+                      <Input style={{ width: "33%" }} placeholder="big rooms"/>
+                      <Input style={{ width: "33%" }} placeholder="bathrooms"/>
                     </Input.Group>
                   )}
                 </Form.Item>

@@ -89,9 +89,9 @@ class CostCalculationForm extends Component {
               Number of small/large rooms/bathrooms
             </label>
             <Input.Group name='rooms'>
-              <Input style={{ width: "33.3%" }} defaultValue="2" />
-              <Input style={{ width: "33.3%" }} defaultValue="0" />
-              <Input style={{ width: "33.3%" }} defaultValue="1" />
+              <Input style={{ width: "33.3%" }} placeholder="small rooms" />
+              <Input style={{ width: "33.3%" }} placeholder="big rooms" />
+              <Input style={{ width: "33.3%" }} placeholder="bathrooms" />
             </Input.Group>
           </fieldset>
 

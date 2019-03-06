@@ -7,7 +7,7 @@ class Header extends Component {
     return (
       <header className="header">
         <div className="header-content">
-            <Link to="/" className="header__heading">CleaningServices</Link>
+            <Link to="/" className="link header__heading">CleaningServices</Link>
             <div className="header-right">
               <div className="search">
                 <Input.Search
@@ -18,10 +18,10 @@ class Header extends Component {
               </div>
               <ul className="button-links">
                 <li className="button-links__link">
-                  <Link to={"/make_order"} className="button-links__link--order">Make order</Link>
+                  <Link to={"/make_order"} className="link button-links__link--order">Make order</Link>
                 </li>
                 <li className="button-links__link">
-                  <Link to={"/sign_in"} className="button-links__link--sign-in">
+                  <Link to={"/sign_in"} className="link button-links__link--sign-in">
                     Sign in
                   </Link>
                 </li>
