@@ -13,6 +13,7 @@ import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 import CompaniesList from "./CompaniesList";
 import CompanyInfo from "./CompanyInfo";
+import ReviewsContainer from "./ReviewsContainer";
 
 class App extends Component {
   render() {
@@ -27,6 +28,7 @@ class App extends Component {
             <Route exact path="/sign_up" component={SignUpForm} />
             <Route exact path="/:title" component={CompaniesList}/>
             <Route exact path="/company/:company" component={CompanyInfo}/>
+            <Route exact path="/:company/reviews" component={ReviewsContainer} />
             <Route render={() => <Redirect to="/" />} />
           </Switch>
 

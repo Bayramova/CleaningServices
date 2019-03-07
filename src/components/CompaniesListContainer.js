@@ -1,16 +1,23 @@
 import React, { Component } from "react";
 import Company from "./Company";
-import companies from "../data/companies";
+import allCompaniesList from "../data/companies";
 
 class CompaniesListContainer extends Component {
   state = {
     companies: []
   };
 
+  
   async componentDidMount() {
+    const companiesList = [];
+    allCompaniesList.map( (company) => {
+      if (company.services.includes(this.props.pathname)) {
+        companiesList.push(company);
+      }
+    });
     this.setState(() => {
       return {
-        companies
+        companies: companiesList
       };
     });
   }

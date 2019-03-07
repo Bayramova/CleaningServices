@@ -1,24 +1,43 @@
 import React, { Component } from "react";
 import { Select } from "antd";
 import CompaniesListContainer from "./CompaniesListContainer";
+import companies from "../data/companies";
+import data from "../data/service_types.js";
 
 class CompaniesList extends Component {
+  state = {
+    title: "",
+    description: ""
+  };
+
+  async componentDidMount() {
+    const matchPath = Object.values(this.props.match.params)[0];
+    data.map((serviceType) => {
+      if (serviceType.id === matchPath) {
+        this.setState(() => {
+          return {
+            title: serviceType.title,
+            description: serviceType.description
+          };
+        });
+      }
+    });
+  }
+  
   handleChange(value) {
     console.log(`selected ${value}`);
   }
 
   render() {
+    const matchPath = Object.values(this.props.match.params)[0];
     return (
       <main className="main">
       <div className="companies-list__container">
         <section className="section">
             <div className="companies-list-title">
-              <h1 className="companies-list__title">Office Cleaning</h1>
+              <h1 className="companies-list__title">{this.state.title}</h1>
               <h2 className="companies-list__description">
-                Different types of cleaning services are available for the busy
-                company. This type of office cleaning services include desk
-                cleaning, window cleaning, carpet and floor cleaning and much
-                more.
+               {this.state.description}
               </h2>
             </div>
         </section>
@@ -40,7 +59,9 @@ class CompaniesList extends Component {
         <section className="section">
           <div className="catalogue catalogue--companies">
             <div className="catalogue__cards catalogue__cards--companies">
-              <CompaniesListContainer />
+              <CompaniesListContainer 
+                pathname={matchPath}
+              />
             </div>
           </div>
         </section>

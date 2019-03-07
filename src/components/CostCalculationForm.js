@@ -86,7 +86,7 @@ class CostCalculationForm extends Component {
 
           <fieldset className="cost-form__fieldset">
             <label className="cost-form__label" htmlFor='rooms'>
-              Number of small/large rooms/bathrooms
+              Number of rooms
             </label>
             <Input.Group name='rooms'>
               <Input style={{ width: "33.3%" }} placeholder="small rooms" />
