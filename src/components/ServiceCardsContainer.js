@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import ServiceCard from "./ServiceCard";
-import data from "../data/service_types.js";
+import serviceTypes from "../data/service_types.js";
 
 class ServiceCardsContainer extends Component {
   state = {
-    cards: []
+    cards: {}
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     this.setState(() => {
       return {
-        cards: data
+        cards: serviceTypes
       };
     });
   }
@@ -18,7 +18,7 @@ class ServiceCardsContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.cards.map(card => (
+        {Object.values(this.state.cards).map(card => (
           <ServiceCard
             key={card.id}
             id={card.id}

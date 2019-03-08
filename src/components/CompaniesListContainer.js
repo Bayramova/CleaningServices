@@ -7,8 +7,7 @@ class CompaniesListContainer extends Component {
     companies: []
   };
 
-  
-  async componentDidMount() {
+  componentDidMount() {
     const companiesList = [];
     allCompaniesList.map( (company) => {
       if (company.services.includes(this.props.pathname)) {

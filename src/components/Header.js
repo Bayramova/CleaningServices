@@ -7,26 +7,28 @@ class Header extends Component {
     return (
       <header className="header">
         <div className="header-content">
-            <Link to="/" className="link header__heading">CleaningServices</Link>
-            <div className="header-right">
-              <div className="search">
-                <Input.Search
-                  placeholder="Catalogue search, e.g. Office cleaning"
-                  onSearch={value => console.log(value)}
-                  enterButton
-                />
-              </div>
-              <ul className="button-links">
-                <li className="button-links__link">
-                  <Link to={"/make_order"} className="link button-links__link--order">Make order</Link>
-                </li>
-                <li className="button-links__link">
-                  <Link to={"/sign_in"} className="link button-links__link--sign-in">
-                    Sign in
-                  </Link>
-                </li>
-              </ul>
+          <div className="header__left">
+            <Link to="/" className="link header__heading">
+              CleaningServices
+            </Link>
+            <div className="search">
+              <Input.Search
+                placeholder="Catalogue search, e.g. Office cleaning"
+                onSearch={value => console.log(value)}
+                enterButton
+              />
             </div>
+          </div>
+
+          <div className="header__right">
+            <Link to={"/make_order"} className="link button-links__link--order">
+              Make order
+            </Link>
+
+            <Link to={"/sign_in"} className="link button-links__link--sign-in">
+              Sign in
+            </Link>
+          </div>
         </div>
       </header>
     );

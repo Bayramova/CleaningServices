@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Select } from "antd";
 import CompaniesListContainer from "./CompaniesListContainer";
-import companies from "../data/companies";
-import data from "../data/service_types.js";
+import serviceTypes from "../data/service_types.js";
 
 class CompaniesList extends Component {
   state = {
@@ -10,18 +9,14 @@ class CompaniesList extends Component {
     description: ""
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     const matchPath = Object.values(this.props.match.params)[0];
-    data.map((serviceType) => {
-      if (serviceType.id === matchPath) {
         this.setState(() => {
           return {
-            title: serviceType.title,
-            description: serviceType.description
+            title: serviceTypes[matchPath].title,
+            description: serviceTypes[matchPath].description
           };
         });
-      }
-    });
   }
   
   handleChange(value) {

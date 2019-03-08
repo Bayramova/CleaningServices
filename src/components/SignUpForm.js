@@ -1,21 +1,17 @@
-import React, { Component } from "react";
-import isEmail from "validator/lib/isEmail";
+import React from "react";
 import {
   Form,
   Input,
   Tooltip,
   Icon,
-  Cascader,
   Select,
   Row,
   Col,
   Checkbox,
-  Button,
-  AutoComplete
+  Button
 } from "antd";
 
 const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
 
 class SignUpForm extends React.Component {
   state = {
@@ -37,7 +33,7 @@ class SignUpForm extends React.Component {
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   };
 
-  compareToFirstPassword = (rule, value, callback) => {
+  compareToFirstPassword = (value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue("password")) {
       callback("Two passwords that you enter is inconsistent!");
@@ -46,7 +42,7 @@ class SignUpForm extends React.Component {
     }
   };
 
-  validateToNextPassword = (rule, value, callback) => {
+  validateToNextPassword = (value, callback) => {
     const form = this.props.form;
     if (value && this.state.confirmDirty) {
       form.validateFields(["confirm"], { force: true });
@@ -68,7 +64,6 @@ class SignUpForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {

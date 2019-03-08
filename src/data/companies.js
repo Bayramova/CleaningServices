@@ -9,26 +9,6 @@ const companies = [
     servicesList: ["Standard Cleaning", "General Cleaning", "Repair Cleaning"],
     services: ["standardcleaning", "generalcleaning", "repaircleaning"],
     reviewsNumber: "25",
-    reviews: [
-      {
-        user: "+375336393823",
-        rating: "4",
-        feedback:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      },
-      {
-        user: "=375336393823",
-        rating: "4",
-        feedback:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      },
-      {
-        user: "=375336393823",
-        rating: "4",
-        feedback:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      }
-    ]
   },
   {
     id: "uborkakvartir",

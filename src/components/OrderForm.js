@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import isEmail from "validator/lib/isEmail";
+import React from "react";
 import {
   Form,
   Input,
@@ -9,7 +8,6 @@ import {
 } from "antd";
 
 const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
 
 class MakeOrderForm extends React.Component {
   state = {
@@ -31,7 +29,7 @@ class MakeOrderForm extends React.Component {
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   };
 
-  compareToFirstPassword = (rule, value, callback) => {
+  compareToFirstPassword = (value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue("password")) {
       callback("Two passwords that you enter is inconsistent!");
@@ -40,7 +38,7 @@ class MakeOrderForm extends React.Component {
     }
   };
 
-  validateToNextPassword = (rule, value, callback) => {
+  validateToNextPassword = (value, callback) => {
     const form = this.props.form;
     if (value && this.state.confirmDirty) {
       form.validateFields(["confirm"], { force: true });
@@ -62,7 +60,6 @@ class MakeOrderForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {
@@ -97,8 +94,6 @@ class MakeOrderForm extends React.Component {
       </Select>
     );
 
-    const children = ['Monday', 'Tuesday', 'Wensday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
     return (
       <main className="main">
         <div className="sign-up__content">
@@ -129,7 +124,6 @@ class MakeOrderForm extends React.Component {
                   })(
                     <Select
                       style={{ width: "100%" }}
-                      defaultValue="Standart cleaning"
                     >
                       <Option value="General cleaning">General cleaning</Option>
                       <Option value="Dry Carpet cleaning">
@@ -209,7 +203,6 @@ class MakeOrderForm extends React.Component {
                   })(
                     <Select
                       style={{ width: "100%" }}
-                      defaultValue="09:00-12:00"
                     >
                       <Option value="09:00-12:00">09:00-12:00</Option>
                       <Option value="12:00-15:00">12:00-15:00</Option>
@@ -231,7 +224,6 @@ class MakeOrderForm extends React.Component {
                   })(
                     <Select
                       style={{ width: "100%" }}
-                      defaultValue="only once"
                     >
                       <Option value="only once">Only once</Option>
                       <Option value="every week">Every week</Option>
