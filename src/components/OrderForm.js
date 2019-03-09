@@ -4,7 +4,6 @@ import {
   Input,
   Select,
   Button,
-  AutoComplete
 } from "antd";
 
 const { Option } = Select;
@@ -13,6 +12,10 @@ class MakeOrderForm extends React.Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: []
+    // fields: {
+    //   adress: '',
+    //   service: ''
+    // }
   };
 
   handleSubmit = e => {

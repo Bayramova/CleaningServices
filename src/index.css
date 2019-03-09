@@ -29,7 +29,7 @@ body {
   z-index: 1000;
 }
 
-.header-content {
+.header__content {
   display: grid;
   grid-template-columns: 1fr auto;
   grid-gap: 20px;
@@ -41,11 +41,17 @@ body {
   color: #82b541;
   text-decoration: none;
   font-size: 26px;
+  line-height: 26px;
   font-weight: 600;
 }
 
 .search {
   max-width: 400px;
+}
+
+.header__left {
+  display: grid;
+  grid-gap: 5px;
 }
 
 .header__right {
@@ -217,7 +223,6 @@ body {
   background: #191919;
   font-size: 18px;
   color: #999999;
-  white-space: nowrap;
 }
 
 .footer__contact,
@@ -272,18 +277,26 @@ body {
   .features-list {
     grid-template-columns: 1fr 1fr 1fr;
   }
+
+  .header__content {
+    margin-top: 8px;
+  }
   .header__heading {
     font-size: 45px;
+    line-height: 40px;
+  }
+  .search {
+    padding-top: 8px;
   }
   .header__left {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
   }
-
   .header__right {
     grid-template-columns: 1fr 1fr;
     align-items: center;
+    padding-top: 10px;
   }
 }
 
@@ -365,7 +378,6 @@ body {
 .companies-list__container {
   background: #fefefe;
   padding: 20px 40px;
-  text-align: left;
 }
 
 .companies-list__title {
@@ -391,10 +403,6 @@ body {
 
 .catalogue--companies {
   background: #fefefe;
-}
-
-.catalogue__cards--companies {
-  padding: 30px 15px;
 }
 
 .company__card {

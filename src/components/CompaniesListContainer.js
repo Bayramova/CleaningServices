@@ -1,42 +1,63 @@
 import React, { Component } from "react";
-import Company from "./Company";
-import allCompaniesList from "../data/companies";
+import { Select } from "antd";
+import CompaniesList from "./CompaniesList";
+import serviceTypes from "../data/service_types.js";
 
 class CompaniesListContainer extends Component {
   state = {
-    companies: []
+    title: "",
+    description: ""
   };
 
   componentDidMount() {
-    const companiesList = [];
-    allCompaniesList.map( (company) => {
-      if (company.services.includes(this.props.pathname)) {
-        companiesList.push(company);
-      }
-    });
+    const matchPath = this.props.match.params.titleId;
     this.setState(() => {
       return {
-        companies: companiesList
+        title: serviceTypes[matchPath].title,
+        description: serviceTypes[matchPath].description
       };
     });
   }
 
+  handleChange(value) {
+    console.log(`selected ${value}`);
+  }
+
   render() {
+    const matchPath = this.props.match.params.titleId;
     return (
-      <React.Fragment>
-        {this.state.companies.map(company => (
-          <Company
-            key={company.id}
-            id={company.id}
-            logo={company.logo}
-            name={company.name}
-            adress={company.adress}
-            rating={company.rating}
-            orders={company.orders}
-            services={company.services}
-          />
-        ))}
-      </React.Fragment>
+      <main className="main">
+        <div className="companies-list__container">
+          <section className="section">
+            <div className="companies-list-title">
+              <h1 className="companies-list__title">{this.state.title}</h1>
+              <h2 className="companies-list__description">
+                {this.state.description}
+              </h2>
+            </div>
+          </section>
+
+          <section className="section">
+            <div className="companies-list__navigation">
+              <Select
+                defaultValue="Sort by"
+                style={{ width: 120 }}
+                onChange={this.handleChange}
+              >
+                <Select.Option value="address">Address</Select.Option>
+                <Select.Option value="rating">Rating</Select.Option>
+                <Select.Option value="popularity">Popularity</Select.Option>
+              </Select>
+            </div>
+          </section>
+
+          <section className="section">
+            <div className="catalogue__cards">
+              <CompaniesList pathname={matchPath} />
+            </div>
+          </section>
+        </div>
+      </main>
     );
   }
 }

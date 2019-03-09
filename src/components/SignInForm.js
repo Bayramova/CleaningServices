@@ -91,7 +91,7 @@ class SignInForm extends Component {
               </fieldset>
 
               <button className="sign-in__button" name="button" type="submit">
-                Sign In
+                <Link to={"/myprofile"}>Sign In</Link>
               </button>
 
               <a className="sign-in__forgot-password-link">

@@ -10,7 +10,7 @@ class CompanyInfo extends Component {
     id: "",
     logo: "",
     name: "",
-    adress: "",
+    address: "",
     rating: "",
     orders: "",
     services: [],
@@ -26,7 +26,7 @@ class CompanyInfo extends Component {
             id: company.id,
             logo: company.logo,
             name: company.name,
-            adress: company.adress,
+            address: company.address,
             rating: company.rating,
             orders: company.orders,
             services: company.services,
@@ -57,8 +57,8 @@ class CompanyInfo extends Component {
                   this.state.orders
                 } orders`}</span>
               </div>
-              <div className="company-info__adress">
-                <h3>{this.state.adress}</h3>
+              <div className="company-info__address">
+                <h3>{this.state.address}</h3>
               </div>
               <div className="company-info__card-container">
                 <div className="company-info__card">
