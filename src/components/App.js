@@ -30,7 +30,16 @@ class App extends Component {
               ) : (
                 <Switch>
                   <Route exact path="/" component={Main} />
-                  <Route exact path="/make_order" component={OrderForm} />
+                  <Route
+                    exact
+                    path="/make_order"
+                    render={() => (
+                      <OrderForm
+                        {...store.orderFormFields}
+                        onChange={store.handleOrderFormChange}
+                      />
+                    )}
+                  />
                   <Route exact path="/sign_in" component={SignInForm} />
                   <Route exact path="/sign_up" component={SignUpForm} />
                   <Route

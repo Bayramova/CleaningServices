@@ -14,10 +14,6 @@ import {
 const { Option } = Select;
 
 class SignUpForm extends React.Component {
-  state = {
-    confirmDirty: false,
-    autoCompleteResult: []
-  };
 
   handleSubmit = e => {
     e.preventDefault();
@@ -50,43 +46,9 @@ class SignUpForm extends React.Component {
     callback();
   };
 
-  handleWebsiteChange = value => {
-    let autoCompleteResult;
-    if (!value) {
-      autoCompleteResult = [];
-    } else {
-      autoCompleteResult = [".com", ".org", ".net"].map(
-        domain => `${value}${domain}`
-      );
-    }
-    this.setState({ autoCompleteResult });
-  };
-
   render() {
     const { getFieldDecorator } = this.props.form;
 
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 }
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 }
-      }
-    };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0
-        },
-        sm: {
-          span: 16,
-          offset: 8
-        }
-      }
-    };
     const prefixSelector = getFieldDecorator("prefix", {
       initialValue: "(29)"
     })(
@@ -104,7 +66,7 @@ class SignUpForm extends React.Component {
           <div className="sign-up-container">
             <div className="sign-up">
               <h1 className="sign-up__title">Create your account</h1>
-              <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+              <Form onSubmit={this.handleSubmit}>
                 <Form.Item label="E-mail">
                   {getFieldDecorator("email", {
                     rules: [
@@ -145,26 +107,7 @@ class SignUpForm extends React.Component {
                     ]
                   })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
                 </Form.Item>
-                <Form.Item
-                  label={
-                    <span>
-                      Nickname&nbsp;
-                      <Tooltip title="What do you want others to call you?">
-                        <Icon type="question-circle-o" />
-                      </Tooltip>
-                    </span>
-                  }
-                >
-                  {getFieldDecorator("nickname", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please input your nickname!",
-                        whitespace: true
-                      }
-                    ]
-                  })(<Input />)}
-                </Form.Item>
+            
                 <Form.Item label="Phone Number">
                   {getFieldDecorator("phone", {
                     rules: [
@@ -201,7 +144,7 @@ class SignUpForm extends React.Component {
                     </Col>
                   </Row>
                 </Form.Item>
-                <Form.Item {...tailFormItemLayout}>
+                <Form.Item >
                   {getFieldDecorator("agreement", {
                     valuePropName: "checked"
                   })(
@@ -210,7 +153,7 @@ class SignUpForm extends React.Component {
                     </Checkbox>
                   )}
                 </Form.Item>
-                <Form.Item {...tailFormItemLayout}>
+                <Form.Item >
                   <Button style={{ width: "50%" }} type="primary" htmlType="submit">
                     Register
                   </Button>
