@@ -1,30 +1,11 @@
 import React, { Component } from "react";
-import Company from "./Company";
-import allCompaniesList from "../data/companies";
+import Company from "./CompaniesListItem";
 
 class CompaniesList extends Component {
-  state = {
-    companies: []
-  };
-
-  componentDidMount() {
-    const companiesList = [];
-    allCompaniesList.map( (company) => {
-      if (company.services.includes(this.props.pathname)) {
-        companiesList.push(company);
-      }
-    });
-    this.setState(() => {
-      return {
-        companies: companiesList
-      };
-    });
-  }
-
   render() {
     return (
-      <React.Fragment>
-        {this.state.companies.map(company => (
+      <div className="catalogue__cards">
+        {this.props.companies.map(company => (
           <Company
             key={company.id}
             id={company.id}
@@ -36,7 +17,7 @@ class CompaniesList extends Component {
             services={company.services}
           />
         ))}
-      </React.Fragment>
+      </div>
     );
   }
 }

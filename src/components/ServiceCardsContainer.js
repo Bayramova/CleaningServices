@@ -1,33 +1,15 @@
 import React, { Component } from "react";
-import ServiceCard from "./ServiceCard";
-import serviceTypes from "../data/service_types.js";
+import ServiceCardsList from "./ServiceCardsList";
+import { Consumer } from "../context";
 
 class ServiceCardsContainer extends Component {
-  state = {
-    cards: {}
-  };
-
-  componentDidMount() {
-    this.setState(() => {
-      return {
-        cards: serviceTypes
-      };
-    });
-  }
-
   render() {
     return (
-      <React.Fragment>
-        {Object.values(this.state.cards).map(card => (
-          <ServiceCard
-            key={card.id}
-            id={card.id}
-            image={card.image}
-            title={card.title}
-            description={card.description}
-          />
-        ))}
-      </React.Fragment>
+      <Consumer>
+        {store => (
+          <ServiceCardsList services={Object.values(store.serviceTypes)} />
+        )}
+      </Consumer>
     );
   }
 }

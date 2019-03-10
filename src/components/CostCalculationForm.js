@@ -13,7 +13,7 @@ class CostCalculationForm extends Component {
                 style={{ width: "100%" }}
                 defaultValue="Standart cleaning"
               >
-              {this.props.serviceTitles.map((title) => {
+              {this.props.services.map((title) => {
                 return (
                   <Select.Option key={title} value={title}>
                   {title}

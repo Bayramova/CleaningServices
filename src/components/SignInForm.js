@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import isEmail from "validator/lib/isEmail";
-import {Link} from "react-router-dom";
-import { Icon, Input} from "antd";
+import { Link } from "react-router-dom";
+import { Icon, Input } from "antd";
 
 class SignInForm extends Component {
   state = {
@@ -56,7 +56,11 @@ class SignInForm extends Component {
             <h1 className="sign-in__title">Sign in to your account</h1>
             <div className="sign-in__sign-up-info">
               Don't have an account?
-              <Link to={"/sign_up"} className="sign-in__sign-up-link"> Create one</Link>.
+              <Link to={"/sign_up"} className="sign-in__sign-up-link">
+                {" "}
+                Create one
+              </Link>
+              .
             </div>
             <form className="sign-in__form" onSubmit={this.onFormSubmit}>
               <fieldset className="sign-in__fieldset">
@@ -73,7 +77,9 @@ class SignInForm extends Component {
                     <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
                 />
-                <span className='field-errors'>{this.state.fieldErrors.login}</span>
+                <span className="field-errors">
+                  {this.state.fieldErrors.login}
+                </span>
               </fieldset>
 
               <fieldset className="sign-in__fieldset">
@@ -87,12 +93,16 @@ class SignInForm extends Component {
                   onChange={this.onInputChange}
                   placeholder="Password"
                 />
-                <span className='field-errors'>{this.state.fieldErrors.password}</span>
+                <span className="field-errors">
+                  {this.state.fieldErrors.password}
+                </span>
               </fieldset>
 
-              <button className="sign-in__button" name="button" type="submit">
-                <Link to={"/myprofile"}>Sign In</Link>
-              </button>
+              <Link to={"/myprofile"}>
+                <button className="sign-in__button" name="button" type="submit">
+                  Sign In
+                </button>
+              </Link>
 
               <a className="sign-in__forgot-password-link">
                 Forgotten your password?

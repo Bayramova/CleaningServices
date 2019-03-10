@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ServiceCardsContainer from './ServiceCardsContainer';
+import ServiceCardsContainer from "./ServiceCardsContainer";
 
 class Main extends Component {
   render() {
@@ -38,9 +38,7 @@ class Main extends Component {
 
         <section className="section">
           <div className="catalogue">
-            <div className="catalogue__cards">
             <ServiceCardsContainer />
-            </div>
           </div>
         </section>
       </main>
