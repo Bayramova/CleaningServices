@@ -33,8 +33,9 @@ class App extends Component {
                   <Route
                     exact
                     path="/make_order"
-                    render={() => (
+                    render={props => (
                       <OrderForm
+                        {...props}
                         {...store.orderFormFields}
                         onChange={store.handleOrderFormChange}
                       />
@@ -45,7 +46,13 @@ class App extends Component {
                   <Route
                     exact
                     path="/service/:titleId"
-                    component={CompaniesCatalogue}
+                    // component={CompaniesCatalogue}
+                    render={props => (
+                      <CompaniesCatalogue
+                        {...props}
+                        onChange={store.handleSortValueChange}
+                      />
+                    )}
                   />
                   <Route
                     exact

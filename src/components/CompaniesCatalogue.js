@@ -4,9 +4,9 @@ import CompaniesListContainer from "./CompaniesListContainer";
 import CompaniesListHeaderContainer from "./CompaniesListHeaderContainer";
 
 class CompaniesCatalogue extends Component {
-  // handleChange = (value) => {
-  //   console.log(`selected ${value}`);
-  // };
+  handleChange = (value) => {
+    this.props.onChange(value);
+  };
 
   render() {
     const matchPath = this.props.match.params.titleId;
@@ -24,9 +24,8 @@ class CompaniesCatalogue extends Component {
                 style={{ width: 120 }}
                 onChange={this.handleChange}
               >
-                <Select.Option value="address">Address</Select.Option>
                 <Select.Option value="rating">Rating</Select.Option>
-                <Select.Option value="popularity">Popularity</Select.Option>
+                <Select.Option value="orders">Popularity</Select.Option>
               </Select>
             </div>
           </section>

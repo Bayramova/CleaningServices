@@ -21,7 +21,15 @@ class Header extends Component {
           </div>
 
           <div className="header__right">
-            <Link to={"/make_order"} className="link button-links__link--order">
+            <Link
+              to={{
+                pathname: "/make_order",
+                state: {
+                  fromSelectedCompany: false
+                }
+              }}
+              className="link button-links__link--order"
+            >
               Make order
             </Link>
 

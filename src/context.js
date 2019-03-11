@@ -59,13 +59,24 @@ class Provider extends Component {
     }));
   };
 
+  handleSortValueChange = orderBy => {
+    this.setState(({ companies }) => {
+      const sortedCompaniesList = [...companies].sort(
+        (company1, company2) => company2[orderBy] - company1[orderBy]
+      );
+      return {
+        companies: sortedCompaniesList
+      };
+    });
+  };
 
   render() {
     return (
       <Context.Provider
         value={{
           ...this.state,
-          handleOrderFormChange: this.handleOrderFormChange
+          handleOrderFormChange: this.handleOrderFormChange,
+          handleSortValueChange: this.handleSortValueChange
         }}
       >
         {this.props.children}

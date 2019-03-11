@@ -11,6 +11,9 @@ const OrderForm = Form.create({
   }
 })(props => {
   const { getFieldDecorator } = props.form;
+  
+  let buttonText = '';
+  (props.location.state.fromSelectedCompany) ? (buttonText="Place Order") : (buttonText="Show Options");
 
   const prefixSelector = getFieldDecorator("prefix", {
     initialValue: "(29)"
@@ -212,7 +215,7 @@ const OrderForm = Form.create({
                   onClick={handleClick}
                 >
                   <Button style={{ width: "50%" }} type="primary">
-                    Show options
+                    {buttonText}
                   </Button>
                 </Link>
               </Form.Item>

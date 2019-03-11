@@ -17,7 +17,12 @@ const Company = props => {
         </div>
       </Link>
       <div className="company__card__order-link">
-        <Link to={'/make_order'}>Make order</Link>
+        <Link to={{
+          pathname: '/make_order',
+          state: {
+            fromSelectedCompany: true,
+          }
+          }}>Make order</Link>
       </div>
     </div>
   );

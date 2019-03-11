@@ -272,13 +272,13 @@ body {
   background: url(./img/gg.svg) no-repeat;
 }
 
-@media (min-width: 650px) {
+@media (min-width: 700px) {
   .catalogue__cards {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1040px) {
   .features-list {
     grid-template-columns: 1fr 1fr 1fr;
   }
