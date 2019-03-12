@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Input } from "antd";
+import SearchContainer from "./Search/SearchContainer";
 import "./Header.css";
 
 class Header extends Component {
@@ -13,11 +13,12 @@ class Header extends Component {
               CleaningServices
             </Link>
             <div className="search">
-              <Input.Search
+              {/* <Input.Search
                 placeholder="Catalogue search, e.g. Office cleaning"
                 onSearch={value => console.log(value)}
                 enterButton
-              />
+              /> */}
+              <SearchContainer />
             </div>
           </div>
 

@@ -13,7 +13,7 @@ import Footer from "./Footer/Footer";
 import OrderForm from "./Forms/Order/OrderForm";
 import SignInForm from "./Forms/SignIn/SignInForm";
 import SignUpForm from "./Forms/SignUp/SignUpForm";
-import CompaniesCatalogue from "./Catalogue/CompaniesCatalogue";
+import CompaniesCatalogue from "./CompaniesCatalogue/CompaniesCatalogue";
 import CompanyInfo from "./Company/CompanyInfo";
 import ClientProfile from "./ClientProfile/ClientProfile";
 
