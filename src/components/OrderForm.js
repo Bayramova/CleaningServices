@@ -9,9 +9,12 @@ const OrderForm = Form.create({
   onFieldsChange(props, changedFields) {
     props.onChange(changedFields);
   }
-})(props => {
+})(
+  // todo попробовать сделать через класс, а не ф-цию
+  props => {
   const { getFieldDecorator } = props.form;
   
+  // todo buttonText = props.location.state.fromSelectedCompany ? "Place Order" : "Show Options"
   let buttonText = '';
   (props.location.state.fromSelectedCompany) ? (buttonText="Place Order") : (buttonText="Show Options");
 

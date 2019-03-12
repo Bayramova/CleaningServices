@@ -9,6 +9,7 @@ class CompanyContainer extends Component {
     return (
       <Consumer>
         {store => {
+          // todo попробуй сделать через find
           store.companies.map(company => {
             if (company.id === this.props.pathname) {
               companyInfo = {

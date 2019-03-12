@@ -69,6 +69,7 @@ class Company extends Component {
         <div className="company-info__services-and-cost">
           <div className="company-info__services">
             <h2 className="company-info__services-list__title">Our Services</h2>
+            { /* todo company-info__services-list явный кандидат на отдельный компонент */ }
             <ul className="company-info__services-list">
               {this.props.services.map(title => {
                 return (
