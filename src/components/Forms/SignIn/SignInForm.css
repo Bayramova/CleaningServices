@@ -1,0 +1,34 @@
+.sign-in-container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .sign-in {
+    background: white;
+    border: 1px solid #e1e8ed;
+    text-align: left;
+    padding: 10px 40px;
+    max-width: 540px;
+    width: 50%;
+  }
+  
+  .sign-in__title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #444444;
+  }
+  
+  .sign-in__sign-up-info {
+    font-size: 13px;
+    color: #7d7d7d;
+  }
+  
+  .sign-in-form__buttons {
+    display: grid;
+    grid-auto-flow: column;
+    justify-items: space-around;
+    align-items: center;
+  }
