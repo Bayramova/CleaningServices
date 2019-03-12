@@ -7,15 +7,15 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
-import Header from "./Header";
-import Main from "./Main";
-import Footer from "./Footer";
-import OrderForm from "./OrderForm";
-import SignInForm from "./SignInForm";
-import SignUpForm from "./SignUpForm";
-import CompaniesCatalogue from "./CompaniesCatalogue";
-import CompanyInfo from "./CompanyInfo";
-import ClientProfile from "./ClientProfile";
+import Header from "./Header/Header";
+import Main from "./Main/Main";
+import Footer from "./Footer/Footer";
+import OrderForm from "./Forms/Order/OrderForm";
+import SignInForm from "./Forms/SignIn/SignInForm";
+import SignUpForm from "./Forms/SignUp/SignUpForm";
+import CompaniesCatalogue from "./Catalogue/CompaniesCatalogue";
+import CompanyInfo from "./Company/CompanyInfo";
+import ClientProfile from "./ClientProfile/ClientProfile";
 
 class App extends Component {
   render() {
@@ -46,7 +46,6 @@ class App extends Component {
                   <Route
                     exact
                     path="/service/:titleId"
-                    // component={CompaniesCatalogue}
                     render={props => (
                       <CompaniesCatalogue
                         {...props}

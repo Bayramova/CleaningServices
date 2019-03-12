@@ -61,8 +61,7 @@ class Provider extends Component {
 
   handleSortValueChange = orderBy => {
     this.setState(({ companies }) => {
-      // todo зачем здесь spread ...companies]
-      const sortedCompaniesList = [...companies].sort(
+      const sortedCompaniesList = companies.sort(
         (company1, company2) => company2[orderBy] - company1[orderBy]
       );
       return {

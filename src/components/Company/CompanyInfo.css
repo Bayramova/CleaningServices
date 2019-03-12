@@ -1,0 +1,99 @@
+.company-info__container {
+  display: grid;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.company-info__title {
+  margin: 0;
+}
+
+.company-info__rating-and-orders {
+  font-size: 20px;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+}
+
+.company-info__orders {
+  color: #666;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+.company-info__card-container {
+  background-color: #fafafa;
+  color: #666666;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid #e1e8ed;
+}
+
+.company-info__card {
+  min-height: 200px;
+  padding: 12px;
+}
+
+.company-info__logo {
+  width: 100%;
+  height: 150px;
+  padding: 20px;
+  background: #f2f2f2;
+  border-bottom: 1px solid #e1e8ed;
+}
+
+.company-info__buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  padding-top: 10px;
+}
+
+.company-info__button--feedback,
+.company-info__button--order {
+  background-color: #81b536;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.company-info__description {
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.services-list__title {
+  font-size: 24px;
+  margin-bottom: 0;
+}
+
+.company-info__cost-form {
+  color: #666666;
+  border: 1px solid #81b536;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.cost-form__button:hover {
+  opacity: 0.8;
+}
+
+@media (min-width: 1240px) {
+  .company-info__container {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1480px) {
+  .company-info__container {
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 20px;
+  }
+}

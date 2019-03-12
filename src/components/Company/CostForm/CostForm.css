@@ -1,0 +1,23 @@
+.cost-form {
+  display: grid;
+  grid-gap: 20px;
+  border: none;
+  padding: 5px;
+}
+
+.cost-form__label {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.cost-form__button {
+  border: none;
+  cursor: pointer;
+  height: 35px;
+  background-color: #81b536;
+  box-shadow: 0 2px 0 0 #709a3c;
+  border-radius: 4px;
+  font-size: 20px;
+  color: white;
+  white-space: nowrap;
+}
