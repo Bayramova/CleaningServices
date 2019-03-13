@@ -6,11 +6,6 @@
     "address": "1600 Pennsylvania Avenue, Washington",
     "rating": "4",
     "orders": "50",
-    "servicesList": [
-      "Standard Cleaning",
-      "General Cleaning",
-      "Repair Cleaning"
-    ],
     "services": ["standardcleaning", "generalcleaning", "repaircleaning"],
     "reviewsNumber": "25"
   },
@@ -22,11 +17,6 @@
     "rating": "5",
     "orders": "30",
     "services": ["standardcleaning", "officecleaning", "furniturecleaning"],
-    "servicesList": [
-      "Standard cleaning",
-      "Office Cleaning",
-      "Furniture Cleaning"
-    ],
     "reviewsNumber": "25"
   },
   {
@@ -37,7 +27,6 @@
     "rating": "4",
     "orders": "77",
     "services": ["industrialcleaning", "poolcleaning", "officecleaning"],
-    "servicesList": ["Industrial Cleaning", "Pool Cleaning", "Office Cleaning"],
     "reviewsNumber": "30"
   },
   {
@@ -52,12 +41,6 @@
       "generalcleaning",
       "carpetcleaning",
       "furniturecleaning"
-    ],
-    "servicesList": [
-      "Standard Cleaning",
-      "General Cleaning",
-      "Carpet Cleaning",
-      "Furniture Cleaning"
     ],
     "reviewsNumber": "25"
   },
@@ -78,16 +61,6 @@
       "industrialcleaning",
       "poolcleaning"
     ],
-    "servicesList": [
-      "Standard Cleaning",
-      "General Cleaning",
-      "Repair Cleaning",
-      "Office Cleaning",
-      "Carpet Cleaning",
-      "Furniture Cleaning",
-      "Industrial Cleaning",
-      "Pool Cleaning"
-    ],
     "reviewsNumber": "25"
   },
   {
@@ -98,7 +71,6 @@
     "rating": "4",
     "orders": "30",
     "services": ["carpetcleaning", "furniturecleaning"],
-    "servicesList": ["Carpet Cleaning", "Furniture Cleaning"],
     "reviewsNumber": "25"
   },
   {
@@ -109,7 +81,6 @@
     "rating": "3",
     "orders": "10",
     "services": ["repaircleaning", "industrialcleaning"],
-    "servicesList": ["Repair Cleaning", "Industrial Cleaning"],
     "reviewsNumber": "25"
   },
   {
@@ -125,12 +96,6 @@
       "furniturecleaning",
       "carpetcleaning"
     ],
-    "servicesList": [
-      "Standard Cleaning",
-      "General Cleaning",
-      "Furniture Cleaning",
-      "Carpet Cleaning"
-    ],
     "reviewsNumber": "25"
   },
   {
@@ -141,7 +106,6 @@
     "rating": "4",
     "orders": "66",
     "services": ["standardcleaning", "poolcleaning"],
-    "servicesList": ["Standard Cleaning", "Pool Cleaning"],
     "reviewsNumber": "25"
   },
   {
@@ -152,7 +116,6 @@
     "rating": "5",
     "orders": "85",
     "services": ["repaircleaning", "generalcleaning"],
-    "servicesList": ["Repair Cleaning", "General Cleaning"],
     "reviewsNumber": "25"
   },
   {
@@ -163,7 +126,6 @@
     "rating": "4",
     "orders": "20",
     "services": ["standardcleaning", "generalcleaning", "poolcleaning"],
-    "servicesList": ["Standard Cleaning", "General Cleaning", "Pool Cleaning"],
     "reviewsNumber": "25"
   },
   {
@@ -179,12 +141,6 @@
       "repaircleaning",
       "officecleaning"
     ],
-    "servicesList": [
-      "Standard Cleaning",
-      "General Cleaning",
-      "Repair Cleaning",
-      "Office Cleaning"
-    ],
     "reviewsNumber": "25"
   },
   {
@@ -199,12 +155,6 @@
       "generalcleaning",
       "carpetcleaning",
       "furniturecleaning"
-    ],
-    "servicesList": [
-      "Standard Cleaning",
-      "General Cleaning",
-      "Carpet Cleaning",
-      "Furniture Cleaning"
     ],
     "reviewsNumber": "25"
   },
@@ -222,13 +172,6 @@
       "furniturecleaning",
       "poolcleaning"
     ],
-    "servicesList": [
-      "Standard Cleaning",
-      "General Cleaning",
-      "Carpet Cleaning",
-      "Furniture Cleaning",
-      "Pool Cleaning"
-    ],
     "reviewsNumber": "25"
   },
   {
@@ -239,11 +182,6 @@
     "rating": "4",
     "orders": "30",
     "services": ["repaircleaning", "officecleaning", "industrialcleaning"],
-    "servicesList": [
-      "Repair Cleaning",
-      "Office Cleaning",
-      "Industrial Cleaning"
-    ],
     "reviewsNumber": "25"
   },
   {
@@ -262,16 +200,6 @@
       "furniturecleaning",
       "industrialcleaning",
       "poolcleaning"
-    ],
-    "servicesList": [
-      "Standard Cleaning",
-      "General Cleaning",
-      "Repair Cleaning",
-      "Office Cleaning",
-      "Carpet Cleaning",
-      "Furniture Cleaning",
-      "Industrial Cleaning",
-      "Pool Cleaning"
     ],
     "reviewsNumber": "25"
   },
@@ -292,16 +220,6 @@
       "industrialcleaning",
       "poolcleaning"
     ],
-    "servicesList": [
-      "Standard Cleaning",
-      "General Cleaning",
-      "Repair Cleaning",
-      "Office Cleaning",
-      "Carpet Cleaning",
-      "Furniture Cleaning",
-      "Industrial Cleaning",
-      "Pool Cleaning"
-    ],
     "reviewsNumber": "25"
   },
   {
@@ -312,7 +230,6 @@
     "rating": "5",
     "orders": "60",
     "services": ["carpetcleaning", "furniturecleaning"],
-    "servicesList": ["Carpet Cleaning", "Furniture Cleaning"],
     "reviewsNumber": "25"
   },
   {
@@ -323,7 +240,6 @@
     "rating": "3",
     "orders": "70",
     "services": ["officecleaning", "standardcleaning"],
-    "servicesList": ["Standard Cleaning", "Office Cleaning"],
     "reviewsNumber": "25"
   },
   {
@@ -334,7 +250,6 @@
     "rating": "4",
     "orders": "80",
     "services": ["standardcleaning", "generalcleaning"],
-    "servicesList": ["Standard Cleaning", "General Cleaning"],
     "reviewsNumber": "25"
   },
   {
@@ -345,7 +260,6 @@
     "rating": "3",
     "orders": "30",
     "services": ["officecleaning"],
-    "servicesList": ["Office Cleaning"],
     "reviewsNumber": "25"
   },
   {
@@ -356,7 +270,6 @@
     "rating": "4",
     "orders": "90",
     "services": ["carpetcleaning", "furniturecleaning", "poolcleaning"],
-    "servicesList": ["Carpet Cleaning", "Furniture Cleaning", "Pool Cleaning"],
     "reviewsNumber": "25"
   },
   {
@@ -367,7 +280,6 @@
     "rating": "5",
     "orders": "35",
     "services": ["repaircleaning", "industrialcleaning", "poolcleaning"],
-    "servicesList": ["Repair Cleaning", "Industrial Cleaning", "Pool Cleaning"],
     "reviewsNumber": "25"
   },
   {
@@ -378,7 +290,6 @@
     "rating": "4",
     "orders": "40",
     "services": ["repaircleaning", "industrialcleaning", "poolcleaning"],
-    "servicesList": ["Repair Cleaning", "Industrial Cleaning", "Pool Cleaning"],
     "reviewsNumber": "25"
   }
 ]
