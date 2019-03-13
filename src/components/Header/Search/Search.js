@@ -1,26 +1,32 @@
-import React, { Component } from "react";
-import { Input } from "antd";
-import companies from "../../../data/companies";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Input, Icon } from 'antd';
 
 class Search extends Component {
   state = {
-    inputValue: ""
+    query: ''
   };
 
-  handleChange = event => {
-    const inputValue = event.target.value;
-    this.setState(() => ({ inputValue }));
+  handleChange = e => {
+    const query = e.target.value;
+    this.setState(() => ({ query }));
   };
 
   render() {
-    const { inputValue } = this.state;
     return (
       <Input.Search
-        value={inputValue}
+        placeholder="Input search text"
         onChange={this.handleChange}
-        placeholder="Type of cleaning e.g. Office cleaning"
-        onSearch={value => console.log(value)}
-        enterButton
+        enterButton={
+          <Link
+            to={{
+              pathname: '/search',
+              search: `?q=${this.state.query}`
+            }}
+          >
+            <Icon type="search" style={{ fontSize: '16px' }} />
+          </Link>
+        }
       />
     );
   }

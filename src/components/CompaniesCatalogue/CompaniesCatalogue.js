@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Select } from "antd";
-import CompaniesListContainer from "./CompaniesListContainer";
-import CompaniesListHeaderContainer from "./CompaniesListHeaderContainer";
-import "./Catalogue.css";
+import React, { Component } from 'react';
+import { Select } from 'antd';
+import CompaniesListByTypeContainer from './CompaniesListByTypeContainer';
+import CompaniesListHeaderContainer from './CompaniesListHeaderContainer';
+import './Catalogue.css';
 
 class CompaniesCatalogue extends Component {
   handleChange = value => {
@@ -12,30 +12,28 @@ class CompaniesCatalogue extends Component {
   render() {
     const matchPath = this.props.match.params.titleId;
     return (
-      <main className="main">
-        <div className="companies-list__container">
-          <section>
-            <CompaniesListHeaderContainer pathname={matchPath} />
-          </section>
+      <div className="companies-list__container">
+        <section>
+          <CompaniesListHeaderContainer pathname={matchPath} />
+        </section>
 
-          <section>
-            <div className="companies-list__navigation">
-              <Select
-                defaultValue="Sort by"
-                style={{ width: 120 }}
-                onChange={this.handleChange}
-              >
-                <Select.Option value="rating">Rating</Select.Option>
-                <Select.Option value="orders">Popularity</Select.Option>
-              </Select>
-            </div>
-          </section>
+        <section>
+          <div className="companies-list__navigation">
+            <Select
+              defaultValue="Sort by"
+              style={{ width: 120 }}
+              onChange={this.handleChange}
+            >
+              <Select.Option value="rating">Rating</Select.Option>
+              <Select.Option value="orders">Popularity</Select.Option>
+            </Select>
+          </div>
+        </section>
 
-          <section>
-            <CompaniesListContainer pathname={matchPath} />
-          </section>
-        </div>
-      </main>
+        <section>
+          <CompaniesListByTypeContainer pathname={matchPath} />
+        </section>
+      </div>
     );
   }
 }
