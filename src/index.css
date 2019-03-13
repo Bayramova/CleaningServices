@@ -27,6 +27,7 @@ body {
 .main {
   margin-top: 80px;
   background: #f2f5f6;
+  display: grid;
 }
 
 
