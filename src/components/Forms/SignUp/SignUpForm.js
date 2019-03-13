@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Select, Row, Col, Checkbox, Button } from 'antd';
+import { Form, Input, Select, Row, Col, Button } from 'antd';
 import './SignUpForm.css';
 
 const { Option } = Select;
@@ -132,15 +132,6 @@ class SignUpForm extends React.Component {
                     <Button>Get captcha</Button>
                   </Col>
                 </Row>
-              </Form.Item>
-              <Form.Item>
-                {getFieldDecorator('agreement', {
-                  valuePropName: 'checked'
-                })(
-                  <Checkbox>
-                    I have read the <a href="">agreement</a>
-                  </Checkbox>
-                )}
               </Form.Item>
               <Form.Item>
                 <Button

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import "./Footer.css";
+import React, { Component } from 'react';
+import './Footer.css';
 
 class Footer extends Component {
   render() {
@@ -17,13 +17,13 @@ class Footer extends Component {
         <div className="footer-right">
           <ul className="footer__join">
             <li className="footer__join__element">
-              <a className="footer__social footer__social--fb" />
+              <div className="footer__social footer__social--fb" />
             </li>
             <li className="footer__join__element">
-              <a className="footer__social footer__social--tw" />
+              <div className="footer__social footer__social--tw" />
             </li>
             <li className="footer__join__element">
-              <a className="footer__social footer__social--gg" />
+              <div className="footer__social footer__social--gg" />
             </li>
           </ul>
         </div>

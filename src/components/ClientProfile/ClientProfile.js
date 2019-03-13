@@ -16,14 +16,8 @@ class ClientProfile extends Component {
           </div>
         </div>
         <div className="user-profile__nav">
-          <div>
-            <a className="active user-profile__nav-button">Activity</a>
-          </div>
-          <div>
-            <a className="user-profile__nav-button user-profile__nav-button--settings">
-              Preferences
-            </a>
-          </div>
+          <div />
+          <div />
         </div>
       </div>
     );
