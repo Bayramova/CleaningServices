@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { fetchCompanies, fetchServices } from './api';
+import React, { Component } from "react";
+import { fetchCompanies, fetchServices } from "./api";
 
 const Context = React.createContext();
 
@@ -10,34 +10,34 @@ class Provider extends Component {
     companies: [],
     orderFormFields: {
       address: {
-        value: ''
+        value: ""
       },
       serviceType: {
-        value: ''
+        value: ""
       },
       bigRooms: {
-        value: ''
+        value: ""
       },
       smallRooms: {
-        value: ''
+        value: ""
       },
       bathrooms: {
-        value: ''
+        value: ""
       },
       daysOfCleaning: {
         value: []
       },
       startTimeOfCleaning: {
-        value: ''
+        value: ""
       },
       cleaningFrequency: {
-        value: ''
+        value: ""
       },
       phone: {
-        value: ''
+        value: ""
       },
       prefix: {
-        value: ''
+        value: ""
       }
     }
   };

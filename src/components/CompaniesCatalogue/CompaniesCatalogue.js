@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { Select } from 'antd';
-import CompaniesListByTypeContainer from './CompaniesListByTypeContainer';
-import CompaniesListHeaderContainer from './CompaniesListHeaderContainer';
-import './Catalogue.css';
+import React, { Component } from "react";
+import { Select } from "antd";
+import CompaniesListByTypeContainer from "./CompaniesListByTypeContainer";
+import CompaniesListHeaderContainer from "./CompaniesListHeaderContainer";
+import "./Catalogue.css";
 
 class CompaniesCatalogue extends Component {
   handleChange = value => {

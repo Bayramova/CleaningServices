@@ -2,13 +2,13 @@
   "standardcleaning": {
     "id": "standardcleaning",
     "image": "./img/standart.jpg",
-    "title": "Standard Cleaning",
+    "title": "Standard cleaning",
     "description": "Life is stressful and so is keeping a clean home. We offer regular house cleaning visits from our residential housekeepers to proactively reduce allergens, bacteria, and of course, homeowner stress."
   },
   "generalcleaning": {
     "id": "generalcleaning",
     "image": "./img/general.jpg",
-    "title": "General Cleaning",
+    "title": "General cleaning",
     "description": "Dust picture frames, knickknacks, ceiling fans, lamps, furniture, woodwork, shelves and baseboards. Remove cobwebs. Vacuum carpets. Wash all floors and dry wood floors. Vacuum furniture, including under any cushions. Empty and clean ashtrays and wastebaskets."
   },
   "repaircleaning": {

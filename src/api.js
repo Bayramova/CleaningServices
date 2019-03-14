@@ -4,11 +4,11 @@ async function fetchData(resource) {
 }
 
 function fetchCompanies() {
-  return fetchData('companies');
+  return fetchData("companies");
 }
 
 function fetchServices() {
-  return fetchData('services');
+  return fetchData("services");
 }
 
 export { fetchCompanies, fetchServices };

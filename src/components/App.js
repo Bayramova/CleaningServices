@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import { Consumer } from '../context';
-import { Spin } from 'antd';
+import React, { Component } from "react";
+import { Consumer } from "../context";
+import { Spin } from "antd";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect
-} from 'react-router-dom';
-import Header from './Header/Header';
-import Main from './Landing/Landing';
-import Footer from './Footer/Footer';
-import OrderForm from './Forms/Order/OrderForm';
-import SignInForm from './Forms/SignIn/SignInForm';
-import SignUpForm from './Forms/SignUp/SignUpForm';
-import CompaniesCatalogue from './CompaniesCatalogue/CompaniesCatalogue';
-import CompanyInfo from './Company/CompanyInfo';
-import CompaniesListByQueryContainer from './CompaniesCatalogue/CompaniesListByQueryContainer';
-import ClientProfile from './ClientProfile/ClientProfile';
+} from "react-router-dom";
+import Header from "./Header/Header";
+import Main from "./Landing/Landing";
+import Footer from "./Footer/Footer";
+import OrderForm from "./Forms/Order/OrderForm";
+import SignInForm from "./Forms/SignIn/SignInForm";
+import SignUpForm from "./Forms/SignUp/SignUpForm";
+import CompaniesCatalogue from "./CompaniesCatalogue/CompaniesCatalogue";
+import CompanyInfo from "./Company/CompanyInfo";
+import CompaniesListByQueryContainer from "./CompaniesCatalogue/CompaniesListByQueryContainer";
+import ClientProfile from "./ClientProfile/ClientProfile";
 
 class App extends Component {
   render() {

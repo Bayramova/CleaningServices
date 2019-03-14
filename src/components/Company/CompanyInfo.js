@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import CompanyContainer from './CompanyContainer';
-import './CompanyInfo.css';
+import React, { Component } from "react";
+import CompanyContainer from "./CompanyContainer";
+import "./CompanyInfo.css";
 
 class CompanyInfo extends Component {
   render() {

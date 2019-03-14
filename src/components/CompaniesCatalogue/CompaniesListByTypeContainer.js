@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import CompaniesList from './CompaniesList';
-import { Consumer } from '../../context';
+import React, { Component } from "react";
+import CompaniesList from "./CompaniesList";
+import { Consumer } from "../../context";
 
 class CompaniesListByTypeContainer extends Component {
   render() {

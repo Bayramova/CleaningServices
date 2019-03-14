@@ -1,6 +1,6 @@
-import React from 'react';
-import { Form, Input, Select, Row, Col, Button } from 'antd';
-import './SignUpForm.css';
+import React from "react";
+import { Form, Input, Select, Row, Col, Button } from "antd";
+import "./SignUpForm.css";
 
 const { Option } = Select;
 
@@ -9,7 +9,7 @@ class SignUpForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        console.log("Received values of form: ", values);
       }
     });
   };
@@ -21,8 +21,8 @@ class SignUpForm extends React.Component {
 
   compareToFirstPassword = (value, callback) => {
     const form = this.props.form;
-    if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
+    if (value && value !== form.getFieldValue("password")) {
+      callback("Two passwords that you enter is inconsistent!");
     } else {
       callback();
     }
@@ -31,7 +31,7 @@ class SignUpForm extends React.Component {
   validateToNextPassword = (value, callback) => {
     const form = this.props.form;
     if (value && this.state.confirmDirty) {
-      form.validateFields(['confirm'], { force: true });
+      form.validateFields(["confirm"], { force: true });
     }
     callback();
   };
@@ -39,8 +39,8 @@ class SignUpForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
 
-    const prefixSelector = getFieldDecorator('prefix', {
-      initialValue: '(29)'
+    const prefixSelector = getFieldDecorator("prefix", {
+      initialValue: "(29)"
     })(
       <Select style={{ width: 70 }}>
         <Option value="(29)">(29)</Option>
@@ -57,25 +57,25 @@ class SignUpForm extends React.Component {
             <h1 className="sign-up__title">Create your account</h1>
             <Form onSubmit={this.handleSubmit}>
               <Form.Item label="E-mail">
-                {getFieldDecorator('email', {
+                {getFieldDecorator("email", {
                   rules: [
                     {
-                      type: 'email',
-                      message: 'The input is not valid E-mail!'
+                      type: "email",
+                      message: "The input is not valid E-mail!"
                     },
                     {
                       required: true,
-                      message: 'Please input your E-mail!'
+                      message: "Please input your E-mail!"
                     }
                   ]
                 })(<Input />)}
               </Form.Item>
               <Form.Item label="Password">
-                {getFieldDecorator('password', {
+                {getFieldDecorator("password", {
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your password!'
+                      message: "Please input your password!"
                     },
                     {
                       validator: this.validateToNextPassword
@@ -84,11 +84,11 @@ class SignUpForm extends React.Component {
                 })(<Input type="password" />)}
               </Form.Item>
               <Form.Item label="Confirm Password">
-                {getFieldDecorator('confirm', {
+                {getFieldDecorator("confirm", {
                   rules: [
                     {
                       required: true,
-                      message: 'Please confirm your password!'
+                      message: "Please confirm your password!"
                     },
                     {
                       validator: this.compareToFirstPassword
@@ -98,17 +98,17 @@ class SignUpForm extends React.Component {
               </Form.Item>
 
               <Form.Item label="Phone Number">
-                {getFieldDecorator('phone', {
+                {getFieldDecorator("phone", {
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your phone number!'
+                      message: "Please input your phone number!"
                     }
                   ]
                 })(
                   <Input
                     addonBefore={prefixSelector}
-                    style={{ width: '100%' }}
+                    style={{ width: "100%" }}
                   />
                 )}
               </Form.Item>
@@ -119,11 +119,11 @@ class SignUpForm extends React.Component {
               >
                 <Row gutter={8}>
                   <Col span={12}>
-                    {getFieldDecorator('captcha', {
+                    {getFieldDecorator("captcha", {
                       rules: [
                         {
                           required: true,
-                          message: 'Please input the captcha you got!'
+                          message: "Please input the captcha you got!"
                         }
                       ]
                     })(<Input />)}
@@ -135,7 +135,7 @@ class SignUpForm extends React.Component {
               </Form.Item>
               <Form.Item>
                 <Button
-                  style={{ width: '50%' }}
+                  style={{ width: "50%" }}
                   type="primary"
                   htmlType="submit"
                 >
@@ -150,6 +150,6 @@ class SignUpForm extends React.Component {
   }
 }
 
-const RegistrationForm = Form.create({ name: 'register' })(SignUpForm);
+const RegistrationForm = Form.create({ name: "register" })(SignUpForm);
 
 export default RegistrationForm;

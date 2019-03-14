@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import CompaniesList from './CompaniesList';
-import { Consumer } from '../../context';
-import queryString from 'query-string';
+import React, { Component } from "react";
+import CompaniesList from "./CompaniesList";
+import { Consumer } from "../../context";
+import queryString from "query-string";
 
 class CompaniesListByQueryContainer extends Component {
   render() {
