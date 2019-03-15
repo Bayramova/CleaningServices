@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import CompaniesList from "./CompaniesList";
-import { Consumer } from "../../context";
+import { connect } from "react-redux";
+
+const mapStateToProps = state => {
+  const companiesList = state.companies.filter(company =>
+    company.services.includes(this.props.pathname)
+  );
+  return {
+    companies: companiesList
+  };
+};
 
 class CompaniesListByTypeContainer extends Component {
   render() {
-    return (
-      <Consumer>
-        {store => {
-          const companiesList = store.companies.filter(company =>
-            company.services.includes(this.props.pathname)
-          );
-          return <CompaniesList companies={companiesList} />;
-        }}
-      </Consumer>
-    );
+    return <CompaniesList companies={this.props.companiesList} />;
   }
 }
 
-export default CompaniesListByTypeContainer;
+export default connect(mapStateToProps)(CompaniesListByTypeContainer);

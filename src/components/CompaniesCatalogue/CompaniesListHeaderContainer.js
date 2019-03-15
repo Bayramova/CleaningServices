@@ -1,22 +1,22 @@
 import React, { Component } from "react";
-import { Consumer } from "../../context";
 import CompaniesListHeader from "./CompaniesListHeader";
+import { connect } from "react-redux";
+
+const mapStateToProps = state => {
+  return {
+    serviceTypes: state.serviceTypes
+  };
+};
 
 class CompaniesListHeaderContainer extends Component {
   render() {
     return (
-      <Consumer>
-        {store => {
-          return (
-            <CompaniesListHeader
-              title={store.serviceTypes[this.props.pathname].title}
-              description={store.serviceTypes[this.props.pathname].description}
-            />
-          );
-        }}
-      </Consumer>
+      <CompaniesListHeader
+        title={this.props.serviceTypes[this.props.pathname].title}
+        description={this.props.serviceTypes[this.props.pathname].description}
+      />
     );
   }
 }
 
-export default CompaniesListHeaderContainer;
+export default connect(mapStateToProps)(CompaniesListHeaderContainer);
