@@ -5,6 +5,7 @@
   "dependencies": {
     "antd": "^3.13.6",
     "babel-plugin-import": "^1.11.0",
+    "cors": "^2.8.5",
     "customize-cra": "^0.2.12",
     "express": "^4.16.4",
     "less": "^3.9.0",
@@ -13,8 +14,11 @@
     "react": "^16.8.3",
     "react-app-rewired": "^2.1.0",
     "react-dom": "^16.8.3",
+    "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "validator": "^10.11.0"
   },
   "scripts": {
