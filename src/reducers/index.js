@@ -1,9 +1,9 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
-import loadingData from "./loadingData";
-import orderFormReducer from "./orderFormReducer";
+import data from './data';
+import orderFormFields from './orderFormFields';
 
 export default combineReducers({
-  loadingData,
-  orderFormReducer
+  data,
+  orderFormFields
 });
