@@ -66,9 +66,6 @@ class SignInForm extends Component {
                 initialValue: true
               })(<Checkbox>Remember me</Checkbox>)}
               <div className="sign-in-form__buttons">
-                <a className="login-form-forgot" href="">
-                  Forgot password
-                </a>
                 <Button
                   type="primary"
                   htmlType="submit"

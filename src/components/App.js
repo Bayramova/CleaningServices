@@ -8,7 +8,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import Header from './Header/Header';
-import Main from './Main/Main';
+import Main from './Landing/Landing';
 import Footer from './Footer/Footer';
 import OrderForm from './Forms/Order/OrderForm';
 import SignInForm from './Forms/SignIn/SignInForm';
