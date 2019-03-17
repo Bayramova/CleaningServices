@@ -8,6 +8,7 @@
     "customize-cra": "^0.2.12",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
+    "query-string": "^6.3.0",
     "react": "^16.8.3",
     "react-app-rewired": "^2.1.0",
     "react-dom": "^16.8.3",
@@ -31,7 +32,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "eslint": "^5.15.1",
+    "eslint": "5.12.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-import": "^2.16.0",

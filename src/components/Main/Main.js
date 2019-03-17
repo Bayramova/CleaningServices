@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import ServiceCardsContainer from "./ServiceTypes/ServiceCardsContainer";
-import "./Main.css";
+import React, { Component } from 'react';
+import ServiceCardsContainer from './ServiceTypes/ServiceCardsContainer';
+import './Main.css';
 
 class Main extends Component {
   render() {
     return (
-      <main className="main">
+      <React.Fragment>
         <section className="section section--about-us">
           <div className="section__promo">
             <div className="section__promo__heading">
@@ -42,7 +42,7 @@ class Main extends Component {
             <ServiceCardsContainer />
           </div>
         </section>
-      </main>
+      </React.Fragment>
     );
   }
 }
