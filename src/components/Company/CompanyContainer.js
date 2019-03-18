@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Company from './Company';
-import './CompanyInfo.css';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import Company from "./Company";
+import "./CompanyInfo.css";
+import { connect } from "react-redux";
 
 class CompanyContainer extends Component {
   render() {

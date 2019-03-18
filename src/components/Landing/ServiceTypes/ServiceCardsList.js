@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import ServiceCard from './ServiceCard';
-import './ServiceCards.css';
+import React, { Component } from "react";
+import ServiceCard from "./ServiceCard";
+import "./ServiceCards.css";
 
 class ServiceCardsList extends Component {
   render() {

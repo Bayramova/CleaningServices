@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Spin } from "antd";
+import { Spin, Alert } from "antd";
 import {
   BrowserRouter as Router,
   Route,
@@ -22,12 +22,13 @@ import { handleInitialData } from "../actions/receiveData";
 
 class App extends Component {
   componentDidMount() {
+    console.log(this.props);
     const { dispatch } = this.props;
     dispatch(handleInitialData());
   }
 
   render() {
-    const { loadingData } = this.props;
+    const { loadingData, serviceTypes, companies, error } = this.props;
     return (
       <Router>
         <div className="container">
@@ -77,7 +78,10 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    loadingData: state.data.loadingData
+    loadingData: state.data.loadingData,
+    serviceTypes: state.data.serviceTypes,
+    companies: state.data.companies,
+    error: state.data.error
   };
 };
 

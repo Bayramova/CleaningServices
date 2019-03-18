@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import data from './data';
-import orderFormFields from './orderFormFields';
+import data from "./data";
+import orderFormFields from "./orderFormFields";
 
 export default combineReducers({
   data,

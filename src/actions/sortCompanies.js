@@ -1,4 +1,4 @@
-export const SORT_COMPANIES = 'CHANGE_FIELDS';
+export const SORT_COMPANIES = "CHANGE_FIELDS";
 
 function sortCompanies(sortBy) {
   return {

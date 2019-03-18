@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './Catalogue.css';
+import React, { Component } from "react";
+import "./Catalogue.css";
 
 class CatalogueHeader extends Component {
   render() {
