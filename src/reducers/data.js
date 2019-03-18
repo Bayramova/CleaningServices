@@ -1,7 +1,7 @@
 import {
-  FETCH_POST_REQUEST,
-  FETCH_POST_SUCCESS,
-  FETCH_POST_FAILURE
+  FETCH_DATA_REQUEST,
+  FETCH_DATA_SUCCESS,
+  FETCH_DATA_FAILURE
 } from "../actions/receiveData";
 import { SORT_COMPANIES } from "../actions/sortCompanies";
 
@@ -14,12 +14,12 @@ const initialState = {
 
 export default function data(state = initialState, action) {
   switch (action.type) {
-    case FETCH_POST_REQUEST:
+    case FETCH_DATA_REQUEST:
       return {
         ...state,
         loadingData: true
       };
-    case FETCH_POST_SUCCESS:
+    case FETCH_DATA_SUCCESS:
       return {
         ...state,
         loadingData: false,
@@ -27,11 +27,11 @@ export default function data(state = initialState, action) {
         companies: action.companies,
         error: null
       };
-    case FETCH_POST_FAILURE:
+    case FETCH_DATA_FAILURE:
       return {
         ...state,
         loadingData: false,
-        error: action.error
+        error: action.message
       };
     case SORT_COMPANIES:
       const sortedCompaniesList = [...state.companies].sort(

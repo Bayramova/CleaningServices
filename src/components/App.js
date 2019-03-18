@@ -22,13 +22,12 @@ import { handleInitialData } from "../actions/receiveData";
 
 class App extends Component {
   componentDidMount() {
-    console.log(this.props);
     const { dispatch } = this.props;
     dispatch(handleInitialData());
   }
 
   render() {
-    const { loadingData, serviceTypes, companies, error } = this.props;
+    const { loadingData, error } = this.props;
     return (
       <Router>
         <div className="container">
@@ -37,6 +36,12 @@ class App extends Component {
             <main className="main">
               {loadingData ? (
                 <Spin className="app__loader" size="large" tip="Loading..." />
+              ) : error ? (
+                <Alert
+                  className="error__message"
+                  message={error}
+                  type="error"
+                />
               ) : (
                 <Switch>
                   <Route exact path="/" component={Main} />
@@ -79,8 +84,6 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     loadingData: state.data.loadingData,
-    serviceTypes: state.data.serviceTypes,
-    companies: state.data.companies,
     error: state.data.error
   };
 };

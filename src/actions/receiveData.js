@@ -1,40 +1,40 @@
 import { fetchCompanies, fetchServices } from "../api";
 
-export const FETCH_POST_REQUEST = "FETCH_POST_REQUEST";
-export const FETCH_POST_SUCCESS = "FETCH_POST_SUCCESS";
-export const FETCH_POST_FAILURE = "FETCH_POST_FAILURE";
+export const FETCH_DATA_REQUEST = "FETCH_DATA_REQUEST";
+export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
+export const FETCH_DATA_FAILURE = "FETCH_DATA_FAILURE";
 
-function fetchPostsRequest() {
+function fetchDataRequest() {
   return {
-    type: FETCH_POST_REQUEST
+    type: FETCH_DATA_REQUEST
   };
 }
 
-function fetchPostsSuccess(serviceTypes, companies) {
+function fetchDataSuccess(serviceTypes, companies) {
   return {
-    type: FETCH_POST_SUCCESS,
+    type: FETCH_DATA_SUCCESS,
     serviceTypes,
     companies
   };
 }
 
-function fetchPostsFailure(error) {
+function fetchDataFailure(error) {
   return {
-    type: FETCH_POST_REQUEST,
+    type: FETCH_DATA_FAILURE,
     message: error.message || "Something went wrong."
   };
 }
 
 export function handleInitialData() {
   return dispatch => {
-    dispatch(fetchPostsRequest());
+    dispatch(fetchDataRequest());
 
     return Promise.all([fetchServices(), fetchCompanies()])
       .then(([serviceTypes, companies]) => {
-        dispatch(fetchPostsSuccess(serviceTypes, companies));
+        dispatch(fetchDataSuccess(serviceTypes, companies));
       })
       .catch(error => {
-        dispatch(fetchPostsFailure(error));
+        dispatch(fetchDataFailure(error));
       });
   };
 }

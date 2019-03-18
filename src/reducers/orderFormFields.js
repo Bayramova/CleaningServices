@@ -1,16 +1,36 @@
 import { CHANGE_FIELDS } from "../actions/updateFieldsState";
 
 const initialState = {
-  address: "",
-  serviceType: "",
-  bigRooms: "",
-  smallRooms: "",
-  bathrooms: "",
-  daysOfCleaning: [],
-  startTimeOfCleaning: "",
-  cleaningFrequency: "",
-  phone: "",
-  prefix: ""
+  address: {
+    value: ""
+  },
+  serviceType: {
+    value: ""
+  },
+  bigRooms: {
+    value: ""
+  },
+  smallRooms: {
+    value: ""
+  },
+  bathrooms: {
+    value: ""
+  },
+  daysOfCleaning: {
+    value: []
+  },
+  startTimeOfCleaning: {
+    value: ""
+  },
+  cleaningFrequency: {
+    value: ""
+  },
+  phone: {
+    value: ""
+  },
+  prefix: {
+    value: ""
+  }
 };
 
 export default function orderFormFields(state = initialState, action) {
