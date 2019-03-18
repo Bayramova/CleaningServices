@@ -7,6 +7,7 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
+import ScrollToTop from "./ScrollToTop";
 import Header from "./Header/Header";
 import Main from "./Landing/Landing";
 import Footer from "./Footer/Footer";
@@ -23,8 +24,6 @@ class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(handleInitialData());
-
-    window.scrollTo(0, 0);
   }
 
   render() {
@@ -33,39 +32,42 @@ class App extends Component {
       <Router>
         <div className="container">
           <Header />
-          <main className="main">
-            {loadingData ? (
-              <Spin className="app__loader" size="large" tip="Loading..." />
-            ) : (
-              <Switch>
-                <Route exact path="/" component={Main} />
-                <Route
-                  exact
-                  path="/make_order"
-                  component={OrderFormContainer}
-                />
-                <Route exact path="/sign_in" component={SignInForm} />
-                <Route exact path="/sign_up" component={SignUpForm} />
-                <Route
-                  exact
-                  path="/service/:titleId"
-                  component={CompaniesCatalogue}
-                />
-                <Route
-                  exact
-                  path="/company/:company"
-                  component={CompanyContainer}
-                />
-                <Route
-                  exact
-                  path="/search"
-                  component={CompaniesListByQueryContainer}
-                />
-                <Route exact path="/myprofile" component={ClientProfile} />
-                <Route render={() => <Redirect to="/" />} />
-              </Switch>
-            )}
-          </main>
+          <ScrollToTop>
+            <main className="main">
+              {loadingData ? (
+                <Spin className="app__loader" size="large" tip="Loading..." />
+              ) : (
+                <Switch>
+                  <Route exact path="/" component={Main} />
+                  <Route
+                    exact
+                    path="/make_order"
+                    component={OrderFormContainer}
+                  />
+                  <Route exact path="/sign_in" component={SignInForm} />
+                  <Route exact path="/sign_up" component={SignUpForm} />
+                  <Route
+                    exact
+                    path="/service/:titleId"
+                    component={CompaniesCatalogue}
+                  />
+                  <Route
+                    exact
+                    path="/company/:company"
+                    component={CompanyContainer}
+                  />
+                  <Route
+                    exact
+                    path="/search"
+                    component={CompaniesListByQueryContainer}
+                  />
+                  <Route exact path="/myprofile" component={ClientProfile} />
+                  <Route render={() => <Redirect to="/" />} />
+                </Switch>
+              )}
+            </main>
+          </ScrollToTop>
+
           <Footer />
         </div>
       </Router>
