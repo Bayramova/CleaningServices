@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Select } from 'antd';
-import CompaniesList from './CompaniesList';
-import CatalogueHeader from './CatalogueHeader';
-import './Catalogue.css';
-import { connect } from 'react-redux';
-import { handleSortValueChange } from '../../actions/sortCompanies';
+import React, { Component } from "react";
+import { Select } from "antd";
+import CompaniesList from "./CompaniesList";
+import CatalogueHeader from "./CatalogueHeader";
+import "./Catalogue.css";
+import { connect } from "react-redux";
+import { handleSortValueChange } from "../../actions/sortCompanies";
 
 class CompaniesCatalogue extends Component {
   handleChange = value => {

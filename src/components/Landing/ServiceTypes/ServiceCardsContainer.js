@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import ServiceCardsList from './ServiceCardsList';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import ServiceCardsList from "./ServiceCardsList";
+import { connect } from "react-redux";
 
 class ServiceCardsContainer extends Component {
   render() {
