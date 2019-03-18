@@ -2,15 +2,12 @@ import React, { Component } from "react";
 import { Form, Input, Select, Button, InputNumber } from "antd";
 import { Link } from "react-router-dom";
 import "./OrderForm.css";
-import { connect } from "react-redux";
-import { handleFormChange } from "../../../actions/updateFieldsState";
 
 const { Option } = Select;
 
-// разделить логику контейнера и отбражания(создать контейнер)
 class PlaceOrderForm extends Component {
   handleClick = event => {
-    this.props.form.validateFieldsAndScroll((err, values) => {
+    this.props.form.validateFieldsAndScroll(err => {
       if (err) {
         event.preventDefault();
       }
@@ -19,9 +16,6 @@ class PlaceOrderForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const buttonText = this.props.location.state.fromSelectedCompany
-      ? "Place Order"
-      : "Show Options";
 
     const prefixSelector = getFieldDecorator("prefix", {
       initialValue: "(29)"
@@ -41,7 +35,7 @@ class PlaceOrderForm extends Component {
             <Form>
               <Form.Item label="Address">
                 {getFieldDecorator("address", {
-                  initialValue: this.props.address.value,
+                  initialValue: this.props.orderFormFields.address.value,
                   rules: [
                     {
                       required: true,
@@ -53,7 +47,7 @@ class PlaceOrderForm extends Component {
 
               <Form.Item label="Type of cleaning">
                 {getFieldDecorator("serviceType", {
-                  initialValue: this.props.serviceType.value,
+                  initialValue: this.props.orderFormFields.serviceType.value,
                   rules: [
                     {
                       required: true,
@@ -80,7 +74,7 @@ class PlaceOrderForm extends Component {
 
               <Form.Item label="Number of big rooms (> 30 sq m)">
                 {getFieldDecorator("bigRooms", {
-                  initialValue: this.props.bigRooms.value,
+                  initialValue: this.props.orderFormFields.bigRooms.value,
                   rules: [
                     {
                       required: true,
@@ -96,7 +90,7 @@ class PlaceOrderForm extends Component {
 
               <Form.Item label="Number of small rooms">
                 {getFieldDecorator("smallRooms", {
-                  initialValue: this.props.smallRooms.value,
+                  initialValue: this.props.orderFormFields.smallRooms.value,
                   rules: [
                     {
                       required: true,
@@ -112,7 +106,7 @@ class PlaceOrderForm extends Component {
 
               <Form.Item label="Number of bathrooms">
                 {getFieldDecorator("bathrooms", {
-                  initialValue: this.props.bathrooms.value,
+                  initialValue: this.props.orderFormFields.bathrooms.value,
                   rules: [
                     {
                       required: true,
@@ -128,7 +122,7 @@ class PlaceOrderForm extends Component {
 
               <Form.Item label="Day/Days">
                 {getFieldDecorator("daysOfCleaning", {
-                  initialValue: this.props.daysOfCleaning.value,
+                  initialValue: this.props.orderFormFields.daysOfCleaning.value,
                   rules: [
                     {
                       required: true,
@@ -154,7 +148,8 @@ class PlaceOrderForm extends Component {
 
               <Form.Item label="Expected start time of cleaning">
                 {getFieldDecorator("startTimeOfCleaning", {
-                  initialValue: this.props.startTimeOfCleaning.value,
+                  initialValue: this.props.orderFormFields.startTimeOfCleaning
+                    .value,
                   rules: [
                     {
                       required: true,
@@ -173,7 +168,8 @@ class PlaceOrderForm extends Component {
 
               <Form.Item label="Cleaning frequency">
                 {getFieldDecorator("cleaningFrequency", {
-                  initialValue: this.props.cleaningFrequency.value,
+                  initialValue: this.props.orderFormFields.cleaningFrequency
+                    .value,
                   rules: [
                     {
                       required: true,
@@ -192,7 +188,7 @@ class PlaceOrderForm extends Component {
 
               <Form.Item label="Phone Number">
                 {getFieldDecorator("phone", {
-                  initialValue: this.props.phone.value,
+                  initialValue: this.props.orderFormFields.phone.value,
                   rules: [
                     {
                       required: true,
@@ -209,11 +205,17 @@ class PlaceOrderForm extends Component {
 
               <Form.Item>
                 <Link
-                  to={`/service/${this.props.serviceType.value}`}
+                  to={`/service/${
+                    this.props.orderFormFields.serviceType.value
+                  }`}
                   onClick={this.handleClick}
                 >
-                  <Button style={{ width: "50%" }} type="primary">
-                    {buttonText}
+                  <Button
+                    style={{ width: "50%" }}
+                    type="primary"
+                    onClick={this.handleClick}
+                  >
+                    {this.props.buttonText}
                   </Button>
                 </Link>
               </Form.Item>
@@ -228,54 +230,9 @@ class PlaceOrderForm extends Component {
 const OrderForm = Form.create({
   name: "global_state",
   onFieldsChange(props, changedFields) {
+    console.log(changedFields);
     props.onChange(changedFields);
   }
 })(PlaceOrderForm);
 
-// todo к вопросу о структуре
-/* const mapStateToProps = state => {
-  return state.orderFormFields;
-}; */
-const mapStateToProps = state => {
-  return {
-    address: {
-      value: state.orderFormFields.address.value
-    },
-    serviceType: {
-      value: state.orderFormFields.serviceType.value
-    },
-    bigRooms: {
-      value: state.orderFormFields.bigRooms.value
-    },
-    smallRooms: {
-      value: state.orderFormFields.smallRooms.value
-    },
-    bathrooms: {
-      value: state.orderFormFields.bathrooms.value
-    },
-    daysOfCleaning: {
-      value: state.orderFormFields.daysOfCleaning.value
-    },
-    startTimeOfCleaning: {
-      value: state.orderFormFields.startTimeOfCleaning.value
-    },
-    cleaningFrequency: {
-      value: state.orderFormFields.cleaningFrequency.value
-    },
-    phone: {
-      value: state.orderFormFields.phone.value
-    },
-    prefix: {
-      value: state.orderFormFields.prefix.value
-    }
-  };
-};
-
-const mapDispatchToProps = {
-  onChange: handleFormChange
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(OrderForm);
+export default OrderForm;
