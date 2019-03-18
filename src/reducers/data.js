@@ -1,5 +1,5 @@
-import { RECEIVE_DATA } from '../actions/receiveData';
-import { SORT_COMPANIES } from '../actions/sortCompanies';
+import { RECEIVE_DATA } from "../actions/receiveData";
+import { SORT_COMPANIES } from "../actions/sortCompanies";
 
 const initialState = {
   loadingData: true,
@@ -17,6 +17,7 @@ export default function data(state = initialState, action) {
         companies: action.companies
       };
     case SORT_COMPANIES:
+      // todo зачем [...state.companies] ?
       const sortedCompaniesList = [...state.companies].sort(
         (company1, company2) =>
           company2[action.sortBy] - company1[action.sortBy]

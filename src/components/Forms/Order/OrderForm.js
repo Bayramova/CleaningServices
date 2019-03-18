@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import { Form, Input, Select, Button, InputNumber } from 'antd';
-import { Link } from 'react-router-dom';
-import './OrderForm.css';
-import { connect } from 'react-redux';
-import { handleFormChange } from '../../../actions/updateFieldsState';
+import React, { Component } from "react";
+import { Form, Input, Select, Button, InputNumber } from "antd";
+import { Link } from "react-router-dom";
+import "./OrderForm.css";
+import { connect } from "react-redux";
+import { handleFormChange } from "../../../actions/updateFieldsState";
 
 const { Option } = Select;
 
+// разделить логику контейнера и отбражания(создать контейнер)
 class PlaceOrderForm extends Component {
   handleClick = event => {
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -19,11 +20,11 @@ class PlaceOrderForm extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const buttonText = this.props.location.state.fromSelectedCompany
-      ? 'Place Order'
-      : 'Show Options';
+      ? "Place Order"
+      : "Show Options";
 
-    const prefixSelector = getFieldDecorator('prefix', {
-      initialValue: '(29)'
+    const prefixSelector = getFieldDecorator("prefix", {
+      initialValue: "(29)"
     })(
       <Select style={{ width: 70 }}>
         <Option value="(29)">(29)</Option>
@@ -39,28 +40,28 @@ class PlaceOrderForm extends Component {
             <h1 className="sign-up__title">Place an order</h1>
             <Form>
               <Form.Item label="Address">
-                {getFieldDecorator('address', {
+                {getFieldDecorator("address", {
                   initialValue: this.props.address.value,
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your adress!'
+                      message: "Please input your adress!"
                     }
                   ]
                 })(<Input />)}
               </Form.Item>
 
               <Form.Item label="Type of cleaning">
-                {getFieldDecorator('serviceType', {
+                {getFieldDecorator("serviceType", {
                   initialValue: this.props.serviceType.value,
                   rules: [
                     {
                       required: true,
-                      message: 'Please select type of cleaning!'
+                      message: "Please select type of cleaning!"
                     }
                   ]
                 })(
-                  <Select style={{ width: '100%' }}>
+                  <Select style={{ width: "100%" }}>
                     <Option value="standardcleaning">Standard cleaning</Option>
                     <Option value="generalcleaning">General cleaning</Option>
                     <Option value="carpetcleaning">Dry Carpet cleaning</Option>
@@ -78,66 +79,66 @@ class PlaceOrderForm extends Component {
               </Form.Item>
 
               <Form.Item label="Number of big rooms (> 30 sq m)">
-                {getFieldDecorator('bigRooms', {
+                {getFieldDecorator("bigRooms", {
                   initialValue: this.props.bigRooms.value,
                   rules: [
                     {
                       required: true,
-                      message: 'Please input number of rooms!'
+                      message: "Please input number of rooms!"
                     },
                     {
-                      type: 'number',
-                      message: 'Please enter a number!'
+                      type: "number",
+                      message: "Please enter a number!"
                     }
                   ]
                 })(<InputNumber min={0} />)}
               </Form.Item>
 
               <Form.Item label="Number of small rooms">
-                {getFieldDecorator('smallRooms', {
+                {getFieldDecorator("smallRooms", {
                   initialValue: this.props.smallRooms.value,
                   rules: [
                     {
                       required: true,
-                      message: 'Please input number of rooms!'
+                      message: "Please input number of rooms!"
                     },
                     {
-                      type: 'number',
-                      message: 'Please enter a number!'
+                      type: "number",
+                      message: "Please enter a number!"
                     }
                   ]
                 })(<InputNumber min={0} />)}
               </Form.Item>
 
               <Form.Item label="Number of bathrooms">
-                {getFieldDecorator('bathrooms', {
+                {getFieldDecorator("bathrooms", {
                   initialValue: this.props.bathrooms.value,
                   rules: [
                     {
                       required: true,
-                      message: 'Please input number of rooms!'
+                      message: "Please input number of rooms!"
                     },
                     {
-                      type: 'number',
-                      message: 'Please enter a number!'
+                      type: "number",
+                      message: "Please enter a number!"
                     }
                   ]
                 })(<InputNumber min={0} />)}
               </Form.Item>
 
               <Form.Item label="Day/Days">
-                {getFieldDecorator('daysOfCleaning', {
+                {getFieldDecorator("daysOfCleaning", {
                   initialValue: this.props.daysOfCleaning.value,
                   rules: [
                     {
                       required: true,
-                      message: 'Please input day/days of cleaning!'
+                      message: "Please input day/days of cleaning!"
                     }
                   ]
                 })(
                   <Select
                     mode="multiple"
-                    style={{ width: '100%' }}
+                    style={{ width: "100%" }}
                     placeholder="Please select day/days"
                   >
                     <Option value="Monday">Monday</Option>
@@ -152,16 +153,16 @@ class PlaceOrderForm extends Component {
               </Form.Item>
 
               <Form.Item label="Expected start time of cleaning">
-                {getFieldDecorator('startTimeOfCleaning', {
+                {getFieldDecorator("startTimeOfCleaning", {
                   initialValue: this.props.startTimeOfCleaning.value,
                   rules: [
                     {
                       required: true,
-                      message: 'Please select time of cleaning!'
+                      message: "Please select time of cleaning!"
                     }
                   ]
                 })(
-                  <Select style={{ width: '100%' }}>
+                  <Select style={{ width: "100%" }}>
                     <Option value="09:00-12:00">09:00-12:00</Option>
                     <Option value="12:00-15:00">12:00-15:00</Option>
                     <Option value="15:00-18:00">15:00-18:00</Option>
@@ -171,16 +172,16 @@ class PlaceOrderForm extends Component {
               </Form.Item>
 
               <Form.Item label="Cleaning frequency">
-                {getFieldDecorator('cleaningFrequency', {
+                {getFieldDecorator("cleaningFrequency", {
                   initialValue: this.props.cleaningFrequency.value,
                   rules: [
                     {
                       required: true,
-                      message: 'Please select cleaning frequency!'
+                      message: "Please select cleaning frequency!"
                     }
                   ]
                 })(
-                  <Select style={{ width: '100%' }}>
+                  <Select style={{ width: "100%" }}>
                     <Option value="only once">Only once</Option>
                     <Option value="every week">Every week</Option>
                     <Option value="every 2 weeks">Every 2 weeks</Option>
@@ -190,18 +191,18 @@ class PlaceOrderForm extends Component {
               </Form.Item>
 
               <Form.Item label="Phone Number">
-                {getFieldDecorator('phone', {
+                {getFieldDecorator("phone", {
                   initialValue: this.props.phone.value,
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your phone number!'
+                      message: "Please input your phone number!"
                     }
                   ]
                 })(
                   <Input
                     addonBefore={prefixSelector}
-                    style={{ width: '100%' }}
+                    style={{ width: "100%" }}
                   />
                 )}
               </Form.Item>
@@ -211,7 +212,7 @@ class PlaceOrderForm extends Component {
                   to={`/service/${this.props.serviceType.value}`}
                   onClick={this.handleClick}
                 >
-                  <Button style={{ width: '50%' }} type="primary">
+                  <Button style={{ width: "50%" }} type="primary">
                     {buttonText}
                   </Button>
                 </Link>
@@ -225,12 +226,16 @@ class PlaceOrderForm extends Component {
 }
 
 const OrderForm = Form.create({
-  name: 'global_state',
+  name: "global_state",
   onFieldsChange(props, changedFields) {
     props.onChange(changedFields);
   }
 })(PlaceOrderForm);
 
+// todo к вопросу о структуре
+/* const mapStateToProps = state => {
+  return state.orderFormFields;
+}; */
 const mapStateToProps = state => {
   return {
     address: {

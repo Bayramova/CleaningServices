@@ -1,35 +1,36 @@
-import { CHANGE_FIELDS } from '../actions/updateFieldsState';
+import { CHANGE_FIELDS } from "../actions/updateFieldsState";
 
+// todo надо ли такая структура? возможно достаточно address: '', serviceType: ''
 const initialState = {
   address: {
-    value: ''
+    value: ""
   },
   serviceType: {
-    value: ''
+    value: ""
   },
   bigRooms: {
-    value: ''
+    value: ""
   },
   smallRooms: {
-    value: ''
+    value: ""
   },
   bathrooms: {
-    value: ''
+    value: ""
   },
   daysOfCleaning: {
     value: []
   },
   startTimeOfCleaning: {
-    value: ''
+    value: ""
   },
   cleaningFrequency: {
-    value: ''
+    value: ""
   },
   phone: {
-    value: ''
+    value: ""
   },
   prefix: {
-    value: ''
+    value: ""
   }
 };
 
