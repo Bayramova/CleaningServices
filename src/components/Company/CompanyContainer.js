@@ -1,23 +1,29 @@
 import React, { Component } from "react";
-import { Consumer } from "../../context";
 import Company from "./Company";
+import "./CompanyInfo.css";
+import { connect } from "react-redux";
 
 class CompanyContainer extends Component {
   render() {
+    const company = this.props.companies.find(
+      company => company.id === this.props.match.params.company
+    );
+    const serviceTitles = company.services.map(
+      id => this.props.serviceTypes[id].title
+    );
     return (
-      <Consumer>
-        {store => {
-          const company = store.companies.find(
-            company => company.id === this.props.pathname
-          );
-          const serviceTitles = company.services.map(
-            id => store.serviceTypes[id].title
-          );
-          return <Company company={company} services={serviceTitles} />;
-        }}
-      </Consumer>
+      <div>
+        <Company company={company} services={serviceTitles} />
+      </div>
     );
   }
 }
 
-export default CompanyContainer;
+const mapStateToProps = state => {
+  return {
+    serviceTypes: state.data.serviceTypes,
+    companies: state.data.companies
+  };
+};
+
+export default connect(mapStateToProps)(CompanyContainer);

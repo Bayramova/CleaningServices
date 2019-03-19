@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Search from './Search/Search';
-import './Header.css';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Search from "./Search/Search";
+import "./Header.css";
 
 class Header extends Component {
   render() {
@@ -20,7 +20,7 @@ class Header extends Component {
           <div className="header__right">
             <Link
               to={{
-                pathname: '/make_order',
+                pathname: "/make_order",
                 state: {
                   fromSelectedCompany: false
                 }
@@ -30,7 +30,7 @@ class Header extends Component {
               Make order
             </Link>
 
-            <Link to={'/sign_in'} className="link button-links__link--sign-in">
+            <Link to={"/sign_in"} className="link button-links__link--sign-in">
               Sign in
             </Link>
           </div>

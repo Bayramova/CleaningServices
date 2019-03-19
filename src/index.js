@@ -1,12 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { Provider } from "./context";
 import App from "./components/App";
+import { Provider } from "react-redux";
+import rootReducer from "./reducers";
+import { createStore } from "redux";
+import middleware from "./middleware";
+
+const store = createStore(rootReducer, middleware);
 
 ReactDOM.render(
-  <Provider>
+  <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById("root")
 );
+
+export default store;

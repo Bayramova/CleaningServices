@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Input, Icon } from 'antd';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { Input, Icon } from "antd";
 
 class Search extends Component {
   state = {
-    query: ''
+    query: ""
   };
 
   handleChange = e => {
@@ -20,11 +20,11 @@ class Search extends Component {
         enterButton={
           <Link
             to={{
-              pathname: '/search',
+              pathname: "/search",
               search: `?q=${this.state.query}`
             }}
           >
-            <Icon type="search" style={{ fontSize: '16px' }} />
+            <Icon type="search" style={{ fontSize: "16px" }} />
           </Link>
         }
       />

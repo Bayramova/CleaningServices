@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Catalogue.css";
 
-class CompaniesListHeader extends Component {
+class CatalogueHeader extends Component {
   render() {
     return (
       <div>
@@ -14,4 +14,4 @@ class CompaniesListHeader extends Component {
   }
 }
 
-export default CompaniesListHeader;
+export default CatalogueHeader;

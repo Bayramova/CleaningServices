@@ -1,6 +1,6 @@
 .companies-list__container {
   background: #fefefe;
-  padding: 20px 40px;
+  padding: 20px;
 }
 
 .companies-list__title {
@@ -33,7 +33,7 @@
   grid-template-rows: 1fr auto;
   width: 300px;
   margin-bottom: 20px;
-  min-height: 300px;
+  height: 300px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
   background: #fefefe;
   border: 1px solid #e1e8ed;
@@ -78,6 +78,12 @@
 @media (min-width: 700px) {
   .catalogue__cards {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1000px) {
+  .catalogue__cards {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 

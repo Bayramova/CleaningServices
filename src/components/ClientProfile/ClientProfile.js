@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './ClientProfile.css';
+import React, { Component } from "react";
+import "./ClientProfile.css";
 
 class ClientProfile extends Component {
   render() {

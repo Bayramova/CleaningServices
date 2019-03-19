@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import ServiceCardsList from "./ServiceCardsList";
-import { Consumer } from "../../../context";
+import { connect } from "react-redux";
 
 class ServiceCardsContainer extends Component {
   render() {
     return (
-      <Consumer>
-        {store => (
-          <ServiceCardsList services={Object.values(store.serviceTypes)} />
-        )}
-      </Consumer>
+      <ServiceCardsList services={Object.values(this.props.serviceTypes)} />
     );
   }
 }
 
-export default ServiceCardsContainer;
+const mapStateToProps = state => {
+  return {
+    serviceTypes: state.data.serviceTypes
+  };
+};
+
+export default connect(mapStateToProps)(ServiceCardsContainer);

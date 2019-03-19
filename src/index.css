@@ -18,6 +18,11 @@ body {
   justify-self: center;
 }
 
+.error__message {
+  align-self: center;
+  justify-self: center;
+}
+
 .container {
   display: grid;
   grid-template-rows: 1fr auto;
@@ -29,19 +34,3 @@ body {
   background: #f2f5f6;
   display: grid;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

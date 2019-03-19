@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import ServiceCardsContainer from './ServiceTypes/ServiceCardsContainer';
-import './Landing.css';
+import React, { Component } from "react";
+import ServiceCardsContainer from "./ServiceTypes/ServiceCardsContainer";
+import "./Landing.css";
 
 class Main extends Component {
   render() {
