@@ -12,14 +12,14 @@ class CompaniesListByQueryContainer extends Component {
 
   render() {
     const query = queryString.parse(this.props.location.search).q.toLowerCase();
+    const service = this.props.serviceTypes.find(service =>
+      service.title.toLowerCase().includes(query)
+    );
+    const serviceId = service ? service.id : "";
     const filtered = this.props.companies.filter(
       company =>
         company.name.toLowerCase().includes(query) ||
-        company.services.includes(
-          Object.keys(this.props.serviceTypes).find(service =>
-            this.props.serviceTypes[service].title.toLowerCase().includes(query)
-          )
-        )
+        company.services.includes(serviceId)
     );
     return (
       <div className="companies-list__container">

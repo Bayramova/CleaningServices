@@ -9,7 +9,7 @@ class CompanyContainer extends Component {
       company => company.id === this.props.match.params.company
     );
     const serviceTitles = company.services.map(
-      id => this.props.serviceTypes[id].title
+      id => this.props.serviceTypes.find(service => service.id === id).title
     );
     return (
       <div>
