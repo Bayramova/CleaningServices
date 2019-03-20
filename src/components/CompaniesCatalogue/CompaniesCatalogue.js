@@ -13,12 +13,15 @@ class CompaniesCatalogue extends Component {
 
   render() {
     const matchPath = this.props.match.params.titleId;
+    const service = this.props.serviceTypes.find(
+      service => service.id === matchPath
+    );
     return (
       <div className="companies-list__container">
         <section>
           <CatalogueHeader
-            title={this.props.serviceTypes[matchPath].title}
-            description={this.props.serviceTypes[matchPath].description}
+            title={service.title}
+            description={service.description}
           />
         </section>
 
