@@ -30,7 +30,7 @@ class Header extends Component {
               Make order
             </Link>
 
-            <Link to={"/sign_in"} className="link button-links__link--sign-in">
+            <Link to={"/signin"} className="link button-links__link--sign-in">
               Sign in
             </Link>
           </div>
