@@ -13,27 +13,14 @@ import Main from "./Landing/Landing";
 import Footer from "./Footer/Footer";
 import OrderFormContainer from "./Forms/Order/OrderFormContainer";
 import SignInFormContainer from "./Forms/SignIn/SignInFormContainer";
-import SignUpForm from "./Forms/SignUp/SignUpForm";
+import SignUpFormContainer from "./Forms/SignUp/SignUpFormContainer";
 import CompaniesCatalogue from "./CompaniesCatalogue/CompaniesCatalogue";
 import CompanyContainer from "./Company/CompanyContainer";
 import CompaniesListByQueryContainer from "./CompaniesCatalogue/CompaniesListByQueryContainer";
 import ClientProfile from "./ClientProfile/ClientProfile";
+import PrivateRoute from "./PrivateRoute";
 import { handleInitialData } from "../actions/receiveData";
-import jwt_decode from "jwt-decode";
-import setAuthToken from "../utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "../actions/authActions";
 
-if (localStorage.jwtToken) {
-  const token = localStorage.jwtToken;
-  setAuthToken(token);
-  const decoded = jwt_decode(token);
-  this.props.store.dispatch(setCurrentUser(decoded));
-  const currentTime = Date.now() / 1000;
-  if (decoded.exp < currentTime) {
-    this.props.store.dispatch(logoutUser());
-    window.location.href = "./signin";
-  }
-}
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -65,7 +52,7 @@ class App extends Component {
                     component={OrderFormContainer}
                   />
                   <Route exact path="/signin" component={SignInFormContainer} />
-                  <Route exact path="/signup" component={SignUpForm} />
+                  <Route exact path="/signup" component={SignUpFormContainer} />
                   <Route
                     exact
                     path="/service/:titleId"
@@ -81,7 +68,11 @@ class App extends Component {
                     path="/search"
                     component={CompaniesListByQueryContainer}
                   />
-                  <Route exact path="/myprofile" component={ClientProfile} />
+                  <PrivateRoute
+                    exact
+                    path="/user/profile"
+                    component={ClientProfile}
+                  />
                   <Route render={() => <Redirect to="/" />} />
                 </Switch>
               )}

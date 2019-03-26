@@ -5,11 +5,20 @@ import "./SignUpForm.css";
 const { Option } = Select;
 
 class SignUpForm extends React.Component {
+  state = {
+    confirmDirty: false
+  };
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
+        const newUser = {
+          email: values.email,
+          password: values.password
+        };
+        this.props.registerUser(newUser, this.props.history);
       }
     });
   };
@@ -19,7 +28,7 @@ class SignUpForm extends React.Component {
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   };
 
-  compareToFirstPassword = (value, callback) => {
+  compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue("password")) {
       callback("Two passwords that you enter is inconsistent!");
@@ -28,7 +37,7 @@ class SignUpForm extends React.Component {
     }
   };
 
-  validateToNextPassword = (value, callback) => {
+  validateToNextPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && this.state.confirmDirty) {
       form.validateFields(["confirm"], { force: true });
@@ -130,6 +139,12 @@ class SignUpForm extends React.Component {
   }
 }
 
-const RegistrationForm = Form.create({ name: "register" })(SignUpForm);
+const RegistrationForm = Form.create({
+  name: "register",
+  onFieldsChange(props, changedFields) {
+    console.log(changedFields);
+    props.onChange(changedFields);
+  }
+})(SignUpForm);
 
 export default RegistrationForm;

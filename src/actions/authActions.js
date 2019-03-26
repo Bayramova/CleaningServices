@@ -2,14 +2,7 @@ import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
 export const GET_ERRORS = "GET_ERRORS";
-export const USER_LOADING = "USER_LOADING";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
-
-export const setUserLoading = () => {
-  return {
-    type: USER_LOADING
-  };
-};
 
 export const setCurrentUser = decoded => {
   return {
@@ -19,16 +12,20 @@ export const setCurrentUser = decoded => {
 };
 
 function getErrors(error) {
+  console.log("error", error);
   return {
     type: GET_ERRORS,
-    payload: error.response.body
+    payload: error
   };
 }
 
 export const registerUser = (userData, history) => dispatch => {
   fetch("/api/signup", {
     method: "POST",
-    body: userData
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(userData)
   })
     .then(res => history.push("/signin"))
     .catch(err => {
@@ -37,12 +34,18 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 export const loginUser = userData => dispatch => {
+  console.log(userData);
   fetch("/api/signin", {
     method: "POST",
-    body: userData
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(userData)
   })
+    .then(res => res.json())
     .then(res => {
-      const { token } = res.data;
+      console.log(res);
+      const { token } = res;
       localStorage.setItem("jwtToken", token);
       setAuthToken(token);
       const decoded = jwt_decode(token);

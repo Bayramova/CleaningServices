@@ -1,13 +1,8 @@
-import {
-  SET_CURRENT_USER,
-  USER_LOADING,
-  GET_ERRORS
-} from "../actions/authActions";
+import { SET_CURRENT_USER, GET_ERRORS } from "../actions/authActions";
 
 const initialState = {
   isAuthenticated: false,
   user: {},
-  loadingUser: false,
   errors: {}
 };
 
@@ -18,11 +13,6 @@ export default function(state = initialState, action) {
         ...state,
         isAuthenticated: true,
         user: action.payload
-      };
-    case USER_LOADING:
-      return {
-        ...state,
-        loadingUser: true
       };
     case GET_ERRORS:
       return {

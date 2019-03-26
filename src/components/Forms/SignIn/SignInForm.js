@@ -13,7 +13,7 @@ class SignInForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/make_order");
+      this.props.history.push("/user/profile");
     }
   }
   handleSubmit = e => {
