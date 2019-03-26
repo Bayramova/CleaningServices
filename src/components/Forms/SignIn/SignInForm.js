@@ -29,11 +29,15 @@ class SignInForm extends Component {
           </div>
           <Form onSubmit={this.handleSubmit}>
             <Form.Item>
-              {getFieldDecorator("userName", {
+              {getFieldDecorator("email", {
                 rules: [
                   {
                     required: true,
-                    message: "Please input your email or phone!"
+                    message: "Please input your email!"
+                  },
+                  {
+                    type: "email",
+                    message: "Please enter a valid email!"
                   }
                 ]
               })(
@@ -41,7 +45,7 @@ class SignInForm extends Component {
                   prefix={
                     <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
-                  placeholder="Email Address or Phone Number"
+                  placeholder="Enter email"
                 />
               )}
             </Form.Item>
@@ -71,7 +75,7 @@ class SignInForm extends Component {
                   htmlType="submit"
                   className="login-form-button"
                 >
-                  Log in
+                  Sign in
                 </Button>
               </div>
             </Form.Item>

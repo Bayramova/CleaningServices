@@ -7,7 +7,7 @@ import { SORT_COMPANIES } from "../actions/sortCompanies";
 
 const initialState = {
   loadingData: true,
-  serviceTypes: {},
+  serviceTypes: [],
   companies: [],
   error: null
 };
