@@ -1,15 +1,21 @@
 const setAuthToken = token => {
-  const headers = new Headers({
-    Authorization: token
-  });
-  const request = new Request("/api/signin", {
-    headers: headers
-  });
+  const headers = new Headers();
   if (token) {
-    fetch(request);
+    headers.append("Authorization", `Bearer ${token}`);
   } else {
     headers.delete("Authorization");
   }
+  fetch("/api/signin", {
+    method: "GET",
+    headers: headers
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
 
 export default setAuthToken;

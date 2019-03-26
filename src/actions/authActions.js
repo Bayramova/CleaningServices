@@ -5,22 +5,39 @@ export const GET_ERRORS = "GET_ERRORS";
 export const USER_LOADING = "USER_LOADING";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
+export const setUserLoading = () => {
+  return {
+    type: USER_LOADING
+  };
+};
+
+export const setCurrentUser = decoded => {
+  return {
+    type: SET_CURRENT_USER,
+    payload: decoded
+  };
+};
+
+function getErrors(error) {
+  return {
+    type: GET_ERRORS,
+    payload: error.response.body
+  };
+}
+
 export const registerUser = (userData, history) => dispatch => {
-  fetch("/api/register", {
+  fetch("/api/signup", {
     method: "POST",
     body: userData
   })
     .then(res => history.push("/signin"))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
+    .catch(err => {
+      dispatch(getErrors(err));
+    });
 };
 
 export const loginUser = userData => dispatch => {
-  fetch("/api/login", {
+  fetch("/api/signin", {
     method: "POST",
     body: userData
   })
@@ -31,25 +48,9 @@ export const loginUser = userData => dispatch => {
       const decoded = jwt_decode(token);
       dispatch(setCurrentUser(decoded));
     })
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};
-
-export const setCurrentUser = decoded => {
-  return {
-    type: SET_CURRENT_USER,
-    payload: decoded
-  };
-};
-
-export const setUserLoading = () => {
-  return {
-    type: USER_LOADING
-  };
+    .catch(err => {
+      dispatch(getErrors(err));
+    });
 };
 
 export const logoutUser = () => dispatch => {
