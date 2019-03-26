@@ -21,7 +21,7 @@ class SignInForm extends Component {
           <h1 className="sign-in__title">Sign in to your account</h1>
           <div className="sign-in__sign-up-info">
             Don't have an account?
-            <Link to={"/sign_up"} className="sign-in__sign-up-link">
+            <Link to={"/signup"} className="sign-in__sign-up-link">
               {" "}
               Create one
             </Link>

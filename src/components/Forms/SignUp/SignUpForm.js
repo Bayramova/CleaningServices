@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Select, Row, Col, Button } from "antd";
+import { Form, Input, Select, Button } from "antd";
 import "./SignUpForm.css";
 
 const { Option } = Select;
@@ -113,26 +113,6 @@ class SignUpForm extends React.Component {
                 )}
               </Form.Item>
 
-              <Form.Item
-                label="Captcha"
-                extra="We must make sure that your are a human."
-              >
-                <Row gutter={8}>
-                  <Col span={12}>
-                    {getFieldDecorator("captcha", {
-                      rules: [
-                        {
-                          required: true,
-                          message: "Please input the captcha you got!"
-                        }
-                      ]
-                    })(<Input />)}
-                  </Col>
-                  <Col span={12}>
-                    <Button>Get captcha</Button>
-                  </Col>
-                </Row>
-              </Form.Item>
               <Form.Item>
                 <Button
                   style={{ width: "50%" }}

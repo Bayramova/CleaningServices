@@ -50,8 +50,8 @@ class App extends Component {
                     path="/make_order"
                     component={OrderFormContainer}
                   />
-                  <Route exact path="/sign_in" component={SignInForm} />
-                  <Route exact path="/sign_up" component={SignUpForm} />
+                  <Route exact path="/signin" component={SignInForm} />
+                  <Route exact path="/signup" component={SignUpForm} />
                   <Route
                     exact
                     path="/service/:titleId"
