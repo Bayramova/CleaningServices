@@ -1,14 +1,31 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Form, Icon, Input, Button, Checkbox } from "antd";
+import { Form, Icon, Input, Button } from "antd";
+import classnames from "classnames";
 import "./SignInForm.css";
 
 class SignInForm extends Component {
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/make_order");
+    }
+  }
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
+        const userData = {
+          email: values.email,
+          password: values.password
+        };
+        this.props.loginUser(userData);
       }
     });
   };
@@ -46,8 +63,17 @@ class SignInForm extends Component {
                     <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
                   placeholder="Enter email"
+                  className={classnames("", {
+                    invalid:
+                      this.props.auth.errors.email ||
+                      this.props.auth.errors.emailnotfound
+                  })}
                 />
               )}
+              <span className="red-text">
+                {this.props.auth.errors.email}
+                {this.props.auth.errors.emailnotfound}
+              </span>
             </Form.Item>
             <Form.Item>
               {getFieldDecorator("password", {
@@ -61,24 +87,20 @@ class SignInForm extends Component {
                   }
                   type="password"
                   placeholder="Password"
+                  className={classnames("", {
+                    invalid: this.props.auth.errors.passwordincorrect
+                  })}
                 />
               )}
+              <span className="red-text">
+                {this.props.auth.errors.passwordincorrect}
+              </span>
             </Form.Item>
-            <Form.Item>
-              {getFieldDecorator("remember", {
-                valuePropName: "checked",
-                initialValue: true
-              })(<Checkbox>Remember me</Checkbox>)}
-              <div className="sign-in-form__buttons">
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="login-form-button"
-                >
-                  Sign in
-                </Button>
-              </div>
-            </Form.Item>
+            <div className="sign-in-form__buttons">
+              <Button type="primary" htmlType="submit">
+                Sign in
+              </Button>
+            </div>
           </Form>
         </div>
       </div>
@@ -86,6 +108,12 @@ class SignInForm extends Component {
   }
 }
 
-const LoginForm = Form.create({ name: "login" })(SignInForm);
+const LoginForm = Form.create({
+  name: "login",
+  onFieldsChange(props, changedFields) {
+    console.log(changedFields);
+    props.onChange(changedFields);
+  }
+})(SignInForm);
 
 export default LoginForm;

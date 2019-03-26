@@ -2,16 +2,14 @@ import { combineReducers } from "redux";
 
 import data from "./data";
 import orderFormFields from "./orderFormFields";
-import loginFormFields from "./loginFormFields";
-import signupFormFields from "./signupFormFields";
-import authReducer from "./authReducer";
-import errorReducer from "./errorReducer";
+import signInFormFields from "./loginFormFields";
+import signUpFormFields from "./signupFormFields";
+import auth from "./authReducer";
 
 export default combineReducers({
   data,
   orderFormFields,
-  loginFormFields,
-  signupFormFields,
-  authReducer,
-  errorReducer
+  signInFormFields,
+  signUpFormFields,
+  auth
 });

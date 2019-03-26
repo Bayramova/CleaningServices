@@ -12,14 +12,28 @@ import Header from "./Header/Header";
 import Main from "./Landing/Landing";
 import Footer from "./Footer/Footer";
 import OrderFormContainer from "./Forms/Order/OrderFormContainer";
-import SignInForm from "./Forms/SignIn/SignInForm";
+import SignInFormContainer from "./Forms/SignIn/SignInFormContainer";
 import SignUpForm from "./Forms/SignUp/SignUpForm";
 import CompaniesCatalogue from "./CompaniesCatalogue/CompaniesCatalogue";
 import CompanyContainer from "./Company/CompanyContainer";
 import CompaniesListByQueryContainer from "./CompaniesCatalogue/CompaniesListByQueryContainer";
 import ClientProfile from "./ClientProfile/ClientProfile";
 import { handleInitialData } from "../actions/receiveData";
+import jwt_decode from "jwt-decode";
+import setAuthToken from "../utils/setAuthToken";
+import { setCurrentUser, logoutUser } from "../actions/authActions";
 
+if (localStorage.jwtToken) {
+  const token = localStorage.jwtToken;
+  setAuthToken(token);
+  const decoded = jwt_decode(token);
+  this.props.store.dispatch(setCurrentUser(decoded));
+  const currentTime = Date.now() / 1000;
+  if (decoded.exp < currentTime) {
+    this.props.store.dispatch(logoutUser());
+    window.location.href = "./signin";
+  }
+}
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -50,7 +64,7 @@ class App extends Component {
                     path="/make_order"
                     component={OrderFormContainer}
                   />
-                  <Route exact path="/signin" component={SignInForm} />
+                  <Route exact path="/signin" component={SignInFormContainer} />
                   <Route exact path="/signup" component={SignUpForm} />
                   <Route
                     exact

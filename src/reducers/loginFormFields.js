@@ -6,7 +6,8 @@ const initialState = {
   },
   password: {
     value: ""
-  }
+  },
+  errors: {}
 };
 
 export default function loginFormFields(state = initialState, action) {
