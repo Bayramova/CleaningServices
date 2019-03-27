@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Form, Icon, Input, Button } from "antd";
-import classnames from "classnames";
 import "./SignInForm.css";
 
 class SignInForm extends Component {
@@ -11,21 +10,12 @@ class SignInForm extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/user/profile");
-    }
-  }
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
-        const userData = {
-          email: values.email,
-          password: values.password
-        };
-        this.props.loginUser(userData);
+        this.props.loginUser(values, this.props.history);
       }
     });
   };
@@ -45,7 +35,7 @@ class SignInForm extends Component {
             .
           </div>
           <Form onSubmit={this.handleSubmit}>
-            <Form.Item>
+            <Form.Item help={this.props.errors.emailincorrect}>
               {getFieldDecorator("email", {
                 rules: [
                   {
@@ -63,19 +53,10 @@ class SignInForm extends Component {
                     <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
                   placeholder="Enter email"
-                  className={classnames("", {
-                    invalid:
-                      this.props.auth.errors.email ||
-                      this.props.auth.errors.emailnotfound
-                  })}
                 />
               )}
-              <span className="red-text">
-                {this.props.auth.errors.email}
-                {this.props.auth.errors.emailnotfound}
-              </span>
             </Form.Item>
-            <Form.Item>
+            <Form.Item help={this.props.errors.passwordincorrect}>
               {getFieldDecorator("password", {
                 rules: [
                   { required: true, message: "Please input your Password!" }
@@ -87,14 +68,8 @@ class SignInForm extends Component {
                   }
                   type="password"
                   placeholder="Password"
-                  className={classnames("", {
-                    invalid: this.props.auth.errors.passwordincorrect
-                  })}
                 />
               )}
-              <span className="red-text">
-                {this.props.auth.errors.passwordincorrect}
-              </span>
             </Form.Item>
             <div className="sign-in-form__buttons">
               <Button type="primary" htmlType="submit">
@@ -108,12 +83,10 @@ class SignInForm extends Component {
   }
 }
 
-const LoginForm = Form.create({
-  name: "login",
+export default Form.create({
+  name: "signin",
   onFieldsChange(props, changedFields) {
     console.log(changedFields);
     props.onChange(changedFields);
   }
 })(SignInForm);
-
-export default LoginForm;

@@ -34,3 +34,15 @@
   justify-items: space-around;
   align-items: center;
 }
+
+@media (min-width: 768px) {
+  .sign-in {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sign-in {
+    width: 50%;
+  }
+}

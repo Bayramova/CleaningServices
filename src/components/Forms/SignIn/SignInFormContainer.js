@@ -22,7 +22,8 @@ class SignInFormContainer extends Component {
 const mapStateToProps = state => {
   return {
     signInFormFields: state.signInFormFields,
-    auth: state.auth
+    auth: state.auth,
+    errors: state.errors
   };
 };
 

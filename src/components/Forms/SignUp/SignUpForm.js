@@ -1,12 +1,20 @@
 import React from "react";
-import { Form, Input, Select, Button } from "antd";
+import { Form, Input, Select, Button, Upload, Icon } from "antd";
 import "./SignUpForm.css";
 
 const { Option } = Select;
 
 class SignUpForm extends React.Component {
   state = {
-    confirmDirty: false
+    confirmDirty: false,
+    formType: ""
+  };
+
+  handleRoleChange = value => {
+    this.setState({
+      formType: value
+    });
+    console.log(value);
   };
 
   handleSubmit = e => {
@@ -14,11 +22,7 @@ class SignUpForm extends React.Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
-        const newUser = {
-          email: values.email,
-          password: values.password
-        };
-        this.props.registerUser(newUser, this.props.history);
+        this.props.registerUser(values, this.props.history);
       }
     });
   };
@@ -65,7 +69,7 @@ class SignUpForm extends React.Component {
           <div className="sign-up">
             <h1 className="sign-up__title">Create your account</h1>
             <Form onSubmit={this.handleSubmit}>
-              <Form.Item label="E-mail">
+              <Form.Item label="E-mail" help={this.props.errors.email}>
                 {getFieldDecorator("email", {
                   rules: [
                     {
@@ -106,22 +110,137 @@ class SignUpForm extends React.Component {
                 })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
               </Form.Item>
 
-              <Form.Item label="Phone Number">
-                {getFieldDecorator("phone", {
+              <Form.Item label="Who you are">
+                {getFieldDecorator("role", {
                   rules: [
                     {
-                      required: true,
-                      message: "Please input your phone number!"
+                      required: true
                     }
                   ]
                 })(
-                  <Input
-                    addonBefore={prefixSelector}
+                  <Select
                     style={{ width: "100%" }}
-                  />
+                    onChange={this.handleRoleChange}
+                  >
+                    <Option value="client">Client</Option>
+                    <Option value="company">Company</Option>
+                  </Select>
                 )}
               </Form.Item>
-
+              {(() => {
+                switch (this.state.formType) {
+                  case "client":
+                    return (
+                      <React.Fragment>
+                        <Form.Item label="Name">
+                          {getFieldDecorator("name", {
+                            rules: [
+                              {
+                                required: true,
+                                message: "Please input your name!"
+                              }
+                            ]
+                          })(<Input />)}
+                        </Form.Item>
+                        <Form.Item label="Address">
+                          {getFieldDecorator("address", {
+                            rules: [
+                              {
+                                required: true,
+                                message: "Please input your adress!"
+                              }
+                            ]
+                          })(<Input />)}
+                        </Form.Item>
+                      </React.Fragment>
+                    );
+                  case "company":
+                    return (
+                      <React.Fragment>
+                        <Form.Item label="Logo">
+                          <div className="dropbox">
+                            {getFieldDecorator("logo", {
+                              valuePropName: "fileList",
+                              getValueFromEvent: this.normFile
+                            })(
+                              <Upload.Dragger name="files" action="/upload.do">
+                                <p className="ant-upload-drag-icon">
+                                  <Icon type="inbox" />
+                                </p>
+                                <p className="ant-upload-text">
+                                  Click or drag logo to this area to upload
+                                </p>
+                              </Upload.Dragger>
+                            )}
+                          </div>
+                        </Form.Item>
+                        <Form.Item label="Company name">
+                          {getFieldDecorator("name", {
+                            rules: [
+                              {
+                                required: true,
+                                message: "Please input your name!"
+                              }
+                            ]
+                          })(<Input />)}
+                        </Form.Item>
+                        <Form.Item label="Company address">
+                          {getFieldDecorator("address", {
+                            rules: [
+                              {
+                                required: true,
+                                message: "Please input your adress!"
+                              }
+                            ]
+                          })(<Input />)}
+                        </Form.Item>
+                        <Form.Item label="Company services">
+                          {getFieldDecorator("services", {
+                            rules: [
+                              {
+                                required: true,
+                                message: "Please select types of cleaning!"
+                              }
+                            ]
+                          })(
+                            <Select
+                              mode="multiple"
+                              style={{ width: "100%" }}
+                              placeholder="Please select types of cleaning you offer"
+                            >
+                              <Option value="standardcleaning">
+                                Standard cleaning
+                              </Option>
+                              <Option value="generalcleaning">
+                                General cleaning
+                              </Option>
+                              <Option value="carpetcleaning">
+                                Dry Carpet cleaning
+                              </Option>
+                              <Option value="furniturecleaning">
+                                Furniture and Coating cleaning
+                              </Option>
+                              <Option value="officecleaning">
+                                Office cleaning
+                              </Option>
+                              <Option value="repaircleaning">
+                                Repair cleaning
+                              </Option>
+                              <Option value="industrialcleaning">
+                                Industrial cleaning
+                              </Option>
+                              <Option value="poolcleaning">
+                                Pool cleaning
+                              </Option>
+                            </Select>
+                          )}
+                        </Form.Item>
+                      </React.Fragment>
+                    );
+                  default:
+                    return;
+                }
+              })()}
               <Form.Item>
                 <Button
                   style={{ width: "50%" }}
@@ -139,12 +258,10 @@ class SignUpForm extends React.Component {
   }
 }
 
-const RegistrationForm = Form.create({
-  name: "register",
+export default Form.create({
+  name: "signup",
   onFieldsChange(props, changedFields) {
     console.log(changedFields);
     props.onChange(changedFields);
   }
 })(SignUpForm);
-
-export default RegistrationForm;

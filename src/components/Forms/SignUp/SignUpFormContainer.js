@@ -20,7 +20,8 @@ class SignInFormContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    signUpFormFields: state.signUpFormFields
+    signUpFormFields: state.signUpFormFields,
+    errors: state.errors
   };
 };
 

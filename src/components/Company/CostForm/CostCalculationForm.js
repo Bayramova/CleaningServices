@@ -10,7 +10,10 @@ class CostCalculationForm extends Component {
           <label className="cost-form__label" htmlFor="type">
             Type of cleaning
           </label>
-          <Select style={{ width: "100%" }}>
+          <Select
+            style={{ width: "100%" }}
+            placeholder="Please select type of cleaning"
+          >
             {this.props.services.map(title => {
               return (
                 <Select.Option key={title} value={title}>

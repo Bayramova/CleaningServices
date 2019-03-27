@@ -15,44 +15,58 @@ function getErrors(error) {
   console.log("error", error);
   return {
     type: GET_ERRORS,
-    payload: error
+    error: error
   };
 }
 
 export const registerUser = (userData, history) => dispatch => {
-  fetch("/api/signup", {
+  fetch("http://localhost:5000/api/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(userData)
   })
+    .then(res => {
+      if (!res.ok) {
+        throw res;
+      }
+      return res.json();
+    })
     .then(res => history.push("/signin"))
     .catch(err => {
-      dispatch(getErrors(err));
+      err.json().then(errorMessage => {
+        dispatch(getErrors(errorMessage));
+      });
     });
 };
 
-export const loginUser = userData => dispatch => {
-  console.log(userData);
-  fetch("/api/signin", {
+export const loginUser = (userData, history) => dispatch => {
+  fetch("http://localhost:5000/api/signin", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(userData)
   })
-    .then(res => res.json())
     .then(res => {
-      console.log(res);
+      if (!res.ok) {
+        throw res;
+      }
+      return res.json();
+    })
+    .then(res => {
       const { token } = res;
       localStorage.setItem("jwtToken", token);
       setAuthToken(token);
       const decoded = jwt_decode(token);
       dispatch(setCurrentUser(decoded));
     })
+    .then(res => history.push(`/user/profile`))
     .catch(err => {
-      dispatch(getErrors(err));
+      err.json().then(errorMessage => {
+        dispatch(getErrors(errorMessage));
+      });
     });
 };
 
@@ -60,4 +74,5 @@ export const logoutUser = () => dispatch => {
   localStorage.removeItem("jwtToken");
   setAuthToken(false);
   dispatch(setCurrentUser({}));
+  // history.push("/signin");
 };
