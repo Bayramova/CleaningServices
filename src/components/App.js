@@ -8,7 +8,7 @@ import {
   Redirect
 } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop";
-import Header from "./Header/Header";
+import HeaderContainer from "./Header/HeaderContainer";
 import Main from "./Landing/Landing";
 import Footer from "./Footer/Footer";
 import OrderFormContainer from "./Forms/Order/OrderFormContainer";
@@ -20,19 +20,34 @@ import CompaniesListByQueryContainer from "./CompaniesCatalogue/CompaniesListByQ
 import ClientProfile from "./ClientProfile/ClientProfile";
 import PrivateRoute from "./PrivateRoute";
 import { handleInitialData } from "../actions/receiveData";
+import jwt_decode from "jwt-decode";
+import setAuthToken from "../utils/setAuthToken";
+import { setCurrentUser, logoutUser } from "../actions/authActions";
 
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(handleInitialData());
+    // if (localStorage.jwtToken) {
+    //   const token = localStorage.jwtToken;
+    //   setAuthToken(token);
+    //   const decoded = jwt_decode(token);
+    //   dispatch(setCurrentUser(decoded));
+    //   const currentTime = Date.now() / 1000;
+    //   if (decoded.expiresIn < currentTime) {
+    //     dispatch(logoutUser());
+    //     window.location.href = "./signin";
+    //   }
+    // }
   }
 
   render() {
     const { loadingData, error } = this.props;
+    const profilePath = `/user/profile`;
     return (
       <Router>
         <div className="container">
-          <Header />
+          <HeaderContainer />
           <ScrollToTop>
             <main className="main">
               {loadingData ? (
@@ -70,7 +85,7 @@ class App extends Component {
                   />
                   <PrivateRoute
                     exact
-                    path="/user/profile"
+                    path={profilePath}
                     component={ClientProfile}
                   />
                   <Route render={() => <Redirect to="/" />} />
@@ -89,7 +104,8 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     loadingData: state.data.loadingData,
-    error: state.data.error
+    error: state.data.error,
+    auth: state.auth
   };
 };
 

@@ -1,5 +1,5 @@
 async function fetchData(resource) {
-  const response = await fetch(`/api/${resource}`);
+  const response = await fetch(`http://localhost:5000/api/${resource}`);
   return response.json();
 }
 
