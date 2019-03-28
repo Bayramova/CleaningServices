@@ -10,7 +10,7 @@ const initialState = {
   errors: {}
 };
 
-export default function loginFormFields(state = initialState, action) {
+export default function signInFormFields(state = initialState, action) {
   switch (action.type) {
     case CHANGE_FIELDS:
       return {
