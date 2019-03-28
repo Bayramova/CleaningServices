@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Select, Button, Upload, Icon } from "antd";
+import { Form, Input, Select, Button, Upload, Icon, Radio } from "antd";
 import "./SignUpForm.css";
 
 const { Option } = Select;
@@ -10,11 +10,11 @@ class SignUpForm extends React.Component {
     formType: ""
   };
 
-  handleRoleChange = value => {
+  handleRoleChange = e => {
     this.setState({
-      formType: value
+      formType: e.target.value
     });
-    console.log(value);
+    console.log(e.target.value);
   };
 
   handleSubmit = e => {
@@ -52,16 +52,16 @@ class SignUpForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
 
-    const prefixSelector = getFieldDecorator("prefix", {
-      initialValue: "(29)"
-    })(
-      <Select style={{ width: 70 }}>
-        <Option value="(29)">(29)</Option>
-        <Option value="(33)">(33)</Option>
-        <Option value="(44)">(44)</Option>
-        <Option value="(17)">(17)</Option>
-      </Select>
-    );
+    // const prefixSelector = getFieldDecorator("prefix", {
+    //   initialValue: "(29)"
+    // })(
+    //   <Select style={{ width: 70 }}>
+    //     <Option value="(29)">(29)</Option>
+    //     <Option value="(33)">(33)</Option>
+    //     <Option value="(44)">(44)</Option>
+    //     <Option value="(17)">(17)</Option>
+    //   </Select>
+    // );
 
     return (
       <div className="sign-up__content">
@@ -118,15 +118,13 @@ class SignUpForm extends React.Component {
                     }
                   ]
                 })(
-                  <Select
-                    style={{ width: "100%" }}
-                    onChange={this.handleRoleChange}
-                  >
-                    <Option value="client">Client</Option>
-                    <Option value="company">Company</Option>
-                  </Select>
+                  <Radio.Group onChange={this.handleRoleChange}>
+                    <Radio value="client">Client</Radio>
+                    <Radio value="company">Company</Radio>
+                  </Radio.Group>
                 )}
               </Form.Item>
+
               {(() => {
                 switch (this.state.formType) {
                   case "client":
