@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, { Component } from "react";
 import Company from "./Company";
 import "./CompanyInfo.css";
@@ -6,7 +7,7 @@ import { connect } from "react-redux";
 class CompanyContainer extends Component {
   render() {
     const company = this.props.companies.find(
-      company => company.id === this.props.match.params.company
+      company => company.id == this.props.match.params.company
     );
     const serviceTitles = company.services.map(
       id => this.props.serviceTypes.find(service => service.id === id).title

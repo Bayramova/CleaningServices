@@ -59,7 +59,7 @@ class SignInForm extends Component {
             <Form.Item help={this.props.errors.passwordincorrect}>
               {getFieldDecorator("password", {
                 rules: [
-                  { required: true, message: "Please input your Password!" }
+                  { required: true, message: "Please input your password!" }
                 ]
               })(
                 <Input

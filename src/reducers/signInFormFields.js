@@ -6,8 +6,7 @@ const initialState = {
   },
   password: {
     value: ""
-  },
-  errors: {}
+  }
 };
 
 export default function signInFormFields(state = initialState, action) {
