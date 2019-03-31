@@ -23,60 +23,62 @@ class SignInForm extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div className="sign-in-container">
-        <div className="sign-in">
-          <h1 className="sign-in__title">Sign in to your account</h1>
-          <div className="sign-in__sign-up-info">
-            Don't have an account?
-            <Link to={"/signup"} className="sign-in__sign-up-link">
-              {" "}
-              Create one
-            </Link>
-            .
-          </div>
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Item help={this.props.errors.emailincorrect}>
-              {getFieldDecorator("email", {
-                rules: [
-                  {
-                    required: true,
-                    message: "Please input your email!"
-                  },
-                  {
-                    type: "email",
-                    message: "Please enter a valid email!"
-                  }
-                ]
-              })(
-                <Input
-                  prefix={
-                    <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                  }
-                  placeholder="Enter email"
-                />
-              )}
-            </Form.Item>
-            <Form.Item help={this.props.errors.passwordincorrect}>
-              {getFieldDecorator("password", {
-                rules: [
-                  { required: true, message: "Please input your password!" }
-                ]
-              })(
-                <Input
-                  prefix={
-                    <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-                  }
-                  type="password"
-                  placeholder="Password"
-                />
-              )}
-            </Form.Item>
-            <div className="sign-in-form__buttons">
-              <Button type="primary" htmlType="submit">
-                Sign in
-              </Button>
+      <div className="sign-up__content">
+        <div className="sign-up-container">
+          <div className="sign-up">
+            <h1 className="sign-up__title">Create your account</h1>
+            <div className="sign-in__sign-up-info">
+              Don't have an account?
+              <Link to={"/signup"} className="sign-in__sign-up-link">
+                {" "}
+                Create one
+              </Link>
+              .
             </div>
-          </Form>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Item help={this.props.errors.emailincorrect}>
+                {getFieldDecorator("email", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "Please input your email!"
+                    },
+                    {
+                      type: "email",
+                      message: "Please enter a valid email!"
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    placeholder="Enter email"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item help={this.props.errors.passwordincorrect}>
+                {getFieldDecorator("password", {
+                  rules: [
+                    { required: true, message: "Please input your password!" }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="password"
+                    placeholder="Password"
+                  />
+                )}
+              </Form.Item>
+              <div className="sign-in-form__buttons">
+                <Button type="primary" htmlType="submit">
+                  Sign in
+                </Button>
+              </div>
+            </Form>
+          </div>
         </div>
       </div>
     );

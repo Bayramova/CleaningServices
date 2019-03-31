@@ -17,7 +17,7 @@ import SignUpFormContainer from "./Forms/SignUp/SignUpFormContainer";
 import CompaniesCatalogue from "./CompaniesCatalogue/CompaniesCatalogue";
 import CompanyContainer from "./Company/CompanyContainer";
 import CompaniesListByQueryContainer from "./CompaniesCatalogue/CompaniesListByQueryContainer";
-import ClientProfile from "./ClientProfile/ClientProfile";
+import UserProfileContainer from "./UserProfile/UserProfileContainer";
 import PrivateRoute from "./PrivateRoute";
 import { handleInitialData } from "../actions/receiveData";
 import jwt_decode from "jwt-decode";
@@ -28,22 +28,22 @@ class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(handleInitialData());
-    // if (localStorage.jwtToken) {
-    //   const token = localStorage.jwtToken;
-    //   setAuthToken(token);
-    //   const decoded = jwt_decode(token);
-    //   dispatch(setCurrentUser(decoded));
-    //   const currentTime = Date.now() / 1000;
-    //   if (decoded.expiresIn < currentTime) {
-    //     dispatch(logoutUser());
-    //     window.location.href = "./signin";
-    //   }
-    // }
+
+    if (localStorage.jwtToken) {
+      const token = localStorage.jwtToken;
+      setAuthToken(token);
+      const decoded = jwt_decode(token);
+      dispatch(setCurrentUser(decoded));
+      const currentTime = Date.now() / 1000;
+      if (decoded.exp < currentTime) {
+        dispatch(logoutUser());
+        window.location.href = "./signin";
+      }
+    }
   }
 
   render() {
     const { loadingData, error } = this.props;
-    const profilePath = `/user/profile`;
     return (
       <Router>
         <div className="container">
@@ -85,8 +85,8 @@ class App extends Component {
                   />
                   <PrivateRoute
                     exact
-                    path={profilePath}
-                    component={ClientProfile}
+                    path="/user/profile"
+                    component={UserProfileContainer}
                   />
                   <Route render={() => <Redirect to="/" />} />
                 </Switch>
