@@ -18,6 +18,7 @@ import CompaniesCatalogue from "./CompaniesCatalogue/CompaniesCatalogue";
 import CompanyContainer from "./Company/CompanyContainer";
 import CompaniesListByQueryContainer from "./CompaniesCatalogue/CompaniesListByQueryContainer";
 import UserProfileContainer from "./UserProfile/UserProfileContainer";
+import UserProfileEditFormContainer from "./UserProfile/UserProfileEditFormContainer";
 import PrivateRoute from "./PrivateRoute";
 import { handleInitialData } from "../actions/receiveData";
 import jwt_decode from "jwt-decode";
@@ -87,6 +88,11 @@ class App extends Component {
                     exact
                     path="/user/profile"
                     component={UserProfileContainer}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/user/profile/edit"
+                    component={UserProfileEditFormContainer}
                   />
                   <Route render={() => <Redirect to="/" />} />
                 </Switch>
