@@ -1,29 +1,29 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Spin, Alert } from "antd";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Spin, Alert } from 'antd';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect
-} from "react-router-dom";
-import ScrollToTop from "./ScrollToTop";
-import HeaderContainer from "./Header/HeaderContainer";
-import Main from "./Landing/Landing";
-import Footer from "./Footer/Footer";
-import OrderFormContainer from "./Forms/Order/OrderFormContainer";
-import SignInFormContainer from "./Forms/SignIn/SignInFormContainer";
-import SignUpFormContainer from "./Forms/SignUp/SignUpFormContainer";
-import CompaniesCatalogue from "./CompaniesCatalogue/CompaniesCatalogue";
-import CompanyContainer from "./Company/CompanyContainer";
-import CompaniesListByQueryContainer from "./CompaniesCatalogue/CompaniesListByQueryContainer";
-import UserProfileContainer from "./UserProfile/UserProfileContainer";
-import UserProfileEditFormContainer from "./UserProfile/UserProfileEditFormContainer";
-import PrivateRoute from "./PrivateRoute";
-import { handleInitialData } from "../actions/receiveData";
-import jwt_decode from "jwt-decode";
-import setAuthToken from "../utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "../actions/authActions";
+} from 'react-router-dom';
+import ScrollToTop from './ScrollToTop';
+import HeaderContainer from './Header/HeaderContainer';
+import Main from './Landing/Landing';
+import Footer from './Footer/Footer';
+import OrderFormContainer from './Forms/Order/OrderFormContainer';
+import SignInFormContainer from './Forms/SignIn/SignInFormContainer';
+import SignUpFormContainer from './Forms/SignUp/SignUpFormContainer';
+import CompaniesCatalogue from './CompaniesCatalogue/CompaniesCatalogue';
+import CompanyContainer from './Company/CompanyContainer';
+import CompaniesListByQueryContainer from './CompaniesCatalogue/CompaniesListByQueryContainer';
+import UserProfileContainer from './UserProfile/UserProfileContainer';
+import UserProfileEditFormContainer from './UserProfile/UserProfileEditFormContainer';
+import PrivateRoute from './PrivateRoute';
+import { handleInitialData } from '../actions/receiveData';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from '../utils/setAuthToken';
+import { setCurrentUser, logoutUser } from '../actions/authActions';
 
 class App extends Component {
   componentDidMount() {
@@ -38,7 +38,8 @@ class App extends Component {
       const currentTime = Date.now() / 1000;
       if (decoded.exp < currentTime) {
         dispatch(logoutUser());
-        window.location.href = "./signin";
+        // TODO в такой реализации, возможно будет перезагрузка страницы, используй history.push роутера
+        window.location.href = './signin';
       }
     }
   }

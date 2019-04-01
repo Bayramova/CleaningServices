@@ -1,5 +1,6 @@
-import { SET_CURRENT_USER } from "../actions/authActions";
-const isEmpty = require("is-empty");
+import { SET_CURRENT_USER } from '../actions/authActions';
+// TODO загугли библиотеку lodash, он является дефакто стандартом и в ней есть куча полезных методов которые стоит использовать
+const isEmpty = require('is-empty');
 
 const initialState = {
   isAuthenticated: false,
