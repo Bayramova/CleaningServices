@@ -230,7 +230,6 @@ class PlaceOrderForm extends Component {
 const OrderForm = Form.create({
   name: "global_state",
   onFieldsChange(props, changedFields) {
-    console.log(changedFields);
     props.onChange(changedFields);
   }
 })(PlaceOrderForm);

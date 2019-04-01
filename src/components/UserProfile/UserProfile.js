@@ -6,7 +6,6 @@ class ClientProfile extends Component {
     const isClient = this.props.role === "client" ? true : false;
     const clientProfile = "Client profile";
     const companyProfile = "Company profile";
-    console.log(this.props);
     return (
       <div className="user-profile__container">
         <div className="user-profile__header">

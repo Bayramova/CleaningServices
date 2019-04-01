@@ -14,14 +14,12 @@ class SignUpForm extends React.Component {
     this.setState({
       formType: e.target.value
     });
-    console.log(e.target.value);
   };
 
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
         this.props.registerUser(values, this.props.history);
       }
     });
@@ -259,7 +257,6 @@ class SignUpForm extends React.Component {
 export default Form.create({
   name: "signup",
   onFieldsChange(props, changedFields) {
-    console.log(changedFields);
     props.onChange(changedFields);
   }
 })(SignUpForm);

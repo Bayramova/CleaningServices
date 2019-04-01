@@ -14,7 +14,6 @@ class SignInForm extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
         this.props.loginUser(values, this.props.history);
       }
     });
@@ -88,7 +87,6 @@ class SignInForm extends Component {
 export default Form.create({
   name: "signin",
   onFieldsChange(props, changedFields) {
-    console.log(changedFields);
     props.onChange(changedFields);
   }
 })(SignInForm);

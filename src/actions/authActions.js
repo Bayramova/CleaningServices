@@ -12,7 +12,6 @@ export const setCurrentUser = decoded => {
 };
 
 function getErrors(error) {
-  console.log("error", error);
   return {
     type: GET_ERRORS,
     error: error

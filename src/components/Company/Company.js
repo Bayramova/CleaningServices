@@ -15,7 +15,7 @@ class Company extends Component {
           </div>
           <div className="company-info__rating-and-orders">
             <div>
-              <Rate disabled defaultValue={4} />
+              <Rate disabled defaultValue={this.props.company.rating} />
               <Link to={"/reviews"}>({this.props.company.reviewsNumber})</Link>
             </div>
             <span className="company-info__orders">{`${
