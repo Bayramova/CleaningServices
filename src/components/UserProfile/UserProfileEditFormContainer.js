@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import UserProfileEditForm from "./UserProfileEditForm";
-import { updateUserInfo } from "../../actions/userProfileActions";
-import { handleFormChange } from "../../actions/updateFieldsState";
+import { updateUser } from "actions/userProfileActions";
+import { handleFormChange } from "actions/updateFieldsState";
 
 class UserProfileEditFormContainer extends Component {
   render() {
@@ -11,7 +11,7 @@ class UserProfileEditFormContainer extends Component {
         errors={this.props.errors}
         onChange={this.props.onChange}
         auth={this.props.auth}
-        updateUserInfo={this.props.updateUserInfo}
+        updateUser={this.props.updateUser}
         history={this.props.history}
       />
     );
@@ -21,13 +21,12 @@ class UserProfileEditFormContainer extends Component {
 const mapStateToProps = state => {
   return {
     auth: state.auth,
-    errors: state.errors,
-    user: state.user
+    errors: state.errors
   };
 };
 
 const mapDispatchToProps = {
-  updateUserInfo: updateUserInfo,
+  updateUser: updateUser,
   onChange: handleFormChange
 };
 

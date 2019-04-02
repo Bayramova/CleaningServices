@@ -4,7 +4,7 @@ import UserProfile from "./UserProfile";
 
 class UserProfileContainer extends Component {
   render() {
-    return <UserProfile role={this.props.auth.user.role} />;
+    return <UserProfile auth={this.props.auth} />;
   }
 }
 

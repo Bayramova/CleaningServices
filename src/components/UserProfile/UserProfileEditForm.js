@@ -18,7 +18,7 @@ class UserProfileEditForm extends React.Component {
           id: this.props.auth.user.id,
           ...values
         };
-        this.props.updateUserInfo(userData, this.props.history);
+        this.props.updateUser(userData, this.props.history);
       }
     });
   };
@@ -65,7 +65,7 @@ class UserProfileEditForm extends React.Component {
           <div className="sign-up">
             <h1 className="sign-up__title">Update your account details</h1>
             <Form onSubmit={this.handleSubmit}>
-              <Form.Item label="E-mail" help={this.props.errors.email}>
+              {/* <Form.Item label="E-mail" help={this.props.errors.email}>
                 {getFieldDecorator("email", {
                   rules: [
                     {
@@ -78,7 +78,7 @@ class UserProfileEditForm extends React.Component {
                     }
                   ]
                 })(<Input />)}
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item label="New password">
                 {getFieldDecorator("password", {
                   rules: [
