@@ -20,7 +20,7 @@ class SignUpForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        this.props.registerUser(values, this.props.history);
+        this.props.signUpUser(values, this.props.history);
       }
     });
   };

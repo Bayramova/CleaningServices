@@ -14,7 +14,7 @@ class SignInForm extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.loginUser(values, this.props.history);
+        this.props.signInUser(values, this.props.history);
       }
     });
   };
@@ -25,7 +25,7 @@ class SignInForm extends Component {
       <div className="sign-up__content">
         <div className="sign-up-container">
           <div className="sign-up">
-            <h1 className="sign-up__title">Create your account</h1>
+            <h1 className="sign-up__title">Sign in to your account</h1>
             <div className="sign-in__sign-up-info">
               Don't have an account?
               <Link to={"/signup"} className="sign-in__sign-up-link">

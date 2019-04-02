@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import SignInForm from "./SignInForm";
-import { loginUser } from "../../../actions/authActions";
-import { handleFormChange } from "../../../actions/updateFieldsState";
+import { signInUser } from "actions/authActions";
+import { handleFormChange } from "actions/updateFieldsState";
 
 class SignInFormContainer extends Component {
   render() {
@@ -12,7 +12,7 @@ class SignInFormContainer extends Component {
         auth={this.props.auth}
         errors={this.props.errors}
         onChange={this.props.onChange}
-        loginUser={this.props.loginUser}
+        signInUser={this.props.signInUser}
         history={this.props.history}
       />
     );
@@ -28,7 +28,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  loginUser: loginUser,
+  signInUser: signInUser,
   onChange: handleFormChange
 };
 

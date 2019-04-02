@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "./Header";
-import { logoutUser } from "../../actions/authActions";
+import { signOutUser } from "actions/authActions";
 
 class HeaderContainer extends Component {
   render() {
     return (
       <Header
         auth={this.props.auth}
-        logoutUser={this.props.logoutUser}
+        signOutUser={this.props.signOutUser}
         history={this.props.history}
       />
     );
@@ -22,7 +22,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  logoutUser: logoutUser
+  signOutUser: signOutUser
 };
 
 export default connect(

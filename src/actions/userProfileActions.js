@@ -1,53 +1,45 @@
-export const EDIT_INFO = "EDIT_PROFILE";
-export const GET_USER_INFO = "GET_USER_INFO";
+import { updateUserInfo } from "utils/fetch";
 
-function editProfile(userData) {
+export const EDIT_INFO = "EDIT_INFO";
+export const FETCH_USER_DATA = "FETCH_USER_DATA";
+
+function editInfo(userData) {
   return {
     type: EDIT_INFO,
     userData
   };
 }
 
-// function getUserInfo(id) {
-//   return {
-//     type: GET_USER_INFO,
-//     id: id
-//   };
-// }
+function fetchUserData(userData) {
+  return {
+    type: FETCH_USER_DATA,
+    userData
+  };
+}
 
-export const updateUserInfo = (updates, history) => dispatch => {
-  fetch("http://localhost:5000/api/user/profile/edit", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(updates)
-  })
+export const updateUser = (updates, history) => dispatch => {
+  updateUserInfo(updates)
     .then(res => {
-      dispatch(editProfile(updates));
+      dispatch(editInfo(updates));
     })
     .then(res => history.push("/user/profile"));
 };
 
-// export const getUser = id => dispatch => {
-//   fetch("http://localhost:5000/api/signin", {
-//     method: "Get",
-//     headers: {
-//       "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify(id)
-//   })
-//     .then(res => {
-//       const { token } = res;
-//       localStorage.setItem("jwtToken", token);
-//       setAuthToken(token);
-//       const decoded = jwt_decode(token);
-//       dispatch(setCurrentUser(decoded));
-//     })
-//     .then(res => history.push(`/user/profile`))
-//     .catch(err => {
-//       err.json().then(errorMessage => {
-//         dispatch(getErrors(errorMessage));
-//       });
-//     });
-// };
+export const fetchUser = id => dispatch => {
+  fetch("http://localhost:5000/api/user/profile", {
+    method: "Get",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(id)
+  })
+    .then(res => {
+      if (!res.ok) {
+        throw res;
+      }
+      return res.json();
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};

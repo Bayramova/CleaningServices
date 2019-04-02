@@ -5,9 +5,9 @@ import { Drawer, Icon } from "antd";
 import "./Header.css";
 
 class Header extends Component {
-  onLogout = e => {
+  onsignOut = e => {
     e.preventDefault();
-    this.props.logoutUser();
+    this.props.signOutUser();
   };
 
   state = { visible: false };
@@ -81,7 +81,7 @@ class Header extends Component {
           <p>
             <Link
               to={"/"}
-              onClick={this.onLogout}
+              onClick={this.onsignOut}
               className="link button-links__link"
             >
               Sign out

@@ -1,14 +1,13 @@
-// TODO в register и login много поторяющегося кода
-import setAuthToken from '../utils/setAuthToken';
-import jwt_decode from 'jwt-decode';
+import { signUp, signIn } from "utils/fetch";
 
-export const GET_ERRORS = 'GET_ERRORS';
-export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const GET_ERRORS = "GET_ERRORS";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
-export const setCurrentUser = decoded => {
+export const setCurrentUser = (token, userData) => {
   return {
     type: SET_CURRENT_USER,
-    payload: decoded
+    token: token,
+    user: userData
   };
 };
 
@@ -19,23 +18,9 @@ function getErrors(error) {
   };
 }
 
-export const registerUser = (userData, history) => dispatch => {
-  // TODO общую локигу fetch, такую как задание base url, хедеров и стрингифая лучше вынести в утилиту
-  fetch('http://localhost:5000/api/signup', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(userData)
-  })
-    // response handling тоже потворяется DRY
-    .then(res => {
-      if (!res.ok) {
-        throw res;
-      }
-      return res.json();
-    })
-    .then(res => history.push('/signin'))
+export const signUpUser = (userData, history) => dispatch => {
+  signUp(userData)
+    .then(res => history.push("/signin"))
     .catch(err => {
       err.json().then(errorMessage => {
         dispatch(getErrors(errorMessage));
@@ -43,29 +28,12 @@ export const registerUser = (userData, history) => dispatch => {
     });
 };
 
-export const loginUser = (userData, history) => dispatch => {
-  fetch('http://localhost:5000/api/signin', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(userData)
-  })
+export const signInUser = (userData, history) => dispatch => {
+  signIn(userData)
     .then(res => {
-      if (!res.ok) {
-        throw res;
-      }
-      return res.json();
-    })
-    .then(res => {
-      const { token } = res;
-      localStorage.setItem('jwtToken', token);
-      setAuthToken(token);
-      // Сейчас в токене хранится email, такой подход имеет место быть, но как другой вариант,
-      // на логин отдавать не только токен, но и данные, отдельным объектом, так как в токене в идеале должна быть только id
-      // плюсы подхода: не надо jwt_decode библиотеку грузить + что если эмейл поменялся, а в токене старый, а мы его отображаем где-то
-      const decoded = jwt_decode(token);
-      dispatch(setCurrentUser(decoded));
+      const { token, user } = res;
+      localStorage.setItem("jwtToken", token);
+      dispatch(setCurrentUser(token, user));
     })
     .then(res => history.push(`/user/profile`))
     .catch(err => {
@@ -75,8 +43,7 @@ export const loginUser = (userData, history) => dispatch => {
     });
 };
 
-export const logoutUser = () => dispatch => {
-  localStorage.removeItem('jwtToken');
-  setAuthToken(false);
-  dispatch(setCurrentUser({}));
+export const signOutUser = () => dispatch => {
+  localStorage.removeItem("jwtToken");
+  dispatch(setCurrentUser(""));
 };

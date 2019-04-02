@@ -1,10 +1,14 @@
-import { SET_CURRENT_USER } from '../actions/authActions';
-// TODO загугли библиотеку lodash, он является дефакто стандартом и в ней есть куча полезных методов которые стоит использовать
-const isEmpty = require('is-empty');
+import { SET_CURRENT_USER } from "actions/authActions";
+import { EDIT_INFO } from "actions/userProfileActions";
+const isEmpty = require("lodash.isempty");
 
 const initialState = {
   isAuthenticated: false,
-  user: {}
+  user: {
+    id: "",
+    role: "",
+    email: ""
+  }
 };
 
 export default function(state = initialState, action) {
@@ -12,8 +16,13 @@ export default function(state = initialState, action) {
     case SET_CURRENT_USER:
       return {
         ...state,
-        isAuthenticated: !isEmpty(action.payload),
-        user: action.payload
+        isAuthenticated: !isEmpty(action.token),
+        user: action.user
+      };
+    case EDIT_INFO:
+      return {
+        ...state,
+        user: action.userData
       };
     default:
       return state;
