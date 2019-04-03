@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import SignUpForm from "./SignUpForm";
-import { signUpUser } from "actions/authActions";
-import { handleFormChange } from "actions/updateFieldsState";
+import { signUpUser, deleteErrors } from "../../../actions/authActions";
+import { handleFormChange } from "../../../actions/updateFieldsState";
 
-class SignInFormContainer extends Component {
+class SignUpFormContainer extends Component {
+  componentWillUnmount() {
+    this.props.deleteErrors();
+  }
+
   render() {
     return (
       <SignUpForm
@@ -27,10 +31,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   signUpUser: signUpUser,
-  onChange: handleFormChange
+  onChange: handleFormChange,
+  deleteErrors: deleteErrors
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SignInFormContainer);
+)(SignUpFormContainer);

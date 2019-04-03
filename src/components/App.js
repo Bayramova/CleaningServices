@@ -20,22 +20,21 @@ import CompaniesListByQueryContainer from "./CompaniesCatalogue/CompaniesListByQ
 import UserProfileContainer from "./UserProfile/UserProfileContainer";
 import UserProfileEditFormContainer from "./UserProfile/UserProfileEditFormContainer";
 import PrivateRoute from "./PrivateRoute";
-import { handleInitialData } from "actions/receiveData";
-import { setCurrentUser, signOutUser } from "actions/authActions";
+import { handleInitialData } from "../actions/receiveData";
+import { signInUser } from "../actions/authActions";
 
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(handleInitialData());
 
-    if (localStorage.jwtToken) {
-      const token = localStorage.jwtToken;
-      dispatch(setCurrentUser(token, { ...this.props.auth.user }));
-      const currentTime = Date.now() / 1000;
-      if (token.exp < currentTime) {
-        dispatch(signOutUser());
-        this.props.history.push("/signin");
-      }
+    if (localStorage.email) {
+      dispatch(
+        signInUser({
+          email: localStorage.email,
+          password: localStorage.password
+        })
+      );
     }
   }
 
@@ -82,12 +81,12 @@ class App extends Component {
                   />
                   <PrivateRoute
                     exact
-                    path="/user/profile"
+                    path="/user/profile/:id"
                     component={UserProfileContainer}
                   />
                   <PrivateRoute
                     exact
-                    path="/user/profile/edit"
+                    path="/user/profile/:id/edit"
                     component={UserProfileEditFormContainer}
                   />
                   <Route render={() => <Redirect to="/" />} />
@@ -111,4 +110,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const ConnectedApp = connect(mapStateToProps)(App);
+
+export default ConnectedApp;

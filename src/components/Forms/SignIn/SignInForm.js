@@ -14,7 +14,7 @@ class SignInForm extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.signInUser(values, this.props.history);
+        this.props.signInUser(values);
       }
     });
   };

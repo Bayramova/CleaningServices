@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import SignInForm from "./SignInForm";
-import { signInUser } from "actions/authActions";
-import { handleFormChange } from "actions/updateFieldsState";
+import { signInUser, deleteErrors } from "../../../actions/authActions";
+import { handleFormChange } from "../../../actions/updateFieldsState";
+import { Redirect } from "react-router-dom";
 
 class SignInFormContainer extends Component {
+  componentWillUnmount() {
+    this.props.deleteErrors();
+  }
   render() {
-    return (
+    return this.props.auth.isAuthenticated ? (
+      <Redirect to="/" />
+    ) : (
       <SignInForm
         signInFormFields={this.props.signInFormFields}
         auth={this.props.auth}
@@ -29,7 +35,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   signInUser: signInUser,
-  onChange: handleFormChange
+  onChange: handleFormChange,
+  deleteErrors: deleteErrors
 };
 
 export default connect(

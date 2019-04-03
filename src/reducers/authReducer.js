@@ -1,6 +1,4 @@
-import { SET_CURRENT_USER } from "actions/authActions";
-import { EDIT_INFO } from "actions/userProfileActions";
-const isEmpty = require("lodash.isempty");
+import { SET_CURRENT_USER, UNSET_CURRENT_USER } from "../actions/authActions";
 
 const initialState = {
   isAuthenticated: false,
@@ -14,15 +12,21 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case SET_CURRENT_USER:
+      console.log(action.user);
       return {
         ...state,
-        isAuthenticated: !isEmpty(action.token),
+        isAuthenticated: true,
         user: action.user
       };
-    case EDIT_INFO:
+    case UNSET_CURRENT_USER:
       return {
         ...state,
-        user: action.userData
+        isAuthenticated: false,
+        user: {
+          id: "",
+          role: "",
+          email: ""
+        }
       };
     default:
       return state;

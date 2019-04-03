@@ -1,7 +1,7 @@
-import { updateUserInfo } from "utils/fetch";
+import { updateUserInfo, getUserInfo } from "../utils/fetch";
 
 export const EDIT_INFO = "EDIT_INFO";
-export const FETCH_USER_DATA = "FETCH_USER_DATA";
+export const GET_USER_DATA = "GET_USER_DATA";
 
 function editInfo(userData) {
   return {
@@ -10,36 +10,24 @@ function editInfo(userData) {
   };
 }
 
-function fetchUserData(userData) {
+function getUserData(userData) {
   return {
-    type: FETCH_USER_DATA,
+    type: GET_USER_DATA,
     userData
   };
 }
 
-export const updateUser = (updates, history) => dispatch => {
-  updateUserInfo(updates)
+export const updateUser = (id, updates, history) => dispatch => {
+  updateUserInfo(id, updates)
     .then(res => {
       dispatch(editInfo(updates));
     })
-    .then(res => history.push("/user/profile"));
+    .then(res => history.push(`/user/profile/${id}`));
 };
 
-export const fetchUser = id => dispatch => {
-  fetch("http://localhost:5000/api/user/profile", {
-    method: "Get",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(id)
-  })
-    .then(res => {
-      if (!res.ok) {
-        throw res;
-      }
-      return res.json();
-    })
-    .catch(err => {
-      console.log(err);
-    });
+export const getUser = id => dispatch => {
+  getUserInfo(id).then(res => {
+    const { client } = res;
+    dispatch(getUserData(client));
+  });
 };

@@ -1,4 +1,4 @@
-import { CHANGE_FIELDS } from "actions/updateFieldsState";
+import { CHANGE_FIELDS } from "../actions/updateFieldsState";
 
 const initialState = {
   email: {
@@ -18,7 +18,7 @@ const initialState = {
   }
 };
 
-export default function signupFormFields(state = initialState, action) {
+export default function signUpFormFields(state = initialState, action) {
   switch (action.type) {
     case CHANGE_FIELDS:
       return {

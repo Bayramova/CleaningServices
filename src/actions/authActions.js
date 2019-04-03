@@ -1,12 +1,25 @@
-import { signUp, signIn } from "utils/fetch";
+import { signUp, signIn } from "../utils/fetch";
 
 export const GET_ERRORS = "GET_ERRORS";
+export const DELETE_ERRORS = "DELETE_ERRORS";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const UNSET_CURRENT_USER = "UNSET_CURRENT_USER";
 
-export const setCurrentUser = (token, userData) => {
+export function unsetCurrentUser() {
+  return {
+    type: UNSET_CURRENT_USER
+  };
+}
+
+export function deleteErrors() {
+  return {
+    type: DELETE_ERRORS
+  };
+}
+
+export const setCurrentUser = userData => {
   return {
     type: SET_CURRENT_USER,
-    token: token,
     user: userData
   };
 };
@@ -28,14 +41,14 @@ export const signUpUser = (userData, history) => dispatch => {
     });
 };
 
-export const signInUser = (userData, history) => dispatch => {
+export const signInUser = userData => dispatch => {
   signIn(userData)
     .then(res => {
-      const { token, user } = res;
-      localStorage.setItem("jwtToken", token);
-      dispatch(setCurrentUser(token, user));
+      const { user } = res;
+      localStorage.setItem("email", userData.email);
+      localStorage.setItem("password", userData.password);
+      dispatch(setCurrentUser(user));
     })
-    .then(res => history.push(`/user/profile`))
     .catch(err => {
       err.json().then(errorMessage => {
         dispatch(getErrors(errorMessage));
@@ -44,6 +57,5 @@ export const signInUser = (userData, history) => dispatch => {
 };
 
 export const signOutUser = () => dispatch => {
-  localStorage.removeItem("jwtToken");
-  dispatch(setCurrentUser(""));
+  dispatch(unsetCurrentUser());
 };

@@ -14,7 +14,7 @@ class ClientProfile extends Component {
             <div className="user-profile__header">
               <div className="user-profile__info">
                 <h4 className="user-profile__details">Account details</h4>
-                <p className="user-profile__name">Vasya Pupkin</p>
+                <p className="user-profile__name">{this.props.userData.name}</p>
                 <p className="user-profile__email">
                   {this.props.auth.user.email}
                 </p>
@@ -26,7 +26,7 @@ class ClientProfile extends Component {
             <div className="user-profile__nav">
               <div>
                 <Link
-                  to="/user/profile/edit"
+                  to={`/user/profile/${this.props.auth.user.id}/edit`}
                   className="link user-profile__nav-link"
                 >
                   Edit details

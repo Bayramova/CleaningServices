@@ -18,7 +18,11 @@ class UserProfileEditForm extends React.Component {
           id: this.props.auth.user.id,
           ...values
         };
-        this.props.updateUser(userData, this.props.history);
+        this.props.updateUser(
+          this.props.auth.user.id,
+          userData,
+          this.props.history
+        );
       }
     });
   };
@@ -79,11 +83,11 @@ class UserProfileEditForm extends React.Component {
                   ]
                 })(<Input />)}
               </Form.Item> */}
-              <Form.Item label="New password">
+              {/* <Form.Item label="New password">
                 {getFieldDecorator("password", {
                   rules: [
                     {
-                      required: true,
+                      required: false,
                       message: "Please input your password!"
                     },
                     {
@@ -96,7 +100,7 @@ class UserProfileEditForm extends React.Component {
                 {getFieldDecorator("confirm", {
                   rules: [
                     {
-                      required: true,
+                      required: false,
                       message: "Please confirm your password!"
                     },
                     {
@@ -104,7 +108,7 @@ class UserProfileEditForm extends React.Component {
                     }
                   ]
                 })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
-              </Form.Item>
+              </Form.Item> */}
 
               {(() => {
                 switch (this.props.auth.user.role) {
@@ -113,6 +117,7 @@ class UserProfileEditForm extends React.Component {
                       <React.Fragment>
                         <Form.Item label="Name">
                           {getFieldDecorator("name", {
+                            initialValue: this.props.userData.name,
                             rules: [
                               {
                                 required: true,
@@ -123,6 +128,7 @@ class UserProfileEditForm extends React.Component {
                         </Form.Item>
                         <Form.Item label="Address">
                           {getFieldDecorator("address", {
+                            initialValue: this.props.userData.address,
                             rules: [
                               {
                                 required: true,

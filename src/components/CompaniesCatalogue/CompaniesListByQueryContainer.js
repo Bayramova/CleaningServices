@@ -3,7 +3,7 @@ import CompaniesList from "./CompaniesList";
 import queryString from "query-string";
 import { connect } from "react-redux";
 import { Select } from "antd";
-import { handleSortValueChange } from "actions/sortCompanies";
+import { handleSortValueChange } from "../../actions/sortCompanies";
 
 class CompaniesListByQueryContainer extends Component {
   handleChange = value => {

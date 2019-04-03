@@ -1,4 +1,4 @@
-import { CHANGE_FIELDS } from "actions/updateFieldsState";
+import { CHANGE_FIELDS } from "../actions/updateFieldsState";
 
 const initialState = {
   email: {

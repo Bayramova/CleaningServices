@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import UserProfileEditForm from "./UserProfileEditForm";
-import { updateUser } from "actions/userProfileActions";
-import { handleFormChange } from "actions/updateFieldsState";
+import { updateUser } from "../../actions/userProfileActions";
+import { handleFormChange } from "../../actions/updateFieldsState";
 
 class UserProfileEditFormContainer extends Component {
   render() {
@@ -13,6 +13,7 @@ class UserProfileEditFormContainer extends Component {
         auth={this.props.auth}
         updateUser={this.props.updateUser}
         history={this.props.history}
+        userData={this.props.userData}
       />
     );
   }
@@ -21,7 +22,8 @@ class UserProfileEditFormContainer extends Component {
 const mapStateToProps = state => {
   return {
     auth: state.auth,
-    errors: state.errors
+    errors: state.errors,
+    userData: state.userData
   };
 };
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import OrderForm from "./OrderForm";
-import { handleFormChange } from "actions/updateFieldsState";
+import { handleFormChange } from "../../../actions/updateFieldsState";
 
 class OrderFormContainer extends Component {
   render() {

@@ -73,7 +73,10 @@ class Header extends Component {
           </p>
 
           <p>
-            <Link to={"/user/profile"} className="link button-links__link">
+            <Link
+              to={`/user/profile/${this.props.auth.user.id}`}
+              className="link button-links__link"
+            >
               My profile
             </Link>
           </p>

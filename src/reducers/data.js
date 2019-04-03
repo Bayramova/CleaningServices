@@ -2,8 +2,8 @@ import {
   FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAILURE
-} from "actions/receiveData";
-import { SORT_COMPANIES } from "actions/sortCompanies";
+} from "../actions/receiveData";
+import { SORT_COMPANIES } from "../actions/sortCompanies";
 
 const initialState = {
   loadingData: true,

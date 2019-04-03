@@ -28,8 +28,19 @@ function signIn(userData) {
   return fetchData("signin", "POST", userData);
 }
 
-function updateUserInfo(updates) {
-  return fetchData("user/profile/edit", "PUT", updates);
+function updateUserInfo(id, updates) {
+  return fetchData(`user/profile/${id}/edit`, "PUT", updates);
 }
 
-export { fetchCompanies, fetchServices, signUp, signIn, updateUserInfo };
+function getUserInfo(id) {
+  return fetchData(`user/profile/${id}`);
+}
+
+export {
+  fetchCompanies,
+  fetchServices,
+  signUp,
+  signIn,
+  updateUserInfo,
+  getUserInfo
+};
