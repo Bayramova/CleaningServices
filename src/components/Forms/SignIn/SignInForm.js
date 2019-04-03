@@ -35,7 +35,7 @@ class SignInForm extends Component {
               .
             </div>
             <Form onSubmit={this.handleSubmit}>
-              <Form.Item help={this.props.errors.emailincorrect}>
+              <Form.Item help={this.props.auth.errors.emailincorrect}>
                 {getFieldDecorator("email", {
                   rules: [
                     {
@@ -56,7 +56,7 @@ class SignInForm extends Component {
                   />
                 )}
               </Form.Item>
-              <Form.Item help={this.props.errors.passwordincorrect}>
+              <Form.Item help={this.props.auth.errors.passwordincorrect}>
                 {getFieldDecorator("password", {
                   rules: [
                     { required: true, message: "Please input your password!" }

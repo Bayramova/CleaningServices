@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import SignUpForm from "./SignUpForm";
-import { signUpUser, deleteErrors } from "../../../actions/authActions";
-import { handleFormChange } from "../../../actions/updateFieldsState";
+import { signUp, deleteErrors } from "actions/userActions";
+import { handleFormChange } from "actions/updateFieldsState";
 
 class SignUpFormContainer extends Component {
   componentWillUnmount() {
@@ -13,7 +13,7 @@ class SignUpFormContainer extends Component {
     return (
       <SignUpForm
         signUpFormFields={this.props.signUpFormFields}
-        errors={this.props.errors}
+        auth={this.props.auth}
         onChange={this.props.onChange}
         signUpUser={this.props.signUpUser}
         history={this.props.history}
@@ -25,12 +25,12 @@ class SignUpFormContainer extends Component {
 const mapStateToProps = state => {
   return {
     signUpFormFields: state.signUpFormFields,
-    errors: state.errors
+    auth: state.auth
   };
 };
 
 const mapDispatchToProps = {
-  signUpUser: signUpUser,
+  signUpUser: signUp,
   onChange: handleFormChange,
   deleteErrors: deleteErrors
 };

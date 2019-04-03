@@ -1,14 +1,14 @@
-import { GET_USER_DATA, EDIT_INFO } from "../actions/userProfileActions";
+// //import { GET_USER_DATA, UPDATE_USER_DATA } from "actions/userActions";
 
-const initialState = {};
+// const initialState = {};
 
-export default function(state = initialState, action) {
-  switch (action.type) {
-    case GET_USER_DATA:
-      return action.userData;
-    case EDIT_INFO:
-      return action.userData;
-    default:
-      return state;
-  }
-}
+// export default function(state = initialState, action) {
+//   switch (action.type) {
+//     case GET_USER_DATA:
+//       return action.userData;
+//     case UPDATE_USER_DATA:
+//       return action.userData;
+//     default:
+//       return state;
+//   }
+// }

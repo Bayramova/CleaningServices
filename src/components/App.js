@@ -7,6 +7,7 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 import ScrollToTop from "./ScrollToTop";
 import HeaderContainer from "./Header/HeaderContainer";
 import Main from "./Landing/Landing";
@@ -20,22 +21,24 @@ import CompaniesListByQueryContainer from "./CompaniesCatalogue/CompaniesListByQ
 import UserProfileContainer from "./UserProfile/UserProfileContainer";
 import UserProfileEditFormContainer from "./UserProfile/UserProfileEditFormContainer";
 import PrivateRoute from "./PrivateRoute";
-import { handleInitialData } from "../actions/receiveData";
-import { signInUser } from "../actions/authActions";
+import OrderFormPrivateRoute from "./OrderFormPrivateRoute";
+import { handleInitialData } from "actions/receiveData";
+import { signOut } from "actions/userActions";
+import { setCurrentUser } from "actions/userActions";
 
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(handleInitialData());
 
-    if (localStorage.email) {
-      dispatch(
-        signInUser({
-          email: localStorage.email,
-          password: localStorage.password
-        })
-      );
-    }
+    // if (localStorage.token) {
+    //   const token = localStorage.token;
+    //   console.log(Object.values(jwtDecode(token)));
+    //   dispatch(setCurrentUser(this.props.auth.user));
+    //   if (jwtDecode(token).exp < Date.now() / 1000) {
+    //     dispatch(signOut());
+    //   }
+    // }
   }
 
   render() {
@@ -57,7 +60,7 @@ class App extends Component {
               ) : (
                 <Switch>
                   <Route exact path="/" component={Main} />
-                  <Route
+                  <OrderFormPrivateRoute
                     exact
                     path="/make_order"
                     component={OrderFormContainer}
@@ -81,12 +84,12 @@ class App extends Component {
                   />
                   <PrivateRoute
                     exact
-                    path="/user/profile/:id"
+                    path="/user/:id"
                     component={UserProfileContainer}
                   />
                   <PrivateRoute
                     exact
-                    path="/user/profile/:id/edit"
+                    path="/user/:id/edit"
                     component={UserProfileEditFormContainer}
                   />
                   <Route render={() => <Redirect to="/" />} />

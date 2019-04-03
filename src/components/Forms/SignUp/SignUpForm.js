@@ -67,7 +67,7 @@ class SignUpForm extends React.Component {
           <div className="sign-up">
             <h1 className="sign-up__title">Create your account</h1>
             <Form onSubmit={this.handleSubmit}>
-              <Form.Item label="E-mail" help={this.props.errors.email}>
+              <Form.Item label="E-mail" help={this.props.auth.errors.email}>
                 {getFieldDecorator("email", {
                   rules: [
                     {

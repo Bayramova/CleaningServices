@@ -45,7 +45,25 @@ class Header extends Component {
         </Link>
       </div>
     );
-    const authLinks = (
+    const companyLinks = (
+      <div className="header__right">
+        <Link
+          to={`/user/${this.props.auth.userData.id}`}
+          className="link button-links__link--order"
+        >
+          My profile
+        </Link>
+
+        <Link
+          to={"/"}
+          onClick={this.onsignOut}
+          className="link button-links__link--sign-in"
+        >
+          Sign out
+        </Link>
+      </div>
+    );
+    const clientLinks = (
       <div className="header__right auth">
         <Icon
           type="menu-fold"
@@ -74,7 +92,7 @@ class Header extends Component {
 
           <p>
             <Link
-              to={`/user/profile/${this.props.auth.user.id}`}
+              to={`/user/${this.props.auth.userData.id}`}
               className="link button-links__link"
             >
               My profile
@@ -104,7 +122,11 @@ class Header extends Component {
               <Search />
             </div>
           </div>
-          {isAuthenticated ? authLinks : guestLinks}
+          {isAuthenticated
+            ? this.props.auth.userData.role === "client"
+              ? clientLinks
+              : companyLinks
+            : guestLinks}
         </div>
       </header>
     );

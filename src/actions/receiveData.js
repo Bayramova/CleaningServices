@@ -1,4 +1,4 @@
-import { fetchCompanies, fetchServices } from "../utils/fetch";
+import { fetchCompanies, fetchServices } from "utils/api";
 
 export const FETCH_DATA_REQUEST = "FETCH_DATA_REQUEST";
 export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
