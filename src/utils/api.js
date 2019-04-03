@@ -20,27 +20,27 @@ function fetchServices() {
   return fetchData("services");
 }
 
-function signUp(userData) {
+function signUpUser(userData) {
   return fetchData("signup", "POST", userData);
 }
 
-function signIn(userData) {
+function signInUser(userData) {
   return fetchData("signin", "POST", userData);
 }
 
-function updateUserInfo(id, updates) {
-  return fetchData(`user/profile/${id}/edit`, "PUT", updates);
+function updateUser(id, updates) {
+  return fetchData(`user/${id}/edit`, "PUT", updates);
 }
 
-function getUserInfo(id) {
-  return fetchData(`user/profile/${id}`);
+function getUser(id) {
+  return fetchData(`user/${id}`);
 }
 
 export {
   fetchCompanies,
   fetchServices,
-  signUp,
-  signIn,
-  updateUserInfo,
-  getUserInfo
+  signUpUser,
+  signInUser,
+  updateUser,
+  getUser
 };

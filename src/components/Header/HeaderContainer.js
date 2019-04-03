@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "./Header";
-import { signOutUser } from "../../actions/authActions";
+import { signOut } from "actions/userActions";
 
 class HeaderContainer extends Component {
   render() {
@@ -22,7 +22,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  signOutUser: signOutUser
+  signOutUser: signOut
 };
 
 export default connect(

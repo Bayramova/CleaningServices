@@ -15,11 +15,11 @@ class UserProfileEditForm extends React.Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         const userData = {
-          id: this.props.auth.user.id,
+          id: this.props.auth.userData.id,
           ...values
         };
         this.props.updateUser(
-          this.props.auth.user.id,
+          this.props.auth.userData.id,
           userData,
           this.props.history
         );
@@ -51,26 +51,15 @@ class UserProfileEditForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-
-    // const prefixSelector = getFieldDecorator("prefix", {
-    //   initialValue: "(29)"
-    // })(
-    //   <Select style={{ width: 70 }}>
-    //     <Option value="(29)">(29)</Option>
-    //     <Option value="(33)">(33)</Option>
-    //     <Option value="(44)">(44)</Option>
-    //     <Option value="(17)">(17)</Option>
-    //   </Select>
-    // );
-
     return (
       <div className="sign-up__content">
         <div className="sign-up-container">
           <div className="sign-up">
             <h1 className="sign-up__title">Update your account details</h1>
             <Form onSubmit={this.handleSubmit}>
-              {/* <Form.Item label="E-mail" help={this.props.errors.email}>
+              <Form.Item label="E-mail" help={this.props.auth.errors.email}>
                 {getFieldDecorator("email", {
+                  initialValue: this.props.auth.userData.email,
                   rules: [
                     {
                       type: "email",
@@ -82,7 +71,7 @@ class UserProfileEditForm extends React.Component {
                     }
                   ]
                 })(<Input />)}
-              </Form.Item> */}
+              </Form.Item>
               {/* <Form.Item label="New password">
                 {getFieldDecorator("password", {
                   rules: [
@@ -111,13 +100,14 @@ class UserProfileEditForm extends React.Component {
               </Form.Item> */}
 
               {(() => {
-                switch (this.props.auth.user.role) {
+                switch (this.props.auth.userData.role) {
                   case "client":
                     return (
                       <React.Fragment>
                         <Form.Item label="Name">
                           {getFieldDecorator("name", {
-                            initialValue: this.props.userData.name,
+                            initialValue: this.props.auth.additionalUserData
+                              .name,
                             rules: [
                               {
                                 required: true,
@@ -128,7 +118,8 @@ class UserProfileEditForm extends React.Component {
                         </Form.Item>
                         <Form.Item label="Address">
                           {getFieldDecorator("address", {
-                            initialValue: this.props.userData.address,
+                            initialValue: this.props.auth.additionalUserData
+                              .address,
                             rules: [
                               {
                                 required: true,
@@ -161,6 +152,8 @@ class UserProfileEditForm extends React.Component {
                         </Form.Item>
                         <Form.Item label="Company name">
                           {getFieldDecorator("name", {
+                            initialValue: this.props.auth.additionalUserData
+                              .name,
                             rules: [
                               {
                                 required: true,
@@ -171,6 +164,8 @@ class UserProfileEditForm extends React.Component {
                         </Form.Item>
                         <Form.Item label="Company address">
                           {getFieldDecorator("address", {
+                            initialValue: this.props.auth.additionalUserData
+                              .address,
                             rules: [
                               {
                                 required: true,
@@ -181,6 +176,8 @@ class UserProfileEditForm extends React.Component {
                         </Form.Item>
                         <Form.Item label="Company services">
                           {getFieldDecorator("services", {
+                            initialValue: this.props.auth.additionalUserData
+                              .services,
                             rules: [
                               {
                                 required: true,

@@ -35,7 +35,7 @@ class PlaceOrderForm extends Component {
             <Form>
               <Form.Item label="Address">
                 {getFieldDecorator("address", {
-                  initialValue: this.props.orderFormFields.address.value,
+                  initialValue: this.props.address,
                   rules: [
                     {
                       required: true,
