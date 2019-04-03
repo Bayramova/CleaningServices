@@ -24,21 +24,21 @@ import PrivateRoute from "./PrivateRoute";
 import OrderFormPrivateRoute from "./OrderFormPrivateRoute";
 import { handleInitialData } from "actions/receiveData";
 import { signOut } from "actions/userActions";
-import { setCurrentUser } from "actions/userActions";
+import { getUserDataFromToken } from "actions/userActions";
 
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(handleInitialData());
 
-    // if (localStorage.token) {
-    //   const token = localStorage.token;
-    //   console.log(Object.values(jwtDecode(token)));
-    //   dispatch(setCurrentUser(this.props.auth.user));
-    //   if (jwtDecode(token).exp < Date.now() / 1000) {
-    //     dispatch(signOut());
-    //   }
-    // }
+    if (localStorage.token) {
+      const token = localStorage.token.split("Bearer ")[1];
+      console.log(token);
+      dispatch(getUserDataFromToken(token));
+      if (jwtDecode(token).exp < Date.now() / 1000) {
+        dispatch(signOut());
+      }
+    }
   }
 
   render() {

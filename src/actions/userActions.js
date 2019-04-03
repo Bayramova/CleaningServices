@@ -1,4 +1,10 @@
-import { signUpUser, signInUser, updateUser, getUser } from "utils/api";
+import {
+  signUpUser,
+  signInUser,
+  updateUser,
+  getUser,
+  getUserFromToken
+} from "utils/api";
 
 export const GET_ERRORS = "GET_ERRORS";
 export const DELETE_ERRORS = "DELETE_ERRORS";
@@ -72,6 +78,21 @@ export const signIn = userData => dispatch => {
       err.json().then(errorMessage => {
         dispatch(getErrors(errorMessage));
       });
+    });
+};
+
+export const getUserDataFromToken = token => dispatch => {
+  getUserFromToken(token)
+    .then(res => {
+      const { user } = res;
+      dispatch(setCurrentUser(user));
+      getUser(user.id).then(res => {
+        const { userData } = res;
+        dispatch(getUserData(userData));
+      });
+    })
+    .catch(err => {
+      console.log(err);
     });
 };
 
