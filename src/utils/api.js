@@ -36,8 +36,17 @@ function getUser(id) {
   return fetchData(`user/${id}`);
 }
 
-function getUserFromToken(token) {
-  return fetchData(`user_from_token`, "POST", token);
+async function getUserFromToken(token) {
+  const response = await fetch(`http://localhost:5000/api/user/from/token`, {
+    method: "GET",
+    headers: {
+      "x-access-token": token
+    }
+  });
+  if (!response.ok) {
+    throw response;
+  }
+  return response.json();
 }
 
 export {

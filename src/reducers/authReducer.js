@@ -4,12 +4,14 @@ import {
   GET_ERRORS,
   DELETE_ERRORS,
   GET_USER_DATA,
-  UPDATE_USER_DATA
+  UPDATE_USER_DATA,
+  USER_LOADING
 } from "actions/userActions";
 
 const initialState = {
   isAuthenticated: false,
   errors: {},
+  loadingUser: false,
   userData: {
     id: "",
     email: "",
@@ -20,11 +22,16 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case USER_LOADING:
+      return {
+        ...state,
+        loadingUser: true
+      };
     case SET_CURRENT_USER:
-      console.log(action.user);
       return {
         ...state,
         isAuthenticated: true,
+        loadingUser: false,
         userData: action.user
       };
     case UNSET_CURRENT_USER:
@@ -55,7 +62,8 @@ export default function(state = initialState, action) {
     case UPDATE_USER_DATA:
       return {
         ...state,
-        additionalUserData: action.userData
+        userData: action.userData,
+        additionalUserData: action.additionalUserData
       };
     default:
       return state;

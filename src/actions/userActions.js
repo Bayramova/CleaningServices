@@ -8,6 +8,7 @@ import {
 
 export const GET_ERRORS = "GET_ERRORS";
 export const DELETE_ERRORS = "DELETE_ERRORS";
+export const USER_LOADING = "USER_LOADING";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const UNSET_CURRENT_USER = "UNSET_CURRENT_USER";
 export const GET_USER_DATA = "GET_USER_DATA";
@@ -23,6 +24,12 @@ const getErrors = error => {
 export const deleteErrors = () => {
   return {
     type: DELETE_ERRORS
+  };
+};
+
+export const setUserLoading = () => {
+  return {
+    type: USER_LOADING
   };
 };
 
@@ -46,10 +53,11 @@ const getUserData = userData => {
   };
 };
 
-const updateUserData = userData => {
+const updateUserData = (userData, additionalUserData) => {
   return {
     type: UPDATE_USER_DATA,
-    userData
+    userData,
+    additionalUserData
   };
 };
 
@@ -82,9 +90,12 @@ export const signIn = userData => dispatch => {
 };
 
 export const getUserDataFromToken = token => dispatch => {
+  dispatch(setUserLoading());
+
   getUserFromToken(token)
     .then(res => {
-      const { user } = res;
+      const { token, user } = res;
+      localStorage.setItem("token", token);
       dispatch(setCurrentUser(user));
       getUser(user.id).then(res => {
         const { userData } = res;
@@ -92,7 +103,9 @@ export const getUserDataFromToken = token => dispatch => {
       });
     })
     .catch(err => {
-      console.log(err);
+      err.json().then(errorMessage => {
+        dispatch(getErrors(errorMessage));
+      });
     });
 };
 
@@ -104,7 +117,8 @@ export const signOut = () => dispatch => {
 export const update = (id, updates, history) => dispatch => {
   updateUser(id, updates)
     .then(res => {
-      dispatch(updateUserData(updates));
+      const { userData, additionalUserData } = res;
+      dispatch(updateUserData(userData, additionalUserData));
     })
     .then(res => history.push(`/user/${id}`))
     .catch(err => {
