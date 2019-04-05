@@ -5,9 +5,16 @@ import { handleFormChange } from "actions/updateFieldsState";
 
 class OrderFormContainer extends Component {
   render() {
-    const buttonText = this.props.location.state.fromSelectedCompany
-      ? "Place Order"
-      : "Show Options";
+    let buttonText = "";
+    //let company = {};
+    if (this.props.location.state.fromSelectedCompany) {
+      buttonText = "Place order";
+      // company = this.props.companies.find(
+      //   company => company.id == this.props.location.state.companyId
+      // );
+    } else {
+      buttonText = "Show options";
+    }
     const address = this.props.auth.isAuthenticated
       ? this.props.auth.additionalUserData.address
       : this.props.orderFormFields.address.value;
@@ -17,6 +24,8 @@ class OrderFormContainer extends Component {
         onChange={this.props.onChange}
         buttonText={buttonText}
         address={address}
+        services={this.props.services}
+        // company={company}
       />
     );
   }
@@ -25,7 +34,9 @@ class OrderFormContainer extends Component {
 const mapStateToProps = state => {
   return {
     orderFormFields: state.orderFormFields,
-    auth: state.auth
+    auth: state.auth,
+    companies: state.data.companies,
+    services: state.data.serviceTypes
   };
 };
 

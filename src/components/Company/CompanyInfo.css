@@ -74,13 +74,6 @@
   margin-bottom: 0;
 }
 
-.company-info__cost-form {
-  color: #666666;
-  border: 1px solid #81b536;
-  border-radius: 4px;
-  margin-top: 10px;
-}
-
 .cost-form__button:hover {
   opacity: 0.8;
 }
