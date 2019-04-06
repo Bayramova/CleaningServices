@@ -8,6 +8,7 @@ class UserProfileContainer extends Component {
       <UserProfile
         auth={this.props.auth}
         userData={this.props.auth.additionalUserData}
+        orders={this.props.auth.orders}
       />
     );
   }

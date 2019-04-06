@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./UserProfile.css";
+import OrdersList from "./OrdersList";
 
 class ClientProfile extends Component {
   render() {
@@ -33,6 +34,8 @@ class ClientProfile extends Component {
               </div>
             </div>
           </div>
+
+          <OrdersList orders={this.props.orders} />
         </div>
       </div>
     );
