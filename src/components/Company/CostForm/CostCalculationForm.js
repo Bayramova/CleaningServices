@@ -1,42 +1,154 @@
 import React, { Component } from "react";
-import { Input, Select } from "antd";
+import { Form, Select, Button, InputNumber } from "antd";
 import "./CostForm.css";
+const { Option } = Select;
 
 class CostCalculationForm extends Component {
+  state = {
+    cost: null
+  };
+  handleClick = event => {
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (err) {
+        event.preventDefault();
+      }
+      function switchResult(result) {
+        switch (values.serviceType) {
+          case "Standart cleaning":
+            return 1;
+          case "Dry carpet cleaning":
+            return 1;
+          case "Dry furniture and coatings cleaning":
+            return 1;
+          case "General cleaning":
+            return 2;
+          case "Office cleaning":
+            return 3;
+          case "Pool cleaning":
+            return 4;
+          case "Industrial cleaning":
+            return 5;
+          case "Cleaning after repair and construction":
+            return 5;
+          default:
+            return 1;
+        }
+      }
+      const coefficient = switchResult(values.serviceType);
+      const cost =
+        coefficient *
+        (10 * values.smallRooms + 13 * values.bigRooms + 15 * values.bathrooms);
+      this.setState({ cost });
+    });
+  };
+
   render() {
+    const { getFieldDecorator } = this.props.form;
+
     return (
-      <form className="cost-form">
-        <fieldset>
-          <label className="cost-form__label" htmlFor="type">
-            Type of cleaning
-          </label>
-          <Select style={{ width: "100%" }}>
-            {this.props.services.map(title => {
-              return (
-                <Select.Option key={title} value={title}>
-                  {title}
-                </Select.Option>
-              );
-            })}
-          </Select>
-        </fieldset>
+      <div className="cost-form__content">
+        <div className="sign-up-container">
+          <div className="sign-up">
+            <Form>
+              <Form.Item label="Type of cleaning">
+                {getFieldDecorator("serviceType", {
+                  initialValue: this.props.services[0],
+                  rules: [
+                    {
+                      required: true,
+                      message: "Please select type of cleaning!"
+                    }
+                  ]
+                })(
+                  <Select
+                    style={{ width: "100%" }}
+                    placeholder="Please select type of cleaning"
+                  >
+                    {this.props.services.map(title => {
+                      return (
+                        <Option key={title} value={title}>
+                          {title}
+                        </Option>
+                      );
+                    })}
+                  </Select>
+                )}
+              </Form.Item>
 
-        <fieldset>
-          <label className="cost-form__label" htmlFor="rooms">
-            Number of rooms
-          </label>
-          <Input placeholder="small rooms" />
-          <Input placeholder="big rooms" />
-          <Input placeholder="bathrooms" />
-        </fieldset>
+              <Form.Item label="Number of big rooms (> 30 sq m)">
+                {getFieldDecorator("bigRooms", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "Please input number of rooms!"
+                    },
+                    {
+                      type: "number",
+                      message: "Please enter a number!"
+                    }
+                  ]
+                })(<InputNumber min={0} />)}
+              </Form.Item>
 
-        <button className="cost-form__button" name="button" type="submit">
-          Сalculate the cost
-        </button>
-        <h3 className="field-errors">{}</h3>
-      </form>
+              <Form.Item label="Number of small rooms">
+                {getFieldDecorator("smallRooms", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "Please input number of rooms!"
+                    },
+                    {
+                      type: "number",
+                      message: "Please enter a number!"
+                    }
+                  ]
+                })(<InputNumber min={0} />)}
+              </Form.Item>
+
+              <Form.Item label="Number of bathrooms">
+                {getFieldDecorator("bathrooms", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "Please input number of rooms!"
+                    },
+                    {
+                      type: "number",
+                      message: "Please enter a number!"
+                    }
+                  ]
+                })(<InputNumber min={0} />)}
+              </Form.Item>
+
+              <div className="cost-info">
+                <Form.Item>
+                  <Button
+                    style={{ width: "50%" }}
+                    type="primary"
+                    onClick={this.handleClick}
+                  >
+                    Calculate
+                  </Button>
+                </Form.Item>
+                {isNaN(this.state.cost) || this.state.cost === null ? (
+                  <div />
+                ) : (
+                  <div className="cost-info__message">
+                    Total cost is {this.state.cost} $
+                  </div>
+                )}
+              </div>
+            </Form>
+          </div>
+        </div>
+      </div>
     );
   }
 }
 
-export default CostCalculationForm;
+export default Form.create({
+  name: "cost-form",
+  onFieldsChange(props, changedFields) {
+    props.onChange(changedFields);
+  }
+})(CostCalculationForm);

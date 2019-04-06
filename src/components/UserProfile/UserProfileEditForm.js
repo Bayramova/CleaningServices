@@ -1,26 +1,28 @@
 import React from "react";
-import { Form, Input, Select, Button, Upload, Icon, Radio } from "antd";
-import "./SignUpForm.css";
+import { Form, Input, Select, Button, Upload, Icon } from "antd";
+import "./UserProfile";
 
 const { Option } = Select;
 
-class SignUpForm extends React.Component {
+class UserProfileEditForm extends React.Component {
   state = {
     confirmDirty: false,
     formType: ""
-  };
-
-  handleRoleChange = e => {
-    this.setState({
-      formType: e.target.value
-    });
   };
 
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        this.props.signUpUser(values, this.props.history);
+        const userData = {
+          id: this.props.auth.userData.id,
+          ...values
+        };
+        this.props.updateUser(
+          this.props.auth.userData.id,
+          userData,
+          this.props.history
+        );
       }
     });
   };
@@ -49,26 +51,15 @@ class SignUpForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-
-    // const prefixSelector = getFieldDecorator("prefix", {
-    //   initialValue: "(29)"
-    // })(
-    //   <Select style={{ width: 70 }}>
-    //     <Option value="(29)">(29)</Option>
-    //     <Option value="(33)">(33)</Option>
-    //     <Option value="(44)">(44)</Option>
-    //     <Option value="(17)">(17)</Option>
-    //   </Select>
-    // );
-
     return (
       <div className="sign-up__content">
         <div className="sign-up-container">
           <div className="sign-up">
-            <h1 className="sign-up__title">Create your account</h1>
+            <h1 className="sign-up__title">Update your account details</h1>
             <Form onSubmit={this.handleSubmit}>
               <Form.Item label="E-mail" help={this.props.auth.errors.email}>
                 {getFieldDecorator("email", {
+                  initialValue: this.props.auth.userData.email,
                   rules: [
                     {
                       type: "email",
@@ -81,11 +72,11 @@ class SignUpForm extends React.Component {
                   ]
                 })(<Input />)}
               </Form.Item>
-              <Form.Item label="Password">
+              {/* <Form.Item label="New password">
                 {getFieldDecorator("password", {
                   rules: [
                     {
-                      required: true,
+                      required: false,
                       message: "Please input your password!"
                     },
                     {
@@ -94,11 +85,11 @@ class SignUpForm extends React.Component {
                   ]
                 })(<Input type="password" />)}
               </Form.Item>
-              <Form.Item label="Confirm Password">
+              <Form.Item label="Confirm password">
                 {getFieldDecorator("confirm", {
                   rules: [
                     {
-                      required: true,
+                      required: false,
                       message: "Please confirm your password!"
                     },
                     {
@@ -106,30 +97,17 @@ class SignUpForm extends React.Component {
                     }
                   ]
                 })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
-              </Form.Item>
-
-              <Form.Item label="Who you are">
-                {getFieldDecorator("role", {
-                  rules: [
-                    {
-                      required: true
-                    }
-                  ]
-                })(
-                  <Radio.Group onChange={this.handleRoleChange}>
-                    <Radio value="client">Client</Radio>
-                    <Radio value="company">Company</Radio>
-                  </Radio.Group>
-                )}
-              </Form.Item>
+              </Form.Item> */}
 
               {(() => {
-                switch (this.state.formType) {
+                switch (this.props.auth.userData.role) {
                   case "client":
                     return (
                       <React.Fragment>
                         <Form.Item label="Name">
                           {getFieldDecorator("name", {
+                            initialValue: this.props.auth.additionalUserData
+                              .name,
                             rules: [
                               {
                                 required: true,
@@ -140,6 +118,8 @@ class SignUpForm extends React.Component {
                         </Form.Item>
                         <Form.Item label="Address">
                           {getFieldDecorator("address", {
+                            initialValue: this.props.auth.additionalUserData
+                              .address,
                             rules: [
                               {
                                 required: true,
@@ -172,6 +152,8 @@ class SignUpForm extends React.Component {
                         </Form.Item>
                         <Form.Item label="Company name">
                           {getFieldDecorator("name", {
+                            initialValue: this.props.auth.additionalUserData
+                              .name,
                             rules: [
                               {
                                 required: true,
@@ -182,6 +164,8 @@ class SignUpForm extends React.Component {
                         </Form.Item>
                         <Form.Item label="Company address">
                           {getFieldDecorator("address", {
+                            initialValue: this.props.auth.additionalUserData
+                              .address,
                             rules: [
                               {
                                 required: true,
@@ -192,6 +176,8 @@ class SignUpForm extends React.Component {
                         </Form.Item>
                         <Form.Item label="Company services">
                           {getFieldDecorator("services", {
+                            initialValue: this.props.auth.additionalUserData
+                              .services,
                             rules: [
                               {
                                 required: true,
@@ -243,7 +229,7 @@ class SignUpForm extends React.Component {
                   type="primary"
                   htmlType="submit"
                 >
-                  Register
+                  Save
                 </Button>
               </Form.Item>
             </Form>
@@ -255,8 +241,8 @@ class SignUpForm extends React.Component {
 }
 
 export default Form.create({
-  name: "signup",
+  name: "edit",
   onFieldsChange(props, changedFields) {
     props.onChange(changedFields);
   }
-})(SignUpForm);
+})(UserProfileEditForm);

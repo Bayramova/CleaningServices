@@ -1,23 +1,20 @@
-.cost-form {
+.cost-form__content {
   display: grid;
-  grid-gap: 20px;
-  border: none;
-  padding: 5px;
+  justify-items: center;
+  align-items: center;
+  height: 100%;
+  margin-top: 19px;
 }
 
-.cost-form__label {
-  font-size: 24px;
-  font-weight: 500;
+.cost-info {
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-rows: 40px 40px;
 }
 
-.cost-form__button {
-  border: none;
-  cursor: pointer;
-  height: 35px;
-  background-color: #81b536;
-  box-shadow: 0 2px 0 0 #709a3c;
-  border-radius: 4px;
+.cost-info__message {
+  color: #9dc265;
+  line-height: 1.5;
   font-size: 20px;
-  color: white;
-  white-space: nowrap;
+  transition: color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }

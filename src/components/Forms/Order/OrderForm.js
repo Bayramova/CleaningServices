@@ -1,11 +1,71 @@
 import React, { Component } from "react";
-import { Form, Input, Select, Button, InputNumber } from "antd";
+import { Form, Input, Select, Button, InputNumber, Modal } from "antd";
 import { Link } from "react-router-dom";
 import "./OrderForm.css";
 
 const { Option } = Select;
 
 class PlaceOrderForm extends Component {
+  state = {
+    visible: false,
+    cost: null
+  };
+
+  showModal = event => {
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (err) {
+        event.preventDefault();
+      } else {
+        function switchResult(result) {
+          switch (values.serviceType) {
+            case "Standart cleaning":
+              return 1;
+            case "Dry carpet cleaning":
+              return 1;
+            case "Dry furniture and coatings cleaning":
+              return 1;
+            case "General cleaning":
+              return 2;
+            case "Office cleaning":
+              return 3;
+            case "Pool cleaning":
+              return 4;
+            case "Industrial cleaning":
+              return 5;
+            case "Cleaning after repair and construction":
+              return 5;
+            default:
+              return 1;
+          }
+        }
+        const coefficient = switchResult(values.serviceType);
+        const cost =
+          coefficient *
+          (10 * values.smallRooms +
+            13 * values.bigRooms +
+            15 * values.bathrooms);
+        this.setState({
+          visible: true,
+          cost
+        });
+      }
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false
+    });
+  };
+
   handleClick = event => {
     this.props.form.validateFieldsAndScroll(err => {
       if (err) {
@@ -35,7 +95,7 @@ class PlaceOrderForm extends Component {
             <Form>
               <Form.Item label="Address">
                 {getFieldDecorator("address", {
-                  initialValue: this.props.orderFormFields.address.value,
+                  initialValue: this.props.address,
                   rules: [
                     {
                       required: true,
@@ -203,22 +263,77 @@ class PlaceOrderForm extends Component {
                 )}
               </Form.Item>
 
-              <Form.Item>
-                <Link
-                  to={`/service/${
-                    this.props.orderFormFields.serviceType.value
-                  }`}
-                  onClick={this.handleClick}
-                >
-                  <Button
-                    style={{ width: "50%" }}
-                    type="primary"
+              {this.props.buttonText === "Show Options" ? (
+                <Form.Item>
+                  <Link
+                    to={`/service/${
+                      this.props.orderFormFields.serviceType.value
+                    }`}
                     onClick={this.handleClick}
                   >
+                    <Button
+                      style={{ width: "50%" }}
+                      type="primary"
+                      onClick={this.handleClick}
+                    >
+                      {this.props.buttonText}
+                    </Button>
+                  </Link>
+                </Form.Item>
+              ) : (
+                <div>
+                  <Button type="primary" onClick={this.showModal}>
                     {this.props.buttonText}
                   </Button>
-                </Link>
-              </Form.Item>
+                  <Modal
+                    title="Order details"
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                  >
+                    <p>Address: {this.props.address}</p>
+                    <p>
+                      Type of cleaning:{" "}
+                      {this.props.orderFormFields.serviceType.value.slice(
+                        0,
+                        this.props.orderFormFields.serviceType.value.indexOf(
+                          "cleaning"
+                        )
+                      )}
+                    </p>
+                    <p>
+                      Big rooms: {this.props.orderFormFields.bigRooms.value}
+                    </p>
+                    <p>
+                      Small rooms: {this.props.orderFormFields.smallRooms.value}
+                    </p>
+                    <p>
+                      Bathrooms: {this.props.orderFormFields.bathrooms.value}
+                    </p>
+                    <p>
+                      Day/days:{" "}
+                      {this.props.orderFormFields.daysOfCleaning.value.join(
+                        ", "
+                      )}
+                    </p>
+                    <p>
+                      Expected start time of cleaning:{" "}
+                      {this.props.orderFormFields.startTimeOfCleaning.value}
+                    </p>
+                    <p>
+                      Cleaning frequency:{" "}
+                      {this.props.orderFormFields.cleaningFrequency.value}
+                    </p>
+                    <p>
+                      Phone number: +375
+                      {this.props.orderFormFields.prefix.value}
+                      {this.props.orderFormFields.phone.value}
+                    </p>
+                    {/* <p>Company: {this.props.company.name}</p> */}
+                    <h3> Total cost: {this.state.cost} $</h3>
+                  </Modal>
+                </div>
+              )}
             </Form>
           </div>
         </div>
@@ -230,7 +345,6 @@ class PlaceOrderForm extends Component {
 const OrderForm = Form.create({
   name: "global_state",
   onFieldsChange(props, changedFields) {
-    console.log(changedFields);
     props.onChange(changedFields);
   }
 })(PlaceOrderForm);

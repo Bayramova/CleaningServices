@@ -1,34 +1,48 @@
-.sign-in-container {
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    height: 100%;
+.sign-up__content {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  height: 100%;
+}
+
+.sign-up-container {
+  width: 100%;
+}
+
+.sign-up {
+  background: white;
+  border: 1px solid #e1e8ed;
+  text-align: left;
+  padding: 10px 40px;
+}
+
+.sign-up__title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #444444;
+}
+
+.sign-in__sign-up-info {
+  font-size: 13px;
+  color: #7d7d7d;
+}
+
+.sign-in-form__buttons {
+  display: grid;
+  grid-auto-flow: column;
+  justify-items: space-around;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .sign-up-container {
+    width: 80%;
   }
-  
-  .sign-in {
-    background: white;
-    border: 1px solid #e1e8ed;
-    text-align: left;
-    padding: 10px 40px;
-    max-width: 540px;
+}
+
+@media (min-width: 1024px) {
+  .sign-up-container {
     width: 50%;
   }
-  
-  .sign-in__title {
-    text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-    color: #444444;
-  }
-  
-  .sign-in__sign-up-info {
-    font-size: 13px;
-    color: #7d7d7d;
-  }
-  
-  .sign-in-form__buttons {
-    display: grid;
-    grid-auto-flow: column;
-    justify-items: space-around;
-    align-items: center;
-  }
+}
