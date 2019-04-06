@@ -58,6 +58,14 @@ async function getUserFromToken(token) {
   return response.json();
 }
 
+function createOrder(orderData) {
+  return fetchData("make_order", "POST", orderData);
+}
+
+function getOrders(id) {
+  return fetchData(`user/${id}/orders`);
+}
+
 export {
   fetchCompanies,
   fetchServices,
@@ -65,5 +73,7 @@ export {
   signInUser,
   updateUser,
   getUser,
-  getUserFromToken
+  getUserFromToken,
+  createOrder,
+  getOrders
 };

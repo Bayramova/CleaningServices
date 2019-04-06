@@ -6,6 +6,10 @@ import { Rate } from "antd";
 import "./CompanyInfo.css";
 
 class Company extends Component {
+  handleClick = event => {
+    // event.preventDefault();
+    this.props.selectCompany(this.props.matchPath);
+  };
   render() {
     return (
       <div className="company-info__container">
@@ -47,6 +51,7 @@ class Company extends Component {
                       fromSelectedCompany: true
                     }
                   }}
+                  onClick={this.handleClick}
                   className="company-info__button--order"
                 >
                   Make order

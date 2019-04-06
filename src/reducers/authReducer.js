@@ -5,7 +5,8 @@ import {
   DELETE_ERRORS,
   GET_USER_DATA,
   UPDATE_USER_DATA,
-  USER_LOADING
+  USER_LOADING,
+  GET_ORDERS
 } from "actions/userActions";
 
 const initialState = {
@@ -17,7 +18,8 @@ const initialState = {
     email: "",
     role: ""
   },
-  additionalUserData: {}
+  additionalUserData: {},
+  orders: []
 };
 
 export default function(state = initialState, action) {
@@ -64,6 +66,11 @@ export default function(state = initialState, action) {
         ...state,
         userData: action.userData,
         additionalUserData: action.additionalUserData
+      };
+    case GET_ORDERS:
+      return {
+        ...state,
+        orders: action.orders
       };
     default:
       return state;

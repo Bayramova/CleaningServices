@@ -3,9 +3,11 @@ import React, { Component } from "react";
 import Company from "./Company";
 import "./CompanyInfo.css";
 import { connect } from "react-redux";
+import { selectCompany } from "actions/makeOrder";
 
 class CompanyContainer extends Component {
   render() {
+    const matchPath = this.props.match.params.company;
     const company = this.props.companies.find(
       company => company.id == this.props.match.params.company
     );
@@ -14,7 +16,12 @@ class CompanyContainer extends Component {
     );
     return (
       <div>
-        <Company company={company} services={serviceTitles} />
+        <Company
+          company={company}
+          services={serviceTitles}
+          matchPath={matchPath}
+          selectCompany={this.props.selectCompany}
+        />
       </div>
     );
   }
@@ -27,4 +34,11 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(CompanyContainer);
+const mapDispatchToProps = {
+  selectCompany
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CompanyContainer);

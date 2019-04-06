@@ -17,7 +17,7 @@ const Company = props => {
           <div className="company-card__description">{address}</div>
         </div>
       </Link>
-      <div className="company-card__order-link">
+      {/* <div className="company-card__order-link">
         <Link
           to={{
             pathname: "/make_order",
@@ -28,7 +28,7 @@ const Company = props => {
         >
           Make order
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };

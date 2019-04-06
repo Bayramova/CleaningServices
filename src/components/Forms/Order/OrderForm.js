@@ -53,10 +53,23 @@ class PlaceOrderForm extends Component {
   };
 
   handleOk = e => {
-    console.log(e);
     this.setState({
       visible: false
     });
+    const values = {
+      address: this.props.address,
+      service: this.props.orderFormFields.serviceType.value,
+      bigRooms: this.props.orderFormFields.bigRooms.value,
+      smallRooms: this.props.orderFormFields.smallRooms.value,
+      bathrooms: this.props.orderFormFields.bathrooms.value,
+      daysOfCleaning: this.props.orderFormFields.daysOfCleaning.value,
+      startTimeOfCleaning: this.props.orderFormFields.startTimeOfCleaning.value,
+      cleaningFrequency: this.props.orderFormFields.cleaningFrequency.value,
+      phone: this.props.orderFormFields.phone.value,
+      companyId: this.props.orderFormFields.companyId.value,
+      clientId: this.props.clientId
+    };
+    this.props.makeOrder(values);
   };
 
   handleCancel = e => {
@@ -93,6 +106,19 @@ class PlaceOrderForm extends Component {
           <div className="sign-up">
             <h1 className="sign-up__title">Place an order</h1>
             <Form>
+              {this.props.orderFormFields.companyId.value ? (
+                <Form.Item label="Company">
+                  {getFieldDecorator("company", {
+                    initialValue: this.props.companies.find(
+                      company =>
+                        company.id == this.props.orderFormFields.companyId.value
+                    ).name
+                  })(<Input disabled />)}
+                </Form.Item>
+              ) : (
+                <React.Fragment />
+              )}
+
               <Form.Item label="Address">
                 {getFieldDecorator("address", {
                   initialValue: this.props.address,
@@ -263,27 +289,10 @@ class PlaceOrderForm extends Component {
                 )}
               </Form.Item>
 
-              {this.props.buttonText === "Show Options" ? (
-                <Form.Item>
-                  <Link
-                    to={`/service/${
-                      this.props.orderFormFields.serviceType.value
-                    }`}
-                    onClick={this.handleClick}
-                  >
-                    <Button
-                      style={{ width: "50%" }}
-                      type="primary"
-                      onClick={this.handleClick}
-                    >
-                      {this.props.buttonText}
-                    </Button>
-                  </Link>
-                </Form.Item>
-              ) : (
+              {this.props.orderFormFields.companyId.value ? (
                 <div>
                   <Button type="primary" onClick={this.showModal}>
-                    {this.props.buttonText}
+                    Place order
                   </Button>
                   <Modal
                     title="Order details"
@@ -333,6 +342,15 @@ class PlaceOrderForm extends Component {
                     <h3> Total cost: {this.state.cost} $</h3>
                   </Modal>
                 </div>
+              ) : (
+                <Link
+                  to={`/service/${
+                    this.props.orderFormFields.serviceType.value
+                  }`}
+                  onClick={this.handleClick}
+                >
+                  <Button type="primary">Show options</Button>
+                </Link>
               )}
             </Form>
           </div>

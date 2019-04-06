@@ -2,30 +2,25 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import OrderForm from "./OrderForm";
 import { handleFormChange } from "actions/updateFieldsState";
+import { makeOrder } from "actions/userActions";
 
 class OrderFormContainer extends Component {
   render() {
-    let buttonText = "";
-    //let company = {};
-    if (this.props.location.state.fromSelectedCompany) {
-      buttonText = "Place order";
-      // company = this.props.companies.find(
-      //   company => company.id == this.props.location.state.companyId
-      // );
-    } else {
-      buttonText = "Show options";
-    }
     const address = this.props.auth.isAuthenticated
       ? this.props.auth.additionalUserData.address
       : this.props.orderFormFields.address.value;
+    const clientId = this.props.auth.isAuthenticated
+      ? this.props.auth.additionalUserData.id
+      : null;
     return (
       <OrderForm
         orderFormFields={this.props.orderFormFields}
         onChange={this.props.onChange}
-        buttonText={buttonText}
         address={address}
         services={this.props.services}
-        // company={company}
+        companies={this.props.companies}
+        makeOrder={this.props.makeOrder}
+        clientId={clientId}
       />
     );
   }
@@ -41,7 +36,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  onChange: handleFormChange
+  onChange: handleFormChange,
+  makeOrder
 };
 
 export default connect(
