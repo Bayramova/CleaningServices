@@ -294,14 +294,12 @@ class PlaceOrderForm extends Component {
                     <p>Address: {this.props.address}</p>
                     <p>
                       Type of cleaning:{" "}
-                      {this.props.orderFormFields.serviceType.value
-                        .split("")
-                        .reverse()
-                        .join("")
-                        .slice(8)
-                        .split("")
-                        .reverse()
-                        .join("")}
+                      {this.props.orderFormFields.serviceType.value.slice(
+                        0,
+                        this.props.orderFormFields.serviceType.value.indexOf(
+                          "cleaning"
+                        )
+                      )}
                     </p>
                     <p>
                       Big rooms: {this.props.orderFormFields.bigRooms.value}

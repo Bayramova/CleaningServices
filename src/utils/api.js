@@ -1,11 +1,17 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 async function fetchData(resource, method, data) {
-  const response = await fetch(`http://localhost:5000/api/${resource}`, {
-    method: method || "GET",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  });
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/${resource}`,
+    {
+      method: method || "GET",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }
+  );
   if (!response.ok) {
     throw response;
   }
@@ -37,12 +43,15 @@ function getUser(id) {
 }
 
 async function getUserFromToken(token) {
-  const response = await fetch(`http://localhost:5000/api/user/from/token`, {
-    method: "GET",
-    headers: {
-      "x-access-token": token
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/user/from/token`,
+    {
+      method: "GET",
+      headers: {
+        "x-access-token": token
+      }
     }
-  });
+  );
   if (!response.ok) {
     throw response;
   }
