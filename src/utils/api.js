@@ -66,6 +66,10 @@ function getOrders(id) {
   return fetchData(`user/${id}/orders`);
 }
 
+function cancelOrder(orderId) {
+  return fetchData("cancel_order", "PUT", orderId);
+}
+
 export {
   fetchCompanies,
   fetchServices,
@@ -75,5 +79,6 @@ export {
   getUser,
   getUserFromToken,
   createOrder,
-  getOrders
+  getOrders,
+  cancelOrder
 };

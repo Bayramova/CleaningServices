@@ -5,7 +5,8 @@ import {
   getUser,
   getUserFromToken,
   createOrder,
-  getOrders
+  getOrders,
+  cancelOrder
 } from "utils/api";
 
 export const GET_ERRORS = "GET_ERRORS";
@@ -17,6 +18,7 @@ export const GET_USER_DATA = "GET_USER_DATA";
 export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
 export const MAKE_ORDER = "MAKE_ORDER";
 export const GET_ORDERS = "GET_ORDERS";
+export const CANCEL_ORDER = "CANCEL_ORDER";
 
 const getErrors = error => {
   return {
@@ -65,12 +67,19 @@ const updateUserData = (userData, additionalUserData) => {
   };
 };
 
-function getOrdersInfo(orders) {
+const getOrdersInfo = orders => {
   return {
     type: GET_ORDERS,
     orders
   };
-}
+};
+
+const changeOrderStatusToCancelled = orderId => {
+  return {
+    type: CANCEL_ORDER,
+    id: orderId
+  };
+};
 
 export const signUp = (userData, history) => dispatch => {
   signUpUser(userData)
@@ -145,20 +154,22 @@ export const update = (id, updates, history) => dispatch => {
     });
 };
 
-export const makeOrder = data => dispatch => {
-  createOrder(data).catch(err => {
-    console.log(err);
-  });
+export const makeOrder = (data, history) => dispatch => {
+  createOrder(data)
+    .then(res => {
+      history.push("/");
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
 
-// export const getOrdersInfoSuccess = user => {
-//   return dispatch => {
-//     getOrders(user.id)
-//       .then(res => {
-//         dispatch(getOrdersInfo(res));
-//       })
-//       .catch(error => {
-//         console.log(error);
-//       });
-//   };
-// };
+export const cancelNewOrder = orderId => dispatch => {
+  cancelOrder(orderId)
+    .then(res => {
+      dispatch(changeOrderStatusToCancelled(orderId));
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};

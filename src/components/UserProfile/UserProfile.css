@@ -57,8 +57,25 @@
   font-size: 18px;
 }
 
+.user-profile__order-buttons {
+  display: grid;
+}
+
+.user-profile__order-button {
+  color: #82b541;
+  cursor: pointer;
+}
+
+.user-profile__order-button--cancel {
+  cursor: pointer;
+}
+
 @media (min-width: 768px) {
   .user-profile__container {
     width: 80%;
+  }
+  .user-profile__order-buttons {
+    grid-auto-flow: column;
+    grid-gap: 10px;
   }
 }

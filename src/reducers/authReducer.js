@@ -6,7 +6,8 @@ import {
   GET_USER_DATA,
   UPDATE_USER_DATA,
   USER_LOADING,
-  GET_ORDERS
+  GET_ORDERS,
+  CANCEL_ORDER
 } from "actions/userActions";
 
 const initialState = {
@@ -71,6 +72,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         orders: action.orders
+      };
+    case CANCEL_ORDER:
+      const updatedOrderList = state.orders.map(order => {
+        if (order.id === action.id) {
+          order.status = "cancelled";
+        }
+      });
+      return {
+        ...state,
+        orders: updatedOrderList
       };
     default:
       return state;

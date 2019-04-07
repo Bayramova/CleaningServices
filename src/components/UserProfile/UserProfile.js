@@ -34,8 +34,11 @@ class ClientProfile extends Component {
               </div>
             </div>
           </div>
-
-          <OrdersList orders={this.props.orders} />
+          <OrdersList
+            orders={this.props.orders}
+            companies={this.props.companies}
+            cancelOrder={this.props.cancelOrder}
+          />
         </div>
       </div>
     );

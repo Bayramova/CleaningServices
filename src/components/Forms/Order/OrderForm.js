@@ -1,6 +1,8 @@
+/* eslint-disable eqeqeq */
 import React, { Component } from "react";
-import { Form, Input, Select, Button, InputNumber, Modal } from "antd";
+import { Form, Input, Select, Button, InputNumber } from "antd";
 import { Link } from "react-router-dom";
+import OrderDetails from "./OrderDetails";
 import "./OrderForm.css";
 
 const { Option } = Select;
@@ -65,15 +67,16 @@ class PlaceOrderForm extends Component {
       daysOfCleaning: this.props.orderFormFields.daysOfCleaning.value,
       startTimeOfCleaning: this.props.orderFormFields.startTimeOfCleaning.value,
       cleaningFrequency: this.props.orderFormFields.cleaningFrequency.value,
+      prefix: this.props.orderFormFields.prefix.value,
       phone: this.props.orderFormFields.phone.value,
+      cost: this.state.cost,
       companyId: this.props.orderFormFields.companyId.value,
       clientId: this.props.clientId
     };
-    this.props.makeOrder(values);
+    this.props.makeOrder(values, this.props.history);
   };
 
   handleCancel = e => {
-    console.log(e);
     this.setState({
       visible: false
     });
@@ -294,53 +297,40 @@ class PlaceOrderForm extends Component {
                   <Button type="primary" onClick={this.showModal}>
                     Place order
                   </Button>
-                  <Modal
-                    title="Order details"
+                  <OrderDetails
                     visible={this.state.visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
-                  >
-                    <p>Address: {this.props.address}</p>
-                    <p>
-                      Type of cleaning:{" "}
-                      {this.props.orderFormFields.serviceType.value.slice(
-                        0,
-                        this.props.orderFormFields.serviceType.value.indexOf(
-                          "cleaning"
-                        )
-                      )}
-                    </p>
-                    <p>
-                      Big rooms: {this.props.orderFormFields.bigRooms.value}
-                    </p>
-                    <p>
-                      Small rooms: {this.props.orderFormFields.smallRooms.value}
-                    </p>
-                    <p>
-                      Bathrooms: {this.props.orderFormFields.bathrooms.value}
-                    </p>
-                    <p>
-                      Day/days:{" "}
-                      {this.props.orderFormFields.daysOfCleaning.value.join(
-                        ", "
-                      )}
-                    </p>
-                    <p>
-                      Expected start time of cleaning:{" "}
-                      {this.props.orderFormFields.startTimeOfCleaning.value}
-                    </p>
-                    <p>
-                      Cleaning frequency:{" "}
-                      {this.props.orderFormFields.cleaningFrequency.value}
-                    </p>
-                    <p>
-                      Phone number: +375
-                      {this.props.orderFormFields.prefix.value}
-                      {this.props.orderFormFields.phone.value}
-                    </p>
-                    {/* <p>Company: {this.props.company.name}</p> */}
-                    <h3> Total cost: {this.state.cost} $</h3>
-                  </Modal>
+                    address={this.props.address}
+                    service={this.props.orderFormFields.serviceType.value}
+                    bigRooms={this.props.orderFormFields.bigRooms.value}
+                    smallRooms={this.props.orderFormFields.smallRooms.value}
+                    bathrooms={this.props.orderFormFields.bathrooms.value}
+                    daysOfCleaning={
+                      this.props.orderFormFields.daysOfCleaning.value
+                    }
+                    startTimeOfCleaning={
+                      this.props.orderFormFields.startTimeOfCleaning.value
+                    }
+                    cleaningFrequency={
+                      this.props.orderFormFields.cleaningFrequency.value
+                    }
+                    prefix={this.props.orderFormFields.prefix.value}
+                    phone={this.props.orderFormFields.phone.value}
+                    cost={this.state.cost}
+                    footer={[
+                      <Button key="back" onClick={this.handleCancel}>
+                        Return
+                      </Button>,
+                      <Button
+                        key="submit"
+                        type="primary"
+                        onClick={this.handleOk}
+                      >
+                        Confirm order
+                      </Button>
+                    ]}
+                  />
                 </div>
               ) : (
                 <Link

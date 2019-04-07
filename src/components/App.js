@@ -29,11 +29,9 @@ class App extends Component {
     if (localStorage.token) {
       if (jwtDecode(localStorage.token).exp < Date.now() / 1000) {
         dispatch(signOut());
-        console.log(this.props);
         this.props.history.push("/signin");
       } else {
         const token = localStorage.token;
-        console.log(token);
         dispatch(getUserDataFromToken(token));
       }
     }

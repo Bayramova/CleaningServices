@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { cancelNewOrder } from "../../actions/userActions";
 import UserProfile from "./UserProfile";
 
 class UserProfileContainer extends Component {
@@ -9,6 +10,8 @@ class UserProfileContainer extends Component {
         auth={this.props.auth}
         userData={this.props.auth.additionalUserData}
         orders={this.props.auth.orders}
+        companies={this.props.companies}
+        cancelOrder={this.props.cancelOrder}
       />
     );
   }
@@ -17,8 +20,16 @@ class UserProfileContainer extends Component {
 const mapStateToProps = state => {
   return {
     auth: state.auth,
-    userData: state.userData
+    userData: state.userData,
+    companies: state.data.companies
   };
 };
 
-export default connect(mapStateToProps)(UserProfileContainer);
+const mapDispatchToProps = {
+  cancelOrder: cancelNewOrder
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserProfileContainer);
