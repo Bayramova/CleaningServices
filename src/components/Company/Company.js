@@ -7,7 +7,6 @@ import "./CompanyInfo.css";
 
 class Company extends Component {
   handleClick = event => {
-    // event.preventDefault();
     this.props.selectCompany(this.props.matchPath);
   };
   render() {
@@ -45,12 +44,7 @@ class Company extends Component {
                 </Link>
 
                 <Link
-                  to={{
-                    pathname: "/make_order",
-                    state: {
-                      fromSelectedCompany: true
-                    }
-                  }}
+                  to={"/make_order"}
                   onClick={this.handleClick}
                   className="company-info__button--order"
                 >

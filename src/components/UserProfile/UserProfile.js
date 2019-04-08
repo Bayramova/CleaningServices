@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./UserProfile.css";
 import OrdersList from "./OrdersList";
 
-class ClientProfile extends Component {
+class UserProfile extends Component {
   render() {
     return (
       <div className="user-profile__content">
@@ -37,7 +37,11 @@ class ClientProfile extends Component {
           <OrdersList
             orders={this.props.orders}
             companies={this.props.companies}
+            clients={this.props.clients}
             cancelOrder={this.props.cancelOrder}
+            changeOrderStatus={this.props.changeOrderStatus}
+            history={this.props.history}
+            auth={this.props.auth}
           />
         </div>
       </div>
@@ -45,4 +49,4 @@ class ClientProfile extends Component {
   }
 }
 
-export default ClientProfile;
+export default UserProfile;

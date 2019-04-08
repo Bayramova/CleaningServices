@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button } from "antd";
 import "./UserProfile.css";
 import OrderDetails from "../Forms/Order/OrderDetails";
 
@@ -13,8 +14,16 @@ class OrderListItem extends Component {
     });
   };
 
+  handleStatusChange = event => {
+    if (this.props.status === "done") {
+      event.preventDefault();
+    } else {
+      this.props.changeOrderStatus(this.props.id, this.props.history);
+    }
+  };
+
   handleCancel = event => {
-    this.props.cancelOrder(this.props.id);
+    this.props.cancelOrder(this.props.id, this.props.history);
   };
 
   render() {
@@ -31,7 +40,8 @@ class OrderListItem extends Component {
       prefix,
       phone,
       cost,
-      company_name
+      company_name,
+      client_name
     } = this.props;
     const orderButtons =
       this.props.status === "new" ? (
@@ -54,11 +64,21 @@ class OrderListItem extends Component {
     return (
       <div className="user-profile">
         <div className="user-profile__header--order">
-          <div className="user-profile__order-status">{status}</div>
+          {this.props.auth.userData.role === "client" ? (
+            <div className="user-profile__order-status">{status}</div>
+          ) : (
+            <Button type="primary" onClick={this.handleStatusChange}>
+              {status}
+            </Button>
+          )}
           {orderButtons}
         </div>
         <div className="user-profile__info">
-          <p className="user-profile__name">{`Company: ${company_name}`}</p>
+          {this.props.auth.userData.role === "client" ? (
+            <p className="user-profile__name">{`Company: ${company_name}`}</p>
+          ) : (
+            <p className="user-profile__name">{`Client: ${client_name}`}</p>
+          )}
           <p className="user-profile__name">
             {`Service: ${service.slice(0, service.indexOf("cleaning"))}`}
           </p>

@@ -6,7 +6,8 @@ import {
   getUserFromToken,
   createOrder,
   getOrders,
-  cancelOrder
+  cancelOrder,
+  changeStatus
 } from "utils/api";
 
 export const GET_ERRORS = "GET_ERRORS";
@@ -19,6 +20,7 @@ export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
 export const MAKE_ORDER = "MAKE_ORDER";
 export const GET_ORDERS = "GET_ORDERS";
 export const CANCEL_ORDER = "CANCEL_ORDER";
+export const CHANGE_ORDER_STATUS = "CHANGE_ORDER_STATUS";
 
 const getErrors = error => {
   return {
@@ -81,6 +83,13 @@ const changeOrderStatusToCancelled = orderId => {
   };
 };
 
+const changeOrderStatus = orderId => {
+  return {
+    type: CHANGE_ORDER_STATUS,
+    id: orderId
+  };
+};
+
 export const signUp = (userData, history) => dispatch => {
   signUpUser(userData)
     .then(res => history.push("/signin"))
@@ -112,13 +121,12 @@ export const signIn = userData => dispatch => {
     });
 };
 
-export const getUserDataFromToken = token => dispatch => {
+export const getUserDataFromToken = () => dispatch => {
   dispatch(setUserLoading());
 
-  getUserFromToken(token)
+  getUserFromToken()
     .then(res => {
-      const { token, user } = res;
-      localStorage.setItem("token", token);
+      const { user } = res;
       dispatch(setCurrentUser(user));
       getUser(user.id).then(res => {
         const { userData } = res;
@@ -164,10 +172,26 @@ export const makeOrder = (data, history) => dispatch => {
     });
 };
 
-export const cancelNewOrder = orderId => dispatch => {
+export const cancelNewOrder = (orderId, history) => dispatch => {
   cancelOrder(orderId)
     .then(res => {
       dispatch(changeOrderStatusToCancelled(orderId));
+    })
+    .then(res => {
+      history.push("/");
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+export const changeOrder = (orderId, history) => dispatch => {
+  changeStatus(orderId)
+    .then(res => {
+      dispatch(changeOrderStatus(orderId));
+    })
+    .then(res => {
+      history.push("/");
     })
     .catch(err => {
       console.log(err);

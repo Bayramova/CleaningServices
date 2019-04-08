@@ -17,18 +17,9 @@ const Company = props => {
           <div className="company-card__description">{address}</div>
         </div>
       </Link>
-      {/* <div className="company-card__order-link">
-        <Link
-          to={{
-            pathname: "/make_order",
-            state: {
-              fromSelectedCompany: true
-            }
-          }}
-        >
-          Make order
-        </Link>
-      </div> */}
+      <div className="company-card__order-link">
+        {/* <Link to={"/make_order"} onClick={selectCompany(id)}>Make order</Link> */}
+      </div>
     </div>
   );
 };

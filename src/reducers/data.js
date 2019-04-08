@@ -9,6 +9,7 @@ const initialState = {
   loadingData: true,
   serviceTypes: [],
   companies: [],
+  clients: [],
   error: null
 };
 
@@ -25,6 +26,7 @@ export default function data(state = initialState, action) {
         loadingData: false,
         serviceTypes: action.serviceTypes,
         companies: action.companies,
+        clients: action.clients,
         error: null
       };
     case FETCH_DATA_FAILURE:

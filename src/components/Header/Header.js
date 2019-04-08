@@ -28,15 +28,7 @@ class Header extends Component {
     const { isAuthenticated } = this.props.auth;
     const guestLinks = (
       <div className="header__right">
-        <Link
-          to={{
-            pathname: "/make_order",
-            state: {
-              fromSelectedCompany: false
-            }
-          }}
-          className="link button-links__link--order"
-        >
+        <Link to={"/make_order"} className="link button-links__link--order">
           Make order
         </Link>
 
@@ -77,15 +69,7 @@ class Header extends Component {
           visible={this.state.visible}
         >
           <p>
-            <Link
-              to={{
-                pathname: "/make_order",
-                state: {
-                  fromSelectedCompany: false
-                }
-              }}
-              className="link button-links__link"
-            >
+            <Link to={"/make_order"} className="link button-links__link">
               Make order
             </Link>
           </p>

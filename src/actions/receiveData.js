@@ -1,4 +1,4 @@
-import { fetchCompanies, fetchServices } from "utils/api";
+import { fetchCompanies, fetchServices, fetchClients } from "utils/api";
 
 export const FETCH_DATA_REQUEST = "FETCH_DATA_REQUEST";
 export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
@@ -10,11 +10,12 @@ function fetchDataRequest() {
   };
 }
 
-function fetchDataSuccess(serviceTypes, companies) {
+function fetchDataSuccess(serviceTypes, companies, clients) {
   return {
     type: FETCH_DATA_SUCCESS,
     serviceTypes,
-    companies
+    companies,
+    clients
   };
 }
 
@@ -29,9 +30,9 @@ export function handleInitialData() {
   return dispatch => {
     dispatch(fetchDataRequest());
 
-    return Promise.all([fetchServices(), fetchCompanies()])
-      .then(([serviceTypes, companies]) => {
-        dispatch(fetchDataSuccess(serviceTypes, companies));
+    return Promise.all([fetchServices(), fetchCompanies(), fetchClients()])
+      .then(([serviceTypes, companies, clients]) => {
+        dispatch(fetchDataSuccess(serviceTypes, companies, clients));
       })
       .catch(error => {
         dispatch(fetchDataFailure(error));

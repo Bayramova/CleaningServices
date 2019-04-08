@@ -7,7 +7,8 @@ import {
   UPDATE_USER_DATA,
   USER_LOADING,
   GET_ORDERS,
-  CANCEL_ORDER
+  CANCEL_ORDER,
+  CHANGE_ORDER_STATUS
 } from "actions/userActions";
 
 const initialState = {
@@ -82,6 +83,18 @@ export default function(state = initialState, action) {
       return {
         ...state,
         orders: updatedOrderList
+      };
+    case CHANGE_ORDER_STATUS:
+      const updatedOrdersList = state.orders.map(order => {
+        if (order.id === action.id && order.status === "new") {
+          order.status = "confirmed";
+        } else {
+          order.status = "done";
+        }
+      });
+      return {
+        ...state,
+        orders: updatedOrdersList
       };
     default:
       return state;

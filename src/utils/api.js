@@ -18,12 +18,34 @@ async function fetchData(resource, method, data) {
   return response.json();
 }
 
+async function fetchProtectedData(resource, method, data) {
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/${resource}`,
+    {
+      method: method || "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.token
+      },
+      body: JSON.stringify(data)
+    }
+  );
+  if (!response.ok) {
+    throw response;
+  }
+  return response.json();
+}
+
 function fetchCompanies() {
   return fetchData("companies");
 }
 
 function fetchServices() {
   return fetchData("services");
+}
+
+function fetchClients() {
+  return fetchData("clients");
 }
 
 function signUpUser(userData) {
@@ -35,27 +57,15 @@ function signInUser(userData) {
 }
 
 function updateUser(id, updates) {
-  return fetchData(`user/${id}/edit`, "PUT", updates);
+  return fetchProtectedData(`user/${id}/edit`, "PUT", updates);
 }
 
 function getUser(id) {
-  return fetchData(`user/${id}`);
+  return fetchProtectedData(`user/${id}`);
 }
 
-async function getUserFromToken(token) {
-  const response = await fetch(
-    `${process.env.REACT_APP_API_URL}/api/user/from/token`,
-    {
-      method: "GET",
-      headers: {
-        "x-access-token": token
-      }
-    }
-  );
-  if (!response.ok) {
-    throw response;
-  }
-  return response.json();
+async function getUserFromToken() {
+  return fetchProtectedData("user/from/token");
 }
 
 function createOrder(orderData) {
@@ -63,16 +73,21 @@ function createOrder(orderData) {
 }
 
 function getOrders(id) {
-  return fetchData(`user/${id}/orders`);
+  return fetchProtectedData(`user/${id}/orders`);
 }
 
-function cancelOrder(orderId) {
-  return fetchData("cancel_order", "PUT", orderId);
+function cancelOrder(id) {
+  return fetchProtectedData(`cancel/${id}`, "PUT");
+}
+
+function changeStatus(id) {
+  return fetchProtectedData(`change_status/${id}`, "PUT");
 }
 
 export {
   fetchCompanies,
   fetchServices,
+  fetchClients,
   signUpUser,
   signInUser,
   updateUser,
@@ -80,5 +95,6 @@ export {
   getUserFromToken,
   createOrder,
   getOrders,
-  cancelOrder
+  cancelOrder,
+  changeStatus
 };

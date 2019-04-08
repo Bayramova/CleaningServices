@@ -28,7 +28,14 @@ class OrdersList extends Component {
                 company => company.id === order.company_id
               ).name
             }
+            client_name={
+              this.props.clients.find(client => client.id === order.client_id)
+                .name
+            }
             cancelOrder={this.props.cancelOrder}
+            changeOrderStatus={this.props.changeOrderStatus}
+            history={this.props.history}
+            auth={this.props.auth}
           />
         ))}
       </React.Fragment>
