@@ -61,11 +61,11 @@ const getUserData = userData => {
   };
 };
 
-const updateUserData = (userData, additionalUserData) => {
+const updateUserData = (id, updates) => {
   return {
     type: UPDATE_USER_DATA,
-    userData,
-    additionalUserData
+    id,
+    updates
   };
 };
 
@@ -121,6 +121,12 @@ export const signIn = userData => dispatch => {
     });
 };
 
+export const fetchOrdersInfo = userId => dispatch => {
+  getOrders(userId).then(res => {
+    dispatch(getOrdersInfo(res));
+  });
+};
+
 export const getUserDataFromToken = () => dispatch => {
   dispatch(setUserLoading());
 
@@ -151,8 +157,7 @@ export const signOut = () => dispatch => {
 export const update = (id, updates, history) => dispatch => {
   updateUser(id, updates)
     .then(res => {
-      const { userData, additionalUserData } = res;
-      dispatch(updateUserData(userData, additionalUserData));
+      dispatch(updateUserData(id, updates));
     })
     .then(res => history.push(`/user/${id}`))
     .catch(err => {
@@ -172,26 +177,20 @@ export const makeOrder = (data, history) => dispatch => {
     });
 };
 
-export const cancelNewOrder = (orderId, history) => dispatch => {
+export const cancelNewOrder = orderId => dispatch => {
   cancelOrder(orderId)
     .then(res => {
       dispatch(changeOrderStatusToCancelled(orderId));
-    })
-    .then(res => {
-      history.push("/");
     })
     .catch(err => {
       console.log(err);
     });
 };
 
-export const changeOrder = (orderId, history) => dispatch => {
+export const changeOrder = orderId => dispatch => {
   changeStatus(orderId)
     .then(res => {
       dispatch(changeOrderStatus(orderId));
-    })
-    .then(res => {
-      history.push("/");
     })
     .catch(err => {
       console.log(err);

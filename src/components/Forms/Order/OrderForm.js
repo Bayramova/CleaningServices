@@ -19,7 +19,7 @@ class PlaceOrderForm extends Component {
         event.preventDefault();
       } else {
         function switchResult(result) {
-          switch (values.serviceType) {
+          switch (result) {
             case "Standart cleaning":
               return 1;
             case "Dry carpet cleaning":
@@ -93,6 +93,32 @@ class PlaceOrderForm extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
 
+    const serviceTitles = this.props.orderFormFields.companyId.value ? (
+      this.props.companies
+        .find(
+          company => company.id == this.props.orderFormFields.companyId.value
+        )
+        .services.map(id => {
+          return (
+            <Option key={id} id={id}>
+              {this.props.services.find(service => service.id === id).title}
+            </Option>
+          );
+        })
+    ) : (
+      <React.Fragment>
+        <Option value="standardcleaning">Standard cleaning</Option>
+        <Option value="generalcleaning">General cleaning</Option>
+        <Option value="carpetcleaning">Dry Carpet cleaning</Option>
+        <Option value="furniturecleaning">
+          Furniture and Coating cleaning
+        </Option>
+        <Option value="officecleaning">Office cleaning</Option>
+        <Option value="repaircleaning">Repair cleaning</Option>
+        <Option value="industrialcleaning">Industrial cleaning</Option>
+        <Option value="poolcleaning">Pool cleaning</Option>
+      </React.Fragment>
+    );
     const prefixSelector = getFieldDecorator("prefix", {
       initialValue: "(29)"
     })(
@@ -134,32 +160,70 @@ class PlaceOrderForm extends Component {
                 })(<Input />)}
               </Form.Item>
 
-              <Form.Item label="Type of cleaning">
-                {getFieldDecorator("serviceType", {
-                  initialValue: this.props.orderFormFields.serviceType.value,
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please select type of cleaning!"
-                    }
-                  ]
-                })(
-                  <Select style={{ width: "100%" }}>
-                    <Option value="standardcleaning">Standard cleaning</Option>
-                    <Option value="generalcleaning">General cleaning</Option>
-                    <Option value="carpetcleaning">Dry Carpet cleaning</Option>
-                    <Option value="furniturecleaning">
-                      Furniture and Coating cleaning
-                    </Option>
-                    <Option value="officecleaning">Office cleaning</Option>
-                    <Option value="repaircleaning">Repair cleaning</Option>
-                    <Option value="industrialcleaning">
-                      Industrial cleaning
-                    </Option>
-                    <Option value="poolcleaning">Pool cleaning</Option>
-                  </Select>
-                )}
-              </Form.Item>
+              {this.props.orderFormFields.companyId.value ? (
+                <Form.Item label="Type of cleaning">
+                  {getFieldDecorator("serviceType", {
+                    initialValue: this.props.orderFormFields.serviceType.value,
+                    rules: [
+                      {
+                        required: true,
+                        message: "Please select type of cleaning!"
+                      }
+                    ]
+                  })(
+                    <Select style={{ width: "100%" }}>
+                      {serviceTitles}
+                      {/* <Option value="standardcleaning">
+                        Standard cleaning
+                      </Option>
+                      <Option value="generalcleaning">General cleaning</Option>
+                      <Option value="carpetcleaning">
+                        Dry Carpet cleaning
+                      </Option>
+                      <Option value="furniturecleaning">
+                        Furniture and Coating cleaning
+                      </Option>
+                      <Option value="officecleaning">Office cleaning</Option>
+                      <Option value="repaircleaning">Repair cleaning</Option>
+                      <Option value="industrialcleaning">
+                        Industrial cleaning
+                      </Option>
+                      <Option value="poolcleaning">Pool cleaning</Option> */}
+                    </Select>
+                  )}
+                </Form.Item>
+              ) : (
+                <Form.Item label="Type of cleaning">
+                  {getFieldDecorator("serviceType", {
+                    initialValue: this.props.orderFormFields.serviceType.value,
+                    rules: [
+                      {
+                        required: true,
+                        message: "Please select type of cleaning!"
+                      }
+                    ]
+                  })(
+                    <Select style={{ width: "100%" }}>
+                      <Option value="standardcleaning">
+                        Standard cleaning
+                      </Option>
+                      <Option value="generalcleaning">General cleaning</Option>
+                      <Option value="carpetcleaning">
+                        Dry Carpet cleaning
+                      </Option>
+                      <Option value="furniturecleaning">
+                        Furniture and Coating cleaning
+                      </Option>
+                      <Option value="officecleaning">Office cleaning</Option>
+                      <Option value="repaircleaning">Repair cleaning</Option>
+                      <Option value="industrialcleaning">
+                        Industrial cleaning
+                      </Option>
+                      <Option value="poolcleaning">Pool cleaning</Option>
+                    </Select>
+                  )}
+                </Form.Item>
+              )}
 
               <Form.Item label="Number of big rooms (> 30 sq m)">
                 {getFieldDecorator("bigRooms", {
@@ -299,8 +363,6 @@ class PlaceOrderForm extends Component {
                   </Button>
                   <OrderDetails
                     visible={this.state.visible}
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
                     address={this.props.address}
                     service={this.props.orderFormFields.serviceType.value}
                     bigRooms={this.props.orderFormFields.bigRooms.value}
@@ -318,8 +380,10 @@ class PlaceOrderForm extends Component {
                     prefix={this.props.orderFormFields.prefix.value}
                     phone={this.props.orderFormFields.phone.value}
                     cost={this.state.cost}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
                     footer={[
-                      <Button key="back" onCancel={this.handleCancel}>
+                      <Button key="back" onClick={this.handleCancel}>
                         Return
                       </Button>,
                       <Button

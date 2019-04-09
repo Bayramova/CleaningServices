@@ -70,6 +70,33 @@
   cursor: pointer;
 }
 
+.status {
+  color: #4f8a10;
+  background-color: #dff2bf;
+  border: none;
+}
+
+.status:hover {
+  opacity: 0.5;
+  color: #4f8a10;
+  background-color: #dff2bf;
+  border: none;
+}
+
+.new {
+  color: #dd4132;
+  font-weight: bold;
+}
+
+.confirmed {
+  color: #ffd662;
+  font-weight: bold;
+}
+.done {
+  color: #4f8a10;
+  font-weight: bold;
+}
+
 @media (min-width: 768px) {
   .user-profile__container {
     width: 80%;

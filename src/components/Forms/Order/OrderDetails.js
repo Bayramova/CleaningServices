@@ -15,10 +15,18 @@ const OrderDetails = props => {
     prefix,
     phone,
     cost,
+    onOk,
+    onCancel,
     footer
   } = props;
   return (
-    <Modal title="Order details" visible={visible} footer={footer}>
+    <Modal
+      title="Order details"
+      visible={visible}
+      onOk={onOk}
+      onCancel={onCancel}
+      footer={footer}
+    >
       <p>Address: {address}</p>
       <p>Type of cleaning: {service.slice(0, service.indexOf("cleaning"))}</p>
       <p>Big rooms: {bigRooms}</p>

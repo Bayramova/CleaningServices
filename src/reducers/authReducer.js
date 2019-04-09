@@ -66,8 +66,14 @@ export default function(state = initialState, action) {
     case UPDATE_USER_DATA:
       return {
         ...state,
-        userData: action.userData,
-        additionalUserData: action.additionalUserData
+        userData: {
+          email: action.updates.email
+        },
+        additionalUserData: {
+          name: action.updates.name,
+          address: action.updates.address,
+          services: action.updates.services
+        }
       };
     case GET_ORDERS:
       return {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button } from "antd";
+import { Button, Icon } from "antd";
 import "./UserProfile.css";
 import OrderDetails from "../Forms/Order/OrderDetails";
 
@@ -18,12 +18,24 @@ class OrderListItem extends Component {
     if (this.props.status === "done") {
       event.preventDefault();
     } else {
-      this.props.changeOrderStatus(this.props.id, this.props.history);
+      this.props.changeOrderStatus(this.props.id);
     }
   };
 
-  handleCancel = event => {
-    this.props.cancelOrder(this.props.id, this.props.history);
+  handleOk = e => {
+    this.setState({
+      visible: false
+    });
+  };
+
+  handleCancel = e => {
+    this.setState({
+      visible: false
+    });
+  };
+
+  handleOrderCancel = event => {
+    this.props.cancelOrder(this.props.id);
   };
 
   render() {
@@ -50,7 +62,7 @@ class OrderListItem extends Component {
             Show details
           </div>
           <div
-            onClick={this.handleCancel}
+            onClick={this.handleOrderCancel}
             className="user-profile__order-button--cancel"
           >
             Cancel order
@@ -65,9 +77,14 @@ class OrderListItem extends Component {
       <div className="user-profile">
         <div className="user-profile__header--order">
           {this.props.auth.userData.role === "client" ? (
-            <div className="user-profile__order-status">{status}</div>
+            <div className={status}>{status}</div>
           ) : (
-            <Button type="primary" onClick={this.handleStatusChange}>
+            <Button
+              type="primary"
+              onClick={this.handleStatusChange}
+              disabled={status === "cancelled" || status === "done"}
+              className="status"
+            >
               {status}
             </Button>
           )}
@@ -85,8 +102,6 @@ class OrderListItem extends Component {
         </div>
         <OrderDetails
           visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
           address={address}
           service={service}
           bigRooms={bigRooms}
@@ -98,6 +113,8 @@ class OrderListItem extends Component {
           prefix={prefix}
           phone={phone}
           cost={cost}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
           footer={null}
         />
       </div>
