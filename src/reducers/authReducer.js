@@ -79,6 +79,7 @@ export default function(state = initialState, action) {
         if (order.id === action.id) {
           order.status = "cancelled";
         }
+        return order;
       });
       return {
         ...state,
@@ -91,6 +92,7 @@ export default function(state = initialState, action) {
         } else {
           order.status = "done";
         }
+        return order;
       });
       return {
         ...state,

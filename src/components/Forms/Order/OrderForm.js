@@ -319,7 +319,7 @@ class PlaceOrderForm extends Component {
                     phone={this.props.orderFormFields.phone.value}
                     cost={this.state.cost}
                     footer={[
-                      <Button key="back" onClick={this.handleCancel}>
+                      <Button key="back" onCancel={this.handleCancel}>
                         Return
                       </Button>,
                       <Button
