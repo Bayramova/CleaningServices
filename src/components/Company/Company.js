@@ -31,41 +31,47 @@ class Company extends Component {
           <div className="company-info__address">
             <h3>{this.props.company.address}</h3>
           </div>
-          <div className="company-info__card-container">
-            <div className="company-info__card">
-              <img
-                className="company-info__logo"
-                alt="logo"
-                src={`.${this.props.company.logo}`}
-              />
-              <div className="company-info__buttons">
-                <Link
-                  to={`/uborkakvartir/reviews`}
-                  className="company-info__button--feedback"
-                >
-                  Leave feedback
-                </Link>
+          <div className="wrapper">
+            <div className="company-info__card-container">
+              <div className="company-info__card">
+                <img
+                  className="company-info__logo"
+                  alt="logo"
+                  src={`.${this.props.company.logo}`}
+                />
+                {this.props.role === "company" ? (
+                  <React.Fragment />
+                ) : (
+                  <div className="company-info__buttons">
+                    <Link
+                      to={`/uborkakvartir/reviews`}
+                      className="company-info__button--feedback"
+                    >
+                      Leave feedback
+                    </Link>
 
-                <Link
-                  to={"/make_order"}
-                  onClick={this.handleClick}
-                  className="company-info__button--order"
-                >
-                  Make order
-                </Link>
+                    <Link
+                      to={"/make_order"}
+                      onClick={this.handleClick}
+                      className="company-info__button--order"
+                    >
+                      Make order
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
-          </div>
-          <div className="company-info__description">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <div className="company-info__description">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
           </div>
         </div>
         <div>

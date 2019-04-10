@@ -1,18 +1,19 @@
-/* eslint-disable eqeqeq */
 import React, { Component } from "react";
 import Company from "./Company";
 import "./CompanyInfo.css";
 import { connect } from "react-redux";
 import { selectCompany } from "actions/makeOrder";
+import { getCompaniesData } from "actions/receiveData";
 
 class CompanyContainer extends Component {
   render() {
+    console.log(this.props);
     const matchPath = this.props.match.params.company;
     const company = this.props.companies.find(
-      company => company.id == this.props.match.params.company
+      company => company.id === parseInt(this.props.match.params.company)
     );
     const serviceTitles = company.services.map(
-      id => this.props.serviceTypes.find(service => service.id === id).title
+      id => this.props.services.find(service => service.id === id).title
     );
     return (
       <div>
@@ -21,6 +22,7 @@ class CompanyContainer extends Component {
           services={serviceTitles}
           matchPath={matchPath}
           selectCompany={this.props.selectCompany}
+          role={this.props.role}
         />
       </div>
     );
@@ -29,13 +31,15 @@ class CompanyContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    serviceTypes: state.data.serviceTypes,
-    companies: state.data.companies
+    services: state.data.services,
+    companies: state.data.companies,
+    role: state.auth.userData.role
   };
 };
 
 const mapDispatchToProps = {
-  selectCompany
+  selectCompany,
+  getCompaniesData
 };
 
 export default connect(

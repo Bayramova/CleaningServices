@@ -32,7 +32,7 @@ const mapStateToProps = state => {
     orderFormFields: state.orderFormFields,
     auth: state.auth,
     companies: state.data.companies,
-    services: state.data.serviceTypes
+    services: state.data.services
   };
 };
 

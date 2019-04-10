@@ -70,20 +70,7 @@
   cursor: pointer;
 }
 
-.status {
-  color: #4f8a10;
-  background-color: #dff2bf;
-  border: none;
-}
-
-.status:hover {
-  opacity: 0.5;
-  color: #4f8a10;
-  background-color: #dff2bf;
-  border: none;
-}
-
-.new {
+.cancelled {
   color: #dd4132;
   font-weight: bold;
 }
@@ -92,9 +79,14 @@
   color: #ffd662;
   font-weight: bold;
 }
-.done {
+.new {
   color: #4f8a10;
   font-weight: bold;
+}
+
+.company-button {
+  display: grid;
+  justify-content: right;
 }
 
 @media (min-width: 768px) {

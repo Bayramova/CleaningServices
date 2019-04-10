@@ -31,9 +31,6 @@ const initialState = {
   },
   phone: {
     value: ""
-  },
-  prefix: {
-    value: ""
   }
 };
 

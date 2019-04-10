@@ -97,7 +97,7 @@ export default function(state = initialState, action) {
       const updatedOrdersList = state.orders.map(order => {
         if (order.id === action.id && order.status === "new") {
           order.status = "confirmed";
-        } else {
+        } else if (order.id === action.id && order.status === "confirmed") {
           order.status = "done";
         }
         return order;

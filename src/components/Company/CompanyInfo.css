@@ -21,6 +21,10 @@
   margin-left: 10px;
 }
 
+.wrapper {
+  display: grid;
+}
+
 .company-info__card-container {
   background-color: #fafafa;
   color: #666666;
@@ -78,15 +82,30 @@
   opacity: 0.8;
 }
 
+@media (min-width: 768px) {
+  .company-info__container {
+    padding-right: 80px;
+    padding-left: 80px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrapper {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+}
+
 @media (min-width: 1240px) {
   .company-info__container {
-    width: 80%;
+    padding-right: 200px;
+    padding-left: 200px;
   }
 }
 
 @media (min-width: 1480px) {
   .company-info__container {
-    grid-template-columns: 3fr 1fr;
-    grid-gap: 20px;
+    padding-right: 400px;
+    padding-left: 400px;
   }
 }

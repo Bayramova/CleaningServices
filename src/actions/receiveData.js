@@ -1,41 +1,91 @@
 import { fetchCompanies, fetchServices, fetchClients } from "utils/api";
 
-export const FETCH_DATA_REQUEST = "FETCH_DATA_REQUEST";
-export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
+export const FETCH_SERVICES_REQUEST = "FETCH_SERVICES_REQUEST";
+export const FETCH_COMPANIES_REQUEST = "FETCH_COMPANIES_REQUEST";
+export const FETCH_CLIENTS_REQUEST = "FETCH_CLIENTS_REQUEST";
 export const FETCH_DATA_FAILURE = "FETCH_DATA_FAILURE";
+export const FETCH_SERVICES_SUCCESS = "FETCH_SERVICES_SUCCESS";
+export const FETCH_COMPANIES_SUCCESS = "FETCH_COMPANIES_SUCCESS";
+export const FETCH_CLIENTS_SUCCESS = "FETCH_CLIENTS_SUCCESS";
 
-function fetchDataRequest() {
+const fetchServicesRequest = () => {
   return {
-    type: FETCH_DATA_REQUEST
+    type: FETCH_SERVICES_REQUEST
   };
-}
+};
 
-function fetchDataSuccess(serviceTypes, companies, clients) {
+const fetchCompaniesRequest = () => {
   return {
-    type: FETCH_DATA_SUCCESS,
-    serviceTypes,
-    companies,
+    type: FETCH_COMPANIES_REQUEST
+  };
+};
+
+const fetchClientsRequest = () => {
+  return {
+    type: FETCH_CLIENTS_REQUEST
+  };
+};
+
+const fetchServicesSuccess = services => {
+  return {
+    type: FETCH_SERVICES_SUCCESS,
+    services
+  };
+};
+
+const fetchCompaniesSuccess = companies => {
+  return {
+    type: FETCH_COMPANIES_SUCCESS,
+    companies
+  };
+};
+
+const fetchClientsSuccess = clients => {
+  return {
+    type: FETCH_CLIENTS_SUCCESS,
     clients
   };
-}
+};
 
-function fetchDataFailure(error) {
+const fetchDataFailure = error => {
   return {
     type: FETCH_DATA_FAILURE,
     message: error.message || "Something went wrong."
   };
-}
+};
 
-export function handleInitialData() {
-  return dispatch => {
-    dispatch(fetchDataRequest());
+export const getServicesData = () => dispatch => {
+  dispatch(fetchServicesRequest());
 
-    return Promise.all([fetchServices(), fetchCompanies(), fetchClients()])
-      .then(([serviceTypes, companies, clients]) => {
-        dispatch(fetchDataSuccess(serviceTypes, companies, clients));
-      })
-      .catch(error => {
-        dispatch(fetchDataFailure(error));
-      });
-  };
-}
+  fetchServices()
+    .then(services => {
+      dispatch(fetchServicesSuccess(services));
+    })
+    .catch(error => {
+      dispatch(fetchDataFailure(error));
+    });
+};
+
+export const getCompaniesData = () => dispatch => {
+  dispatch(fetchCompaniesRequest());
+
+  fetchCompanies()
+    .then(companies => {
+      dispatch(fetchCompaniesSuccess(companies));
+    })
+    .catch(error => {
+      dispatch(fetchDataFailure(error));
+    });
+};
+
+export const getClientsData = () => dispatch => {
+  dispatch(fetchClientsRequest());
+
+  fetchClients()
+    .then(clients => {
+      dispatch(fetchClientsSuccess(clients));
+    })
+    .catch(error => {
+      dispatch(fetchDataFailure(error));
+    });
+};

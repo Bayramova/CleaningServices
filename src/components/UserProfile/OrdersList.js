@@ -18,7 +18,6 @@ class OrdersList extends Component {
             daysOfCleaning={order.daysOfCleaning}
             startTimeOfCleaning={order.startTimeOfCleaning}
             cleaningFrequency={order.cleaningFrequency}
-            prefix={order.prefix}
             phone={order.phone}
             cost={order.cost}
             client_id={order.client_id}

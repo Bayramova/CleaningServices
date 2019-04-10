@@ -5,15 +5,20 @@ import CatalogueHeader from "./CatalogueHeader";
 import "./Catalogue.css";
 import { connect } from "react-redux";
 import { handleSortValueChange } from "actions/sortCompanies";
+import { getCompaniesData } from "actions/receiveData";
 
 class CompaniesCatalogue extends Component {
+  componentDidMount() {
+    this.props.getCompaniesData();
+  }
+
   handleChange = value => {
     this.props.onChange(value);
   };
 
   render() {
     const matchPath = this.props.match.params.titleId;
-    const service = this.props.serviceTypes.find(
+    const service = this.props.services.find(
       service => service.id === matchPath
     );
     return (
@@ -52,13 +57,14 @@ class CompaniesCatalogue extends Component {
 
 const mapStateToProps = state => {
   return {
-    serviceTypes: state.data.serviceTypes,
+    services: state.data.services,
     companies: state.data.companies
   };
 };
 
 const mapDispatchToProps = {
-  onChange: handleSortValueChange
+  onChange: handleSortValueChange,
+  getCompaniesData
 };
 
 export default connect(

@@ -4,15 +4,13 @@ import { connect } from "react-redux";
 
 class ServiceCardsContainer extends Component {
   render() {
-    return (
-      <ServiceCardsList services={Object.values(this.props.serviceTypes)} />
-    );
+    return <ServiceCardsList services={Object.values(this.props.services)} />;
   }
 }
 
 const mapStateToProps = state => {
   return {
-    serviceTypes: state.data.serviceTypes
+    services: state.data.services
   };
 };
 

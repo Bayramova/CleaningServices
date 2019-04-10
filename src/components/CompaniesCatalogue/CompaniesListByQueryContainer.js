@@ -4,15 +4,20 @@ import queryString from "query-string";
 import { connect } from "react-redux";
 import { Select } from "antd";
 import { handleSortValueChange } from "actions/sortCompanies";
+import { getCompaniesData } from "actions/receiveData";
 
 class CompaniesListByQueryContainer extends Component {
+  componentDidMount() {
+    this.props.getCompaniesData();
+  }
+
   handleChange = value => {
     this.props.onChange(value);
   };
 
   render() {
     const query = queryString.parse(this.props.location.search).q.toLowerCase();
-    const service = this.props.serviceTypes.find(service =>
+    const service = this.props.services.find(service =>
       service.title.toLowerCase().includes(query)
     );
     const serviceId = service ? service.id : "";
@@ -46,13 +51,14 @@ class CompaniesListByQueryContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    serviceTypes: state.data.serviceTypes,
+    services: state.data.services,
     companies: state.data.companies
   };
 };
 
 const mapDispatchToProps = {
-  onChange: handleSortValueChange
+  onChange: handleSortValueChange,
+  getCompaniesData
 };
 
 export default connect(

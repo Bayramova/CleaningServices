@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Icon } from "antd";
+import { Button } from "antd";
 import "./UserProfile.css";
 import OrderDetails from "../Forms/Order/OrderDetails";
 
@@ -49,7 +49,6 @@ class OrderListItem extends Component {
       daysOfCleaning,
       startTimeOfCleaning,
       cleaningFrequency,
-      prefix,
       phone,
       cost,
       company_name,
@@ -76,18 +75,7 @@ class OrderListItem extends Component {
     return (
       <div className="user-profile">
         <div className="user-profile__header--order">
-          {this.props.auth.userData.role === "client" ? (
-            <div className={status}>{status}</div>
-          ) : (
-            <Button
-              type="primary"
-              onClick={this.handleStatusChange}
-              disabled={status === "cancelled" || status === "done"}
-              className="status"
-            >
-              {status}
-            </Button>
-          )}
+          <div className={status}>{status}</div>
           {orderButtons}
         </div>
         <div className="user-profile__info">
@@ -110,13 +98,26 @@ class OrderListItem extends Component {
           daysOfCleaning={daysOfCleaning}
           startTimeOfCleaning={startTimeOfCleaning}
           cleaningFrequency={cleaningFrequency}
-          prefix={prefix}
           phone={phone}
           cost={cost}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           footer={null}
         />
+        <div className="company-button">
+          {this.props.auth.userData.role === "company" && status === "new" ? (
+            <Button type="primary" onClick={this.handleStatusChange}>
+              Confirm order
+            </Button>
+          ) : this.props.auth.userData.role === "company" &&
+            status === "confirmed" ? (
+            <Button type="primary" onClick={this.handleStatusChange}>
+              Close order
+            </Button>
+          ) : (
+            <React.Fragment />
+          )}
+        </div>
       </div>
     );
   }

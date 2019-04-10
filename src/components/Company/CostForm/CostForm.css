@@ -1,6 +1,6 @@
 .cost-form__content {
   display: grid;
-  justify-items: center;
+  justify-items: left;
   align-items: center;
   height: 100%;
   margin-top: 19px;

@@ -67,7 +67,6 @@ class PlaceOrderForm extends Component {
       daysOfCleaning: this.props.orderFormFields.daysOfCleaning.value,
       startTimeOfCleaning: this.props.orderFormFields.startTimeOfCleaning.value,
       cleaningFrequency: this.props.orderFormFields.cleaningFrequency.value,
-      prefix: this.props.orderFormFields.prefix.value,
       phone: this.props.orderFormFields.phone.value,
       cost: this.state.cost,
       companyId: this.props.orderFormFields.companyId.value,
@@ -118,16 +117,6 @@ class PlaceOrderForm extends Component {
         <Option value="industrialcleaning">Industrial cleaning</Option>
         <Option value="poolcleaning">Pool cleaning</Option>
       </React.Fragment>
-    );
-    const prefixSelector = getFieldDecorator("prefix", {
-      initialValue: "(29)"
-    })(
-      <Select style={{ width: 70 }}>
-        <Option value="(29)">(29)</Option>
-        <Option value="(33)">(33)</Option>
-        <Option value="(44)">(44)</Option>
-        <Option value="(17)">(17)</Option>
-      </Select>
     );
     return (
       <div className="sign-up__content">
@@ -350,7 +339,7 @@ class PlaceOrderForm extends Component {
                   ]
                 })(
                   <Input
-                    addonBefore={prefixSelector}
+                    placeholder="+375*********"
                     style={{ width: "100%" }}
                   />
                 )}
@@ -377,7 +366,6 @@ class PlaceOrderForm extends Component {
                     cleaningFrequency={
                       this.props.orderFormFields.cleaningFrequency.value
                     }
-                    prefix={this.props.orderFormFields.prefix.value}
                     phone={this.props.orderFormFields.phone.value}
                     cost={this.state.cost}
                     onOk={this.handleOk}

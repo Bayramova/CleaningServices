@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { cancelNewOrder } from "actions/userActions";
+import { getClientsData } from "actions/receiveData";
 import { changeOrder, fetchOrdersInfo } from "actions/userActions";
 import UserProfile from "./UserProfile";
 
 class UserProfileContainer extends Component {
   componentDidMount() {
+    this.props.getClientsData();
     this.props.fetchOrdersInfo(this.props.auth.userData.id);
   }
   render() {
@@ -36,7 +38,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   cancelOrder: cancelNewOrder,
   changeOrderStatus: changeOrder,
-  fetchOrdersInfo
+  fetchOrdersInfo,
+  getClientsData
 };
 
 export default connect(
