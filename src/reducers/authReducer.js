@@ -67,9 +67,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         userData: {
+          ...state.userData,
           email: action.updates.email
         },
         additionalUserData: {
+          ...state.userData,
           name: action.updates.name,
           address: action.updates.address,
           services: action.updates.services
