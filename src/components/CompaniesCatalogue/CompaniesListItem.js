@@ -12,7 +12,7 @@ const Company = props => {
         <div className="company-card__content">
           <div className="company-card__title">{name}</div>
           <div className="company-card__rate">
-            <Rate disabled defaultValue={parseInt(rating)} />
+            <Rate disabled defaultValue={rating} />
           </div>
           <div className="company-card__description">{address}</div>
         </div>

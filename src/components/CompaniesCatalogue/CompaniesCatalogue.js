@@ -9,7 +9,7 @@ import { getCompaniesData } from "actions/receiveData";
 
 class CompaniesCatalogue extends Component {
   componentDidMount() {
-    this.props.getCompaniesData();
+    // this.props.getCompaniesData();
   }
 
   handleChange = value => {

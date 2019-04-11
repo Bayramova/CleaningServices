@@ -37,6 +37,7 @@
 .user-profile__phone,
 .user-profile__address {
   margin-bottom: 0;
+  padding-left: 10px;
   font-size: 20px;
 }
 

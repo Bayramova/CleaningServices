@@ -7,7 +7,7 @@ import UserProfile from "./UserProfile";
 
 class UserProfileContainer extends Component {
   componentDidMount() {
-    this.props.getClientsData();
+    // this.props.getClientsData();
     this.props.fetchOrdersInfo(this.props.auth.userData.id);
   }
   render() {

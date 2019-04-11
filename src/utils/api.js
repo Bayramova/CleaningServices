@@ -84,6 +84,14 @@ function changeStatus(id) {
   return fetchProtectedData(`change_status/${id}`, "PUT");
 }
 
+function postFeedback(feedback) {
+  return fetchProtectedData("leave_feedback", "POST", feedback);
+}
+
+function getFeedbacks(id) {
+  return fetchData(`company/${id}/feedbacks`);
+}
+
 export {
   fetchCompanies,
   fetchServices,
@@ -96,5 +104,7 @@ export {
   createOrder,
   getOrders,
   cancelOrder,
-  changeStatus
+  changeStatus,
+  postFeedback,
+  getFeedbacks
 };

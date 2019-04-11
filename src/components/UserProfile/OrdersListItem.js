@@ -1,11 +1,19 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "antd";
 import "./UserProfile.css";
 import OrderDetails from "../Forms/Order/OrderDetails";
 
 class OrderListItem extends Component {
   state = {
-    visible: false
+    visible: false,
+    feedbackLeft: false
+  };
+
+  handleFeedback = () => {
+    this.setState({
+      feedbackLeft: true
+    });
   };
 
   showModal = event => {
@@ -52,7 +60,9 @@ class OrderListItem extends Component {
       phone,
       cost,
       company_name,
-      client_name
+      client_name,
+      client_id,
+      company_id
     } = this.props;
     const orderButtons =
       this.props.status === "new" ? (
@@ -114,6 +124,22 @@ class OrderListItem extends Component {
             <Button type="primary" onClick={this.handleStatusChange}>
               Close order
             </Button>
+          ) : this.props.auth.userData.role === "client" &&
+            status === "done" &&
+            !this.state.feedbackLeft ? (
+            <Link
+              to={{
+                pathname: "/feedback",
+                state: {
+                  clientId: client_id,
+                  companyId: company_id,
+                  company_name,
+                  handleFeedback: this.handleFeedback
+                }
+              }}
+            >
+              <Button type="primary">Leave feedback</Button>
+            </Link>
           ) : (
             <React.Fragment />
           )}

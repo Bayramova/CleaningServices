@@ -15,8 +15,9 @@ import CompanyContainer from "./Company/CompanyContainer";
 import CompaniesListByQueryContainer from "./CompaniesCatalogue/CompaniesListByQueryContainer";
 import UserProfileContainer from "./UserProfile/UserProfileContainer";
 import UserProfileEditFormContainer from "./UserProfile/UserProfileEditFormContainer";
+import FeedbackFormContainer from "./Forms/Feedback/FeedbackFormContainer";
 import PrivateRoute from "./PrivateRoute";
-import OrderFormPrivateRoute from "./OrderFormPrivateRoute";
+import ClientPrivateRoute from "./ClientPrivateRoute";
 import {
   getServicesData,
   getCompaniesData,
@@ -62,10 +63,15 @@ class App extends Component {
             ) : (
               <Switch>
                 <Route exact path="/" component={Main} />
-                <OrderFormPrivateRoute
+                <ClientPrivateRoute
                   exact
                   path="/make_order"
                   component={OrderFormContainer}
+                />
+                <ClientPrivateRoute
+                  exact
+                  path="/feedback"
+                  component={FeedbackFormContainer}
                 />
                 <Route exact path="/signin" component={SignInFormContainer} />
                 <Route exact path="/signup" component={SignUpFormContainer} />

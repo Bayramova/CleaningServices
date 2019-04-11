@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import CostCalculationFormContainer from "./CostForm/CostCalculationFormContainer";
-import CompanyServicesList from "./ServicesList/CompanyServicesList";
+// import CompanyServicesList from "./ServicesList/CompanyServicesList";
+import FeedbackList from "./Feedbacks/FeedbackList";
 import { Link } from "react-router-dom";
-import { Rate } from "antd";
+import { Rate, Button } from "antd";
 import "./CompanyInfo.css";
 
 class Company extends Component {
@@ -18,11 +19,7 @@ class Company extends Component {
           </div>
           <div className="company-info__rating-and-orders">
             <div>
-              <Rate
-                disabled
-                defaultValue={parseInt(this.props.company.rating)}
-              />
-              <Link to={"/reviews"}>({this.props.company.reviewsNumber})</Link>
+              <Rate disabled defaultValue={this.props.company.rating} />
             </div>
             <span className="company-info__orders">{`${
               this.props.company.ordersNumber
@@ -42,22 +39,14 @@ class Company extends Component {
                 {this.props.role === "company" ? (
                   <React.Fragment />
                 ) : (
-                  <div className="company-info__buttons">
-                    <Link
-                      to={`/uborkakvartir/reviews`}
-                      className="company-info__button--feedback"
-                    >
-                      Leave feedback
-                    </Link>
-
-                    <Link
-                      to={"/make_order"}
-                      onClick={this.handleClick}
+                  <Link to={"/make_order"} onClick={this.handleClick}>
+                    <Button
+                      type="primary"
                       className="company-info__button--order"
                     >
                       Make order
-                    </Link>
-                  </div>
+                    </Button>
+                  </Link>
                 )}
               </div>
             </div>
@@ -74,12 +63,20 @@ class Company extends Component {
             </div>
           </div>
         </div>
-        <div>
-          <div>
+        <div className="company-info__feedbacks">
+          {/* <div>
             <h2 className="services-list__title">Our Services</h2>
             <CompanyServicesList services={this.props.services} />
-          </div>
-          <CostCalculationFormContainer services={this.props.services} />
+          </div> */}
+          <CostCalculationFormContainer
+            services={this.props.services}
+            selectCompany={this.props.selectCompany}
+            matchPath={this.props.matchPath}
+          />
+          <FeedbackList
+            feedbacks={this.props.feedbacks}
+            clients={this.props.clients}
+          />
         </div>
       </div>
     );

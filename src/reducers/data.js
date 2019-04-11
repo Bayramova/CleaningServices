@@ -8,6 +8,7 @@ import {
   FETCH_DATA_FAILURE
 } from "actions/receiveData";
 import { SORT_COMPANIES } from "actions/sortCompanies";
+import { GET_FEEDBACKS } from "actions/userActions";
 
 const initialState = {
   loadingServices: true,
@@ -16,6 +17,7 @@ const initialState = {
   services: [],
   companies: [],
   clients: [],
+  feedbacks: [],
   error: null
 };
 
@@ -64,6 +66,11 @@ export default function data(state = initialState, action) {
         loadingCompanies: false,
         loadingClients: false,
         error: action.message
+      };
+    case GET_FEEDBACKS:
+      return {
+        ...state,
+        feedbacks: action.feedbacks
       };
     case SORT_COMPANIES:
       const sortedCompaniesList = [...state.companies].sort(
