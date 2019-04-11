@@ -60,7 +60,9 @@ export default function data(state = initialState, action) {
     case FETCH_DATA_FAILURE:
       return {
         ...state,
-        loadingData: false,
+        loadingServices: false,
+        loadingCompanies: false,
+        loadingClients: false,
         error: action.message
       };
     case SORT_COMPANIES:

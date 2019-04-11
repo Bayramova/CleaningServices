@@ -55,7 +55,7 @@ class App extends Component {
         <HeaderContainer />
         <ScrollToTop>
           <main className="main">
-            {loadingServices && loadingCompanies && loadingClients ? (
+            {loadingServices || loadingCompanies || loadingClients ? (
               <Spin className="app__loader" size="large" tip="Loading..." />
             ) : error ? (
               <Alert className="error__message" message={error} type="error" />

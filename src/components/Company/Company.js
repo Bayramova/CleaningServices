@@ -25,7 +25,7 @@ class Company extends Component {
               <Link to={"/reviews"}>({this.props.company.reviewsNumber})</Link>
             </div>
             <span className="company-info__orders">{`${
-              this.props.company.orders
+              this.props.company.ordersNumber
             } orders`}</span>
           </div>
           <div className="company-info__address">
