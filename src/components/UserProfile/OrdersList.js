@@ -27,10 +27,7 @@ class OrdersList extends Component {
                 company => company.id === order.company_id
               ).name
             }
-            client_name={
-              this.props.clients.find(client => client.id === order.client_id)
-                .name
-            }
+            clients={this.props.clients}
             cancelOrder={this.props.cancelOrder}
             changeOrderStatus={this.props.changeOrderStatus}
             history={this.props.history}

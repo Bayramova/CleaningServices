@@ -14,7 +14,6 @@ class FeedbackForm extends Component {
           feedback: values.feedback
         };
         this.props.leaveFeedback(data, this.props.history);
-        // this.props.handleFeedback();
       }
     });
   };

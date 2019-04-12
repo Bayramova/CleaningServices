@@ -56,7 +56,6 @@ class CostCalculationForm extends Component {
             <Form>
               <Form.Item label="Type of cleaning">
                 {getFieldDecorator("serviceType", {
-                  initialValue: this.props.services[0],
                   rules: [
                     {
                       required: true,
@@ -135,21 +134,14 @@ class CostCalculationForm extends Component {
                   </Button>
                 </Form.Item>
               ) : (
-                <div>
-                  <div className="cost-info">
-                    <Form.Item>
-                      <Button type="primary" onClick={this.handleCalculate}>
-                        Calculate
-                      </Button>
-                    </Form.Item>
-                    <div className="cost-info__message">
-                      Total cost is {this.state.cost} $
-                    </div>
-                  </div>
+                <React.Fragment>
                   <Link to={"/make_order"} onClick={this.handleClick}>
                     <Button type="primary">Make order</Button>
                   </Link>
-                </div>
+                  <div className="cost-info__message">
+                    Total cost is {this.state.cost} $
+                  </div>
+                </React.Fragment>
               )}
             </Form>
           </div>

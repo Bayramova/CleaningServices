@@ -18,11 +18,7 @@ import UserProfileEditFormContainer from "./UserProfile/UserProfileEditFormConta
 import FeedbackFormContainer from "./Forms/Feedback/FeedbackFormContainer";
 import PrivateRoute from "./PrivateRoute";
 import ClientPrivateRoute from "./ClientPrivateRoute";
-import {
-  getServicesData,
-  getCompaniesData,
-  getClientsData
-} from "actions/receiveData";
+import { getServicesData } from "actions/receiveData";
 import { signOut } from "actions/userActions";
 import { getUserDataFromToken } from "actions/userActions";
 
@@ -30,8 +26,6 @@ class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(getServicesData());
-    dispatch(getCompaniesData());
-    dispatch(getClientsData());
 
     if (localStorage.token) {
       if (jwtDecode(localStorage.token).exp < Date.now() / 1000) {
@@ -45,18 +39,13 @@ class App extends Component {
   }
 
   render() {
-    const {
-      loadingServices,
-      loadingCompanies,
-      loadingClients,
-      error
-    } = this.props;
+    const { loadingServices, error } = this.props;
     return (
       <div className="container">
         <HeaderContainer />
         <ScrollToTop>
           <main className="main">
-            {loadingServices || loadingCompanies || loadingClients ? (
+            {loadingServices ? (
               <Spin className="app__loader" size="large" tip="Loading..." />
             ) : error ? (
               <Alert className="error__message" message={error} type="error" />
@@ -115,8 +104,6 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     loadingServices: state.data.loadingServices,
-    loadingCompanies: state.data.loadingCompanies,
-    loadingClients: state.data.loadingClients,
     error: state.data.error,
     auth: state.auth
   };

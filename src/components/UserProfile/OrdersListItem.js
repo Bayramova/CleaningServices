@@ -10,12 +10,6 @@ class OrderListItem extends Component {
     feedbackLeft: false
   };
 
-  handleFeedback = () => {
-    this.setState({
-      feedbackLeft: true
-    });
-  };
-
   showModal = event => {
     this.setState({
       visible: true
@@ -60,10 +54,13 @@ class OrderListItem extends Component {
       phone,
       cost,
       company_name,
-      client_name,
       client_id,
       company_id
     } = this.props;
+    const client_name =
+      client_id !== null
+        ? this.props.clients.find(client => client.id === client_id).name
+        : "?";
     const orderButtons =
       this.props.status === "new" ? (
         <div className="user-profile__order-buttons">
@@ -133,8 +130,7 @@ class OrderListItem extends Component {
                 state: {
                   clientId: client_id,
                   companyId: company_id,
-                  company_name,
-                  handleFeedback: this.handleFeedback
+                  company_name
                 }
               }}
             >

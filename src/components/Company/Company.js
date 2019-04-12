@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import CostCalculationFormContainer from "./CostForm/CostCalculationFormContainer";
-// import CompanyServicesList from "./ServicesList/CompanyServicesList";
 import FeedbackList from "./Feedbacks/FeedbackList";
 import { Link } from "react-router-dom";
 import { Rate, Button } from "antd";
@@ -11,6 +10,9 @@ class Company extends Component {
     this.props.selectCompany(this.props.matchPath);
   };
   render() {
+    const serviceTitles = this.props.company.services.map(
+      id => this.props.services.find(service => service.id === id).title
+    );
     return (
       <div className="company-info__container">
         <div>
@@ -64,19 +66,17 @@ class Company extends Component {
           </div>
         </div>
         <div className="company-info__feedbacks">
-          {/* <div>
-            <h2 className="services-list__title">Our Services</h2>
-            <CompanyServicesList services={this.props.services} />
-          </div> */}
           <CostCalculationFormContainer
-            services={this.props.services}
+            services={serviceTitles}
             selectCompany={this.props.selectCompany}
             matchPath={this.props.matchPath}
           />
-          <FeedbackList
-            feedbacks={this.props.feedbacks}
-            clients={this.props.clients}
-          />
+          <div>
+            <FeedbackList
+              feedbacks={this.props.feedbacks}
+              clients={this.props.clients}
+            />
+          </div>
         </div>
       </div>
     );

@@ -160,25 +160,7 @@ class PlaceOrderForm extends Component {
                       }
                     ]
                   })(
-                    <Select style={{ width: "100%" }}>
-                      {serviceTitles}
-                      {/* <Option value="standardcleaning">
-                        Standard cleaning
-                      </Option>
-                      <Option value="generalcleaning">General cleaning</Option>
-                      <Option value="carpetcleaning">
-                        Dry Carpet cleaning
-                      </Option>
-                      <Option value="furniturecleaning">
-                        Furniture and Coating cleaning
-                      </Option>
-                      <Option value="officecleaning">Office cleaning</Option>
-                      <Option value="repaircleaning">Repair cleaning</Option>
-                      <Option value="industrialcleaning">
-                        Industrial cleaning
-                      </Option>
-                      <Option value="poolcleaning">Pool cleaning</Option> */}
-                    </Select>
+                    <Select style={{ width: "100%" }}>{serviceTitles}</Select>
                   )}
                 </Form.Item>
               ) : (

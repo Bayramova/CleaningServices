@@ -23,6 +23,7 @@
 
 .wrapper {
   display: grid;
+  align-items: flex-start;
 }
 
 .company-info__card-container {
@@ -112,7 +113,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .wrapper {
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;

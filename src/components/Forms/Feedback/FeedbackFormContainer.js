@@ -13,7 +13,6 @@ class FeedbackFormContainer extends Component {
         clientId={this.props.location.state.clientId}
         companyId={this.props.location.state.companyId}
         company={this.props.location.state.company_name}
-        //handleFeedback={this.props.location.state.handleFeedback}
         history={this.props.history}
       />
     );
