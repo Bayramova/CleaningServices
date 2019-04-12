@@ -1,6 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 async function fetchData(resource, method, data) {
   const response = await fetch(
     `${process.env.REACT_APP_API_URL}/api/${resource}`,

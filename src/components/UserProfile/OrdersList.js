@@ -20,6 +20,7 @@ class OrdersList extends Component {
             cleaningFrequency={order.cleaningFrequency}
             phone={order.phone}
             cost={order.cost}
+            feedbackLeft={order.feedbackLeft}
             client_id={order.client_id}
             company_id={order.company_id}
             company_name={

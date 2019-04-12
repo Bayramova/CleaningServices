@@ -8,8 +8,7 @@ class FeedbackForm extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         const data = {
-          clientId: this.props.clientId,
-          companyId: this.props.companyId,
+          orderId: this.props.orderId,
           rate: values.rate,
           feedback: values.feedback
         };

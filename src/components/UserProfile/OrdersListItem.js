@@ -6,8 +6,7 @@ import OrderDetails from "../Forms/Order/OrderDetails";
 
 class OrderListItem extends Component {
   state = {
-    visible: false,
-    feedbackLeft: false
+    visible: false
   };
 
   showModal = event => {
@@ -42,6 +41,7 @@ class OrderListItem extends Component {
 
   render() {
     const {
+      id,
       status,
       address,
       service,
@@ -53,9 +53,9 @@ class OrderListItem extends Component {
       cleaningFrequency,
       phone,
       cost,
+      feedbackLeft,
       company_name,
-      client_id,
-      company_id
+      client_id
     } = this.props;
     const client_name =
       client_id !== null
@@ -123,13 +123,12 @@ class OrderListItem extends Component {
             </Button>
           ) : this.props.auth.userData.role === "client" &&
             status === "done" &&
-            !this.state.feedbackLeft ? (
+            !feedbackLeft ? (
             <Link
               to={{
                 pathname: "/feedback",
                 state: {
-                  clientId: client_id,
-                  companyId: company_id,
+                  orderId: id,
                   company_name
                 }
               }}
