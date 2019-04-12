@@ -89,6 +89,7 @@ function getFeedbacks(id) {
   return fetchData(`company/${id}/feedbacks`);
 }
 
+// TODO файлик растёт, есть смысл разбивать
 export {
   fetchCompanies,
   fetchServices,
