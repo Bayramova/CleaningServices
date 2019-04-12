@@ -1,3 +1,5 @@
+// TODO dotenv нет в package.json и он уже встроен в cra https://facebook.github.io/create-react-app/docs/adding-custom-environment-variables
+// не надо его руками импорить и вызывать
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -92,6 +94,7 @@ function getFeedbacks(id) {
   return fetchData(`company/${id}/feedbacks`);
 }
 
+// TODO файлик растёт, есть смысл разбивать
 export {
   fetchCompanies,
   fetchServices,
