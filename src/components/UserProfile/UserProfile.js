@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./UserProfile.css";
+import OrdersList from "./OrdersList";
 
-class ClientProfile extends Component {
+class UserProfile extends Component {
   render() {
     return (
       <div className="user-profile__content">
@@ -33,10 +34,19 @@ class ClientProfile extends Component {
               </div>
             </div>
           </div>
+          <OrdersList
+            orders={this.props.orders}
+            companies={this.props.companies}
+            clients={this.props.clients}
+            cancelOrder={this.props.cancelOrder}
+            changeOrderStatus={this.props.changeOrderStatus}
+            history={this.props.history}
+            auth={this.props.auth}
+          />
         </div>
       </div>
     );
   }
 }
 
-export default ClientProfile;
+export default UserProfile;

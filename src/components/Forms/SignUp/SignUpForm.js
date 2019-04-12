@@ -50,17 +50,6 @@ class SignUpForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
 
-    // const prefixSelector = getFieldDecorator("prefix", {
-    //   initialValue: "(29)"
-    // })(
-    //   <Select style={{ width: 70 }}>
-    //     <Option value="(29)">(29)</Option>
-    //     <Option value="(33)">(33)</Option>
-    //     <Option value="(44)">(44)</Option>
-    //     <Option value="(17)">(17)</Option>
-    //   </Select>
-    // );
-
     return (
       <div className="sign-up__content">
         <div className="sign-up-container">

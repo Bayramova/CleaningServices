@@ -1,37 +1,76 @@
 import {
-  FETCH_DATA_REQUEST,
-  FETCH_DATA_SUCCESS,
+  FETCH_SERVICES_REQUEST,
+  FETCH_COMPANIES_REQUEST,
+  FETCH_CLIENTS_REQUEST,
+  FETCH_SERVICES_SUCCESS,
+  FETCH_COMPANIES_SUCCESS,
+  FETCH_CLIENTS_SUCCESS,
   FETCH_DATA_FAILURE
 } from "actions/receiveData";
 import { SORT_COMPANIES } from "actions/sortCompanies";
+import { GET_FEEDBACKS } from "actions/userActions";
 
 const initialState = {
-  loadingData: true,
-  serviceTypes: [],
+  loadingServices: true,
+  loadingCompanies: true,
+  loadingClients: true,
+  services: [],
   companies: [],
+  clients: [],
+  feedbacks: [],
   error: null
 };
 
 export default function data(state = initialState, action) {
   switch (action.type) {
-    case FETCH_DATA_REQUEST:
+    case FETCH_SERVICES_REQUEST:
       return {
         ...state,
-        loadingData: true
+        loadingServices: true
       };
-    case FETCH_DATA_SUCCESS:
+    case FETCH_COMPANIES_REQUEST:
       return {
         ...state,
-        loadingData: false,
-        serviceTypes: action.serviceTypes,
+        loadingCompanies: true
+      };
+    case FETCH_CLIENTS_REQUEST:
+      return {
+        ...state,
+        loadingClients: true
+      };
+    case FETCH_SERVICES_SUCCESS:
+      return {
+        ...state,
+        loadingServices: false,
+        services: action.services,
+        error: null
+      };
+    case FETCH_COMPANIES_SUCCESS:
+      return {
+        ...state,
+        loadingCompanies: false,
         companies: action.companies,
+        error: null
+      };
+    case FETCH_CLIENTS_SUCCESS:
+      return {
+        ...state,
+        loadingClients: false,
+        clients: action.clients,
         error: null
       };
     case FETCH_DATA_FAILURE:
       return {
         ...state,
-        loadingData: false,
+        loadingServices: false,
+        loadingCompanies: false,
+        loadingClients: false,
         error: action.message
+      };
+    case GET_FEEDBACKS:
+      return {
+        ...state,
+        feedbacks: action.feedbacks
       };
     case SORT_COMPANIES:
       const sortedCompaniesList = [...state.companies].sort(

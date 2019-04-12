@@ -9,6 +9,8 @@ class CostCalculationFormContainer extends Component {
       <CostCalculationForm
         services={this.props.services}
         onChange={this.props.onChange}
+        selectCompany={this.props.selectCompany}
+        matchPath={this.props.matchPath}
       />
     );
   }

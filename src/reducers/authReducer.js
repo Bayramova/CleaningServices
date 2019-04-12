@@ -5,7 +5,10 @@ import {
   DELETE_ERRORS,
   GET_USER_DATA,
   UPDATE_USER_DATA,
-  USER_LOADING
+  USER_LOADING,
+  GET_ORDERS,
+  CANCEL_ORDER,
+  CHANGE_ORDER_STATUS
 } from "actions/userActions";
 
 const initialState = {
@@ -17,7 +20,8 @@ const initialState = {
     email: "",
     role: ""
   },
-  additionalUserData: {}
+  additionalUserData: {},
+  orders: []
 };
 
 export default function(state = initialState, action) {
@@ -62,8 +66,45 @@ export default function(state = initialState, action) {
     case UPDATE_USER_DATA:
       return {
         ...state,
-        userData: action.userData,
-        additionalUserData: action.additionalUserData
+        userData: {
+          ...state.userData,
+          email: action.updates.email
+        },
+        additionalUserData: {
+          ...state.userData,
+          name: action.updates.name,
+          address: action.updates.address,
+          services: action.updates.services
+        }
+      };
+    case GET_ORDERS:
+      return {
+        ...state,
+        orders: action.orders
+      };
+    case CANCEL_ORDER:
+      const updatedOrderList = state.orders.map(order => {
+        if (order.id === action.id) {
+          order.status = "cancelled";
+        }
+        return order;
+      });
+      return {
+        ...state,
+        orders: updatedOrderList
+      };
+    case CHANGE_ORDER_STATUS:
+      const updatedOrdersList = state.orders.map(order => {
+        if (order.id === action.id && order.status === "new") {
+          order.status = "confirmed";
+        } else if (order.id === action.id && order.status === "confirmed") {
+          order.status = "done";
+        }
+        return order;
+      });
+      return {
+        ...state,
+        orders: updatedOrdersList
       };
     default:
       return state;

@@ -1,6 +1,8 @@
+/* eslint-disable eqeqeq */
 import React, { Component } from "react";
-import { Form, Input, Select, Button, InputNumber, Modal } from "antd";
+import { Form, Input, Select, Button, InputNumber } from "antd";
 import { Link } from "react-router-dom";
+import OrderDetails from "./OrderDetails";
 import "./OrderForm.css";
 
 const { Option } = Select;
@@ -17,7 +19,7 @@ class PlaceOrderForm extends Component {
         event.preventDefault();
       } else {
         function switchResult(result) {
-          switch (values.serviceType) {
+          switch (result) {
             case "Standart cleaning":
               return 1;
             case "Dry carpet cleaning":
@@ -53,14 +55,27 @@ class PlaceOrderForm extends Component {
   };
 
   handleOk = e => {
-    console.log(e);
     this.setState({
       visible: false
     });
+    const values = {
+      address: this.props.address,
+      service: this.props.orderFormFields.serviceType.value,
+      bigRooms: this.props.orderFormFields.bigRooms.value,
+      smallRooms: this.props.orderFormFields.smallRooms.value,
+      bathrooms: this.props.orderFormFields.bathrooms.value,
+      daysOfCleaning: this.props.orderFormFields.daysOfCleaning.value,
+      startTimeOfCleaning: this.props.orderFormFields.startTimeOfCleaning.value,
+      cleaningFrequency: this.props.orderFormFields.cleaningFrequency.value,
+      phone: this.props.orderFormFields.phone.value,
+      cost: this.state.cost,
+      companyId: this.props.orderFormFields.companyId.value,
+      clientId: this.props.clientId
+    };
+    this.props.makeOrder(values, this.props.history);
   };
 
   handleCancel = e => {
-    console.log(e);
     this.setState({
       visible: false
     });
@@ -77,15 +92,31 @@ class PlaceOrderForm extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
 
-    const prefixSelector = getFieldDecorator("prefix", {
-      initialValue: "(29)"
-    })(
-      <Select style={{ width: 70 }}>
-        <Option value="(29)">(29)</Option>
-        <Option value="(33)">(33)</Option>
-        <Option value="(44)">(44)</Option>
-        <Option value="(17)">(17)</Option>
-      </Select>
+    const serviceTitles = this.props.orderFormFields.companyId.value ? (
+      this.props.companies
+        .find(
+          company => company.id == this.props.orderFormFields.companyId.value
+        )
+        .services.map(id => {
+          return (
+            <Option key={id} id={id}>
+              {this.props.services.find(service => service.id === id).title}
+            </Option>
+          );
+        })
+    ) : (
+      <React.Fragment>
+        <Option value="standardcleaning">Standard cleaning</Option>
+        <Option value="generalcleaning">General cleaning</Option>
+        <Option value="carpetcleaning">Dry Carpet cleaning</Option>
+        <Option value="furniturecleaning">
+          Furniture and Coating cleaning
+        </Option>
+        <Option value="officecleaning">Office cleaning</Option>
+        <Option value="repaircleaning">Repair cleaning</Option>
+        <Option value="industrialcleaning">Industrial cleaning</Option>
+        <Option value="poolcleaning">Pool cleaning</Option>
+      </React.Fragment>
     );
     return (
       <div className="sign-up__content">
@@ -93,6 +124,19 @@ class PlaceOrderForm extends Component {
           <div className="sign-up">
             <h1 className="sign-up__title">Place an order</h1>
             <Form>
+              {this.props.orderFormFields.companyId.value ? (
+                <Form.Item label="Company">
+                  {getFieldDecorator("company", {
+                    initialValue: this.props.companies.find(
+                      company =>
+                        company.id == this.props.orderFormFields.companyId.value
+                    ).name
+                  })(<Input disabled />)}
+                </Form.Item>
+              ) : (
+                <React.Fragment />
+              )}
+
               <Form.Item label="Address">
                 {getFieldDecorator("address", {
                   initialValue: this.props.address,
@@ -105,32 +149,52 @@ class PlaceOrderForm extends Component {
                 })(<Input />)}
               </Form.Item>
 
-              <Form.Item label="Type of cleaning">
-                {getFieldDecorator("serviceType", {
-                  initialValue: this.props.orderFormFields.serviceType.value,
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please select type of cleaning!"
-                    }
-                  ]
-                })(
-                  <Select style={{ width: "100%" }}>
-                    <Option value="standardcleaning">Standard cleaning</Option>
-                    <Option value="generalcleaning">General cleaning</Option>
-                    <Option value="carpetcleaning">Dry Carpet cleaning</Option>
-                    <Option value="furniturecleaning">
-                      Furniture and Coating cleaning
-                    </Option>
-                    <Option value="officecleaning">Office cleaning</Option>
-                    <Option value="repaircleaning">Repair cleaning</Option>
-                    <Option value="industrialcleaning">
-                      Industrial cleaning
-                    </Option>
-                    <Option value="poolcleaning">Pool cleaning</Option>
-                  </Select>
-                )}
-              </Form.Item>
+              {this.props.orderFormFields.companyId.value ? (
+                <Form.Item label="Type of cleaning">
+                  {getFieldDecorator("serviceType", {
+                    initialValue: this.props.orderFormFields.serviceType.value,
+                    rules: [
+                      {
+                        required: true,
+                        message: "Please select type of cleaning!"
+                      }
+                    ]
+                  })(
+                    <Select style={{ width: "100%" }}>{serviceTitles}</Select>
+                  )}
+                </Form.Item>
+              ) : (
+                <Form.Item label="Type of cleaning">
+                  {getFieldDecorator("serviceType", {
+                    initialValue: this.props.orderFormFields.serviceType.value,
+                    rules: [
+                      {
+                        required: true,
+                        message: "Please select type of cleaning!"
+                      }
+                    ]
+                  })(
+                    <Select style={{ width: "100%" }}>
+                      <Option value="standardcleaning">
+                        Standard cleaning
+                      </Option>
+                      <Option value="generalcleaning">General cleaning</Option>
+                      <Option value="carpetcleaning">
+                        Dry Carpet cleaning
+                      </Option>
+                      <Option value="furniturecleaning">
+                        Furniture and Coating cleaning
+                      </Option>
+                      <Option value="officecleaning">Office cleaning</Option>
+                      <Option value="repaircleaning">Repair cleaning</Option>
+                      <Option value="industrialcleaning">
+                        Industrial cleaning
+                      </Option>
+                      <Option value="poolcleaning">Pool cleaning</Option>
+                    </Select>
+                  )}
+                </Form.Item>
+              )}
 
               <Form.Item label="Number of big rooms (> 30 sq m)">
                 {getFieldDecorator("bigRooms", {
@@ -257,82 +321,60 @@ class PlaceOrderForm extends Component {
                   ]
                 })(
                   <Input
-                    addonBefore={prefixSelector}
+                    placeholder="+375*********"
                     style={{ width: "100%" }}
                   />
                 )}
               </Form.Item>
 
-              {this.props.buttonText === "Show Options" ? (
-                <Form.Item>
-                  <Link
-                    to={`/service/${
-                      this.props.orderFormFields.serviceType.value
-                    }`}
-                    onClick={this.handleClick}
-                  >
-                    <Button
-                      style={{ width: "50%" }}
-                      type="primary"
-                      onClick={this.handleClick}
-                    >
-                      {this.props.buttonText}
-                    </Button>
-                  </Link>
-                </Form.Item>
-              ) : (
+              {this.props.orderFormFields.companyId.value ? (
                 <div>
                   <Button type="primary" onClick={this.showModal}>
-                    {this.props.buttonText}
+                    Place order
                   </Button>
-                  <Modal
-                    title="Order details"
+                  <OrderDetails
                     visible={this.state.visible}
+                    address={this.props.address}
+                    service={this.props.orderFormFields.serviceType.value}
+                    bigRooms={this.props.orderFormFields.bigRooms.value}
+                    smallRooms={this.props.orderFormFields.smallRooms.value}
+                    bathrooms={this.props.orderFormFields.bathrooms.value}
+                    daysOfCleaning={
+                      this.props.orderFormFields.daysOfCleaning.value
+                    }
+                    startTimeOfCleaning={
+                      this.props.orderFormFields.startTimeOfCleaning.value
+                    }
+                    cleaningFrequency={
+                      this.props.orderFormFields.cleaningFrequency.value
+                    }
+                    phone={this.props.orderFormFields.phone.value}
+                    cost={this.state.cost}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
-                  >
-                    <p>Address: {this.props.address}</p>
-                    <p>
-                      Type of cleaning:{" "}
-                      {this.props.orderFormFields.serviceType.value.slice(
-                        0,
-                        this.props.orderFormFields.serviceType.value.indexOf(
-                          "cleaning"
-                        )
-                      )}
-                    </p>
-                    <p>
-                      Big rooms: {this.props.orderFormFields.bigRooms.value}
-                    </p>
-                    <p>
-                      Small rooms: {this.props.orderFormFields.smallRooms.value}
-                    </p>
-                    <p>
-                      Bathrooms: {this.props.orderFormFields.bathrooms.value}
-                    </p>
-                    <p>
-                      Day/days:{" "}
-                      {this.props.orderFormFields.daysOfCleaning.value.join(
-                        ", "
-                      )}
-                    </p>
-                    <p>
-                      Expected start time of cleaning:{" "}
-                      {this.props.orderFormFields.startTimeOfCleaning.value}
-                    </p>
-                    <p>
-                      Cleaning frequency:{" "}
-                      {this.props.orderFormFields.cleaningFrequency.value}
-                    </p>
-                    <p>
-                      Phone number: +375
-                      {this.props.orderFormFields.prefix.value}
-                      {this.props.orderFormFields.phone.value}
-                    </p>
-                    {/* <p>Company: {this.props.company.name}</p> */}
-                    <h3> Total cost: {this.state.cost} $</h3>
-                  </Modal>
+                    footer={[
+                      <Button key="back" onClick={this.handleCancel}>
+                        Return
+                      </Button>,
+                      <Button
+                        key="submit"
+                        type="primary"
+                        onClick={this.handleOk}
+                      >
+                        Confirm order
+                      </Button>
+                    ]}
+                  />
                 </div>
+              ) : (
+                <Link
+                  to={`/service/${
+                    this.props.orderFormFields.serviceType.value
+                  }`}
+                  onClick={this.handleClick}
+                >
+                  <Button type="primary">Show options</Button>
+                </Link>
               )}
             </Form>
           </div>

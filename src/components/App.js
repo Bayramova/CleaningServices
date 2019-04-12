@@ -15,48 +15,52 @@ import CompanyContainer from "./Company/CompanyContainer";
 import CompaniesListByQueryContainer from "./CompaniesCatalogue/CompaniesListByQueryContainer";
 import UserProfileContainer from "./UserProfile/UserProfileContainer";
 import UserProfileEditFormContainer from "./UserProfile/UserProfileEditFormContainer";
+import FeedbackFormContainer from "./Forms/Feedback/FeedbackFormContainer";
 import PrivateRoute from "./PrivateRoute";
-import OrderFormPrivateRoute from "./OrderFormPrivateRoute";
-import { handleInitialData } from "actions/receiveData";
+import ClientPrivateRoute from "./ClientPrivateRoute";
+import { getServicesData } from "actions/receiveData";
 import { signOut } from "actions/userActions";
 import { getUserDataFromToken } from "actions/userActions";
 
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(handleInitialData());
+    dispatch(getServicesData());
 
     if (localStorage.token) {
       if (jwtDecode(localStorage.token).exp < Date.now() / 1000) {
         dispatch(signOut());
-        console.log(this.props);
         this.props.history.push("/signin");
       } else {
         const token = localStorage.token;
-        console.log(token);
         dispatch(getUserDataFromToken(token));
       }
     }
   }
 
   render() {
-    const { loadingData, error } = this.props;
+    const { loadingServices, error } = this.props;
     return (
       <div className="container">
         <HeaderContainer />
         <ScrollToTop>
           <main className="main">
-            {loadingData ? (
+            {loadingServices ? (
               <Spin className="app__loader" size="large" tip="Loading..." />
             ) : error ? (
               <Alert className="error__message" message={error} type="error" />
             ) : (
               <Switch>
                 <Route exact path="/" component={Main} />
-                <OrderFormPrivateRoute
+                <ClientPrivateRoute
                   exact
                   path="/make_order"
                   component={OrderFormContainer}
+                />
+                <ClientPrivateRoute
+                  exact
+                  path="/feedback"
+                  component={FeedbackFormContainer}
                 />
                 <Route exact path="/signin" component={SignInFormContainer} />
                 <Route exact path="/signup" component={SignUpFormContainer} />
@@ -99,7 +103,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    loadingData: state.data.loadingData,
+    loadingServices: state.data.loadingServices,
     error: state.data.error,
     auth: state.auth
   };

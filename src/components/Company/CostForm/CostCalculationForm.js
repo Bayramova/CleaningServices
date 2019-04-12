@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Form, Select, Button, InputNumber } from "antd";
-import "./CostForm.css";
+import "../CompanyInfo.css";
 const { Option } = Select;
 
 class CostCalculationForm extends Component {
@@ -8,6 +9,9 @@ class CostCalculationForm extends Component {
     cost: null
   };
   handleClick = event => {
+    this.props.selectCompany(this.props.matchPath);
+  };
+  handleCalculate = event => {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (err) {
         event.preventDefault();
@@ -47,12 +51,11 @@ class CostCalculationForm extends Component {
 
     return (
       <div className="cost-form__content">
-        <div className="sign-up-container">
+        <div className="sign-up-container cost-form__container">
           <div className="sign-up">
             <Form>
               <Form.Item label="Type of cleaning">
                 {getFieldDecorator("serviceType", {
-                  initialValue: this.props.services[0],
                   rules: [
                     {
                       required: true,
@@ -120,24 +123,26 @@ class CostCalculationForm extends Component {
                 })(<InputNumber min={0} />)}
               </Form.Item>
 
-              <div className="cost-info">
+              {isNaN(this.state.cost) || this.state.cost === null ? (
                 <Form.Item>
                   <Button
                     style={{ width: "50%" }}
                     type="primary"
-                    onClick={this.handleClick}
+                    onClick={this.handleCalculate}
                   >
                     Calculate
                   </Button>
                 </Form.Item>
-                {isNaN(this.state.cost) || this.state.cost === null ? (
-                  <div />
-                ) : (
+              ) : (
+                <React.Fragment>
+                  <Link to={"/make_order"} onClick={this.handleClick}>
+                    <Button type="primary">Make order</Button>
+                  </Link>
                   <div className="cost-info__message">
                     Total cost is {this.state.cost} $
                   </div>
-                )}
-              </div>
+                </React.Fragment>
+              )}
             </Form>
           </div>
         </div>

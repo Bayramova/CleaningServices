@@ -12,22 +12,13 @@ const Company = props => {
         <div className="company-card__content">
           <div className="company-card__title">{name}</div>
           <div className="company-card__rate">
-            <Rate disabled defaultValue={parseInt(rating)} />
+            <Rate disabled defaultValue={rating} />
           </div>
           <div className="company-card__description">{address}</div>
         </div>
       </Link>
       <div className="company-card__order-link">
-        <Link
-          to={{
-            pathname: "/make_order",
-            state: {
-              fromSelectedCompany: true
-            }
-          }}
-        >
-          Make order
-        </Link>
+        {/* <Link to={"/make_order"} onClick={selectCompany(id)}>Make order</Link> */}
       </div>
     </div>
   );

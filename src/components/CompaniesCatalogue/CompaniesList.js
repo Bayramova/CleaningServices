@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Company from "./CompaniesListItem";
+import CompaniesListItem from "./CompaniesListItem";
 import "./Catalogue.css";
 
 class CompaniesList extends Component {
@@ -7,7 +7,7 @@ class CompaniesList extends Component {
     return (
       <div className="catalogue__cards">
         {this.props.companies.map(company => (
-          <Company
+          <CompaniesListItem
             key={company.id}
             id={company.id}
             logo={company.logo}
