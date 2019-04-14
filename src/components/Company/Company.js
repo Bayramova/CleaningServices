@@ -38,7 +38,7 @@ class Company extends Component {
                   alt="logo"
                   src={`.${this.props.company.logo}`}
                 />
-                {this.props.role === "company" ? (
+                {this.props.role === "COMPANY" ? (
                   <React.Fragment />
                 ) : (
                   <Link to={"/make_order"} onClick={this.handleClick}>

@@ -107,7 +107,7 @@ class Header extends Component {
             </div>
           </div>
           {isAuthenticated
-            ? this.props.auth.userData.role === "client"
+            ? this.props.auth.userData.role === "CLIENT"
               ? clientLinks
               : companyLinks
             : guestLinks}

@@ -16,7 +16,7 @@ class OrderListItem extends Component {
   };
 
   handleStatusChange = event => {
-    if (this.props.status === "done") {
+    if (this.props.status === "DONE") {
       event.preventDefault();
     } else {
       this.props.changeOrderStatus(this.props.id);
@@ -62,7 +62,7 @@ class OrderListItem extends Component {
         ? this.props.clients.find(client => client.id === client_id).name
         : "?";
     const orderButtons =
-      this.props.status === "new" ? (
+      this.props.status === "NEW" ? (
         <div className="user-profile__order-buttons">
           <div onClick={this.showModal} className="user-profile__order-button">
             Show details
@@ -86,7 +86,7 @@ class OrderListItem extends Component {
           {orderButtons}
         </div>
         <div className="user-profile__info">
-          {this.props.auth.userData.role === "client" ? (
+          {this.props.auth.userData.role === "CLIENT" ? (
             <p className="user-profile__name">{`Company: ${company_name}`}</p>
           ) : (
             <p className="user-profile__name">{`Client: ${client_name}`}</p>
@@ -112,17 +112,17 @@ class OrderListItem extends Component {
           footer={null}
         />
         <div className="company-button">
-          {this.props.auth.userData.role === "company" && status === "new" ? (
+          {this.props.auth.userData.role === "COMPANY" && status === "NEW" ? (
             <Button type="primary" onClick={this.handleStatusChange}>
               Confirm order
             </Button>
-          ) : this.props.auth.userData.role === "company" &&
-            status === "confirmed" ? (
+          ) : this.props.auth.userData.role === "COMPANY" &&
+            status === "CONFIRMED" ? (
             <Button type="primary" onClick={this.handleStatusChange}>
               Close order
             </Button>
-          ) : this.props.auth.userData.role === "client" &&
-            status === "done" &&
+          ) : this.props.auth.userData.role === "CLIENT" &&
+            status === "DONE" &&
             !feedbackLeft ? (
             <Link
               to={{

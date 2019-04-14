@@ -85,7 +85,7 @@ export default function(state = initialState, action) {
     case CANCEL_ORDER:
       const updatedOrderList = state.orders.map(order => {
         if (order.id === action.id) {
-          order.status = "cancelled";
+          order.status = "CANCELLED";
         }
         return order;
       });
@@ -95,10 +95,10 @@ export default function(state = initialState, action) {
       };
     case CHANGE_ORDER_STATUS:
       const updatedOrdersList = state.orders.map(order => {
-        if (order.id === action.id && order.status === "new") {
-          order.status = "confirmed";
-        } else if (order.id === action.id && order.status === "confirmed") {
-          order.status = "done";
+        if (order.id === action.id && order.status === "NEW") {
+          order.status = "CONFIRMED";
+        } else if (order.id === action.id && order.status === "CONFIRMED") {
+          order.status = "DONE";
         }
         return order;
       });

@@ -101,7 +101,7 @@ class UserProfileEditForm extends React.Component {
 
               {(() => {
                 switch (this.props.auth.userData.role) {
-                  case "client":
+                  case "CLIENT":
                     return (
                       <React.Fragment>
                         <Form.Item label="Name">
@@ -130,7 +130,7 @@ class UserProfileEditForm extends React.Component {
                         </Form.Item>
                       </React.Fragment>
                     );
-                  case "company":
+                  case "COMPANY":
                     return (
                       <React.Fragment>
                         <Form.Item label="Logo">

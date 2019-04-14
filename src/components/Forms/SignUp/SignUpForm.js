@@ -106,15 +106,15 @@ class SignUpForm extends React.Component {
                   ]
                 })(
                   <Radio.Group onChange={this.handleRoleChange}>
-                    <Radio value="client">Client</Radio>
-                    <Radio value="company">Company</Radio>
+                    <Radio value="CLIENT">Client</Radio>
+                    <Radio value="COMPANY">Company</Radio>
                   </Radio.Group>
                 )}
               </Form.Item>
 
               {(() => {
                 switch (this.state.formType) {
-                  case "client":
+                  case "CLIENT":
                     return (
                       <React.Fragment>
                         <Form.Item label="Name">
@@ -139,7 +139,7 @@ class SignUpForm extends React.Component {
                         </Form.Item>
                       </React.Fragment>
                     );
-                  case "company":
+                  case "COMPANY":
                     return (
                       <React.Fragment>
                         <Form.Item label="Logo">
