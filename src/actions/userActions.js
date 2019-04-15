@@ -186,7 +186,7 @@ export const update = (id, updates, history) => dispatch => {
 export const makeOrder = (data, history) => dispatch => {
   createOrder(data)
     .then(res => {
-      history.push("/");
+      history.goBack();
     })
     .catch(err => {
       console.log(err);
@@ -216,7 +216,7 @@ export const changeOrder = orderId => dispatch => {
 export const leaveFeedback = (data, history) => dispatch => {
   postFeedback(data)
     .then(res => {
-      history.push("/");
+      history.goBack();
     })
     .catch(err => {
       console.log(err);

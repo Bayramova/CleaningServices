@@ -82,7 +82,7 @@ class OrderListItem extends Component {
     return (
       <div className="user-profile">
         <div className="user-profile__header--order">
-          <div className={status}>{status}</div>
+          <div className={status.toLowerCase()}>{status}</div>
           {orderButtons}
         </div>
         <div className="user-profile__info">
