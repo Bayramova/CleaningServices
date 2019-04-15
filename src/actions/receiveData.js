@@ -14,7 +14,7 @@ const fetchServicesRequest = () => {
   };
 };
 
-const fetchCompaniesRequest = () => {
+export const fetchCompaniesRequest = () => {
   return {
     type: FETCH_COMPANIES_REQUEST
   };
@@ -33,7 +33,7 @@ const fetchServicesSuccess = services => {
   };
 };
 
-const fetchCompaniesSuccess = companies => {
+export const fetchCompaniesSuccess = companies => {
   return {
     type: FETCH_COMPANIES_SUCCESS,
     companies
@@ -47,7 +47,7 @@ const fetchClientsSuccess = clients => {
   };
 };
 
-const fetchDataFailure = error => {
+export const fetchDataFailure = error => {
   return {
     type: FETCH_DATA_FAILURE,
     message: error.message || "Something went wrong."

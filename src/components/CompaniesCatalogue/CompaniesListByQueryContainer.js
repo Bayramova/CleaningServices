@@ -4,11 +4,13 @@ import queryString from "query-string";
 import { connect } from "react-redux";
 import { Select, Spin, Alert } from "antd";
 import { handleSortValueChange } from "actions/sortCompanies";
-import { getCompaniesData } from "actions/receiveData";
+import { searchCompanies } from "actions/searchCompanies";
 
 class CompaniesListByQueryContainer extends Component {
   componentDidMount() {
-    this.props.getCompaniesData();
+    this.props.searchCompanies(
+      queryString.parse(this.props.location.search).q.toLowerCase()
+    );
   }
 
   handleChange = value => {
@@ -17,16 +19,6 @@ class CompaniesListByQueryContainer extends Component {
 
   render() {
     const { loadingCompanies, error } = this.props;
-    const query = queryString.parse(this.props.location.search).q.toLowerCase();
-    const service = this.props.services.find(service =>
-      service.title.toLowerCase().includes(query)
-    );
-    const serviceId = service ? service.id : "";
-    const filtered = this.props.companies.filter(
-      company =>
-        company.name.toLowerCase().includes(query) ||
-        company.services.includes(serviceId)
-    );
     return (
       <React.Fragment>
         {loadingCompanies ? (
@@ -49,7 +41,7 @@ class CompaniesListByQueryContainer extends Component {
             </section>
 
             <section>
-              <CompaniesList companies={filtered} />
+              <CompaniesList companies={this.props.companies} />
             </section>
           </div>
         )}
@@ -69,7 +61,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   onChange: handleSortValueChange,
-  getCompaniesData
+  searchCompanies
 };
 
 export default connect(

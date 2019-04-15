@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Input, Icon } from "antd";
+// import { APP } from "cleaning-services";
 
 class Search extends Component {
   state = {

@@ -89,6 +89,10 @@ function getFeedbacks(id) {
   return fetchData(`company/${id}/feedbacks`);
 }
 
+function search(query) {
+  return fetchData(`search?q=${query}`);
+}
+
 // TODO файлик растёт, есть смысл разбивать
 export {
   fetchCompanies,
@@ -104,5 +108,6 @@ export {
   cancelOrder,
   changeStatus,
   postFeedback,
-  getFeedbacks
+  getFeedbacks,
+  search
 };
