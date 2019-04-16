@@ -1,26 +1,25 @@
 import * as Actions from "../actions/socket";
 
 const initialState = {
-  orders: {},
+  companies: {},
   isFetching: true,
   error: null
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case Actions.GET_REQUEST_ORDERS:
+    case Actions.GET_REQUEST_COMPANIES:
       return {
         ...state,
-        isFetching: true,
-        error: null
+        isFetching: true
       };
-    case Actions.GET_SUCCESS_ORDERS:
+    case Actions.GET_SUCCESS_COMPANIES:
       return {
         ...state,
-        orders: action.data,
+        companies: action.data,
         isFetching: false
       };
-    case Actions.GET_FAILURE_ORDERS:
+    case Actions.GET_FAILURE_COMPANIES:
       console.log("Error: ", action.error);
       return {
         ...state,

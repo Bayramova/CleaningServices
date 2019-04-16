@@ -1,30 +1,30 @@
-export const GET_REQUEST_ORDERS = "GET_REQUEST_ORDERS";
-export const GET_SUCCESS_ORDERS = "GET_SUCCESS_ORDERS";
-export const GET_FAILURE_ORDERS = "GET_FAILURE_ORDERS";
+export const GET_REQUEST_COMPANIES = "GET_REQUEST_COMPANIES";
+export const GET_SUCCESS_COMPANIES = "GET_SUCCESS_COMPANIES";
+export const GET_FAILURE_COMPANIES = "GET_FAILURE_COMPANIES";
 
-export const getRequestOrders = () => ({
-  type: GET_REQUEST_ORDERS
+export const getRequestCompanies = () => ({
+  type: GET_REQUEST_COMPANIES
 });
 
-export const getSuccessOrders = data => {
+export const getSuccessCompanies = data => {
   return {
-    type: GET_SUCCESS_ORDERS,
+    type: GET_SUCCESS_COMPANIES,
     data
   };
 };
 
-export const getFailureOrders = err => ({
-  type: GET_FAILURE_ORDERS,
+export const getFailureCompanies = err => ({
+  type: GET_FAILURE_COMPANIES,
   err
 });
 
-export const getOrders = options => async dispatch => {
-  dispatch(getRequestOrders());
+export const getCompanies = options => async dispatch => {
+  dispatch(getRequestCompanies());
   const { socket } = options;
   delete options.socket;
   try {
-    socket.emit(GET_REQUEST_ORDERS, options);
+    socket.emit(GET_REQUEST_COMPANIES, options);
   } catch (err) {
-    dispatch(getFailureOrders(err));
+    dispatch(getFailureCompanies(err));
   }
 };

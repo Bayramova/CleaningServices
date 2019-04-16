@@ -21,31 +21,25 @@ import ClientPrivateRoute from "./ClientPrivateRoute";
 import { getServicesData } from "actions/receiveData";
 import { signOut } from "actions/userActions";
 import { getUserDataFromToken } from "actions/userActions";
-// import {
-//   GET_SUCCESS_ORDERS,
-//   GET_FAILURE_ORDERS,
-//   getSuccessOrders,
-//   getFailureOrders,
-//   getOrders
-// } from "actions/socket";
+import {
+  GET_SUCCESS_COMPANIES,
+  getSuccessCompanies,
+  getCompanies
+} from "actions/socket";
 import openSocket from "socket.io-client";
 
 class App extends Component {
-  state = {
-    data: []
-  };
-
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(getServicesData());
     const socket = openSocket("http://localhost:5000");
-    socket.on("GET_SUCCESS_ORDERS", data => {
-      this.setState({ data });
+    socket.on(GET_SUCCESS_COMPANIES, data => {
+      dispatch(getSuccessCompanies(data));
     });
-    // socket.on(GET_FAILURE_ORDERS, err => {
-    //   dispatch(getFailureOrders(err));
+    dispatch(getCompanies({ socket }));
+    // socket.on(GET_FAILURE_COMPANIES, err => {
+    //   dispatch(getFailureCompanies(err));
     // });
-    // dispatch(getOrders({ socket: socket }));
 
     if (localStorage.token) {
       if (jwtDecode(localStorage.token).exp < Date.now() / 1000) {
@@ -59,7 +53,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("!!!!!!!!!!!!!!!!!!!!!", this.state.data);
     const { loadingServices, error } = this.props;
     return (
       <div className="container">
