@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Search from "./Search/Search";
 import { Drawer, Icon } from "antd";
 import "./Header.css";
+//import Toast from "popup-messages";
+//import "popup-messages/css/index.css";
 
 class Header extends Component {
   onsignOut = e => {
@@ -23,6 +25,13 @@ class Header extends Component {
       visible: false
     });
   };
+
+  // showToast = e => {
+  //   new Toast("Sample message", "error").show(Toast.toastsContainer);
+  //   new Toast("Sample message", "warning").show(Toast.toastsContainer);
+  //   new Toast("Sample message", "success").show(Toast.toastsContainer);
+  //   new Toast("Sample message", "info").show(Toast.toastsContainer);
+  // };
 
   render() {
     const { isAuthenticated } = this.props.auth;
