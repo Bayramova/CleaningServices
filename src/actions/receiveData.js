@@ -66,10 +66,10 @@ export const getServicesData = () => dispatch => {
     });
 };
 
-export const getCompaniesData = () => dispatch => {
+export const getCompaniesData = page => dispatch => {
   dispatch(fetchCompaniesRequest());
 
-  fetchCompanies()
+  fetchCompanies(page)
     .then(companies => {
       dispatch(fetchCompaniesSuccess(companies));
     })

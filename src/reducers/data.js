@@ -12,10 +12,12 @@ import { GET_FEEDBACKS } from "actions/userActions";
 
 const initialState = {
   loadingServices: true,
-  loadingCompanies: true,
+  loadingCompanies: false,
   loadingClients: true,
   services: [],
   companies: [],
+  page: 1,
+  hasMore: true,
   clients: [],
   feedbacks: [],
   error: null
@@ -49,7 +51,9 @@ export default function data(state = initialState, action) {
       return {
         ...state,
         loadingCompanies: false,
-        companies: action.companies,
+        companies: [...state.companies, ...action.companies],
+        page: state.page + 1,
+        hasMore: Boolean(action.companies.length),
         error: null
       };
     case FETCH_CLIENTS_SUCCESS:

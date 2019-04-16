@@ -33,8 +33,8 @@ async function fetchProtectedData(resource, method, data) {
   return response.json();
 }
 
-function fetchCompanies() {
-  return fetchData("companies");
+function fetchCompanies(page) {
+  return fetchData(`companies/${page}`);
 }
 
 function fetchServices() {
