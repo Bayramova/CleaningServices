@@ -54,13 +54,9 @@ class OrderListItem extends Component {
       phone,
       cost,
       feedbackLeft,
-      company_name,
-      client_id
+      client_name,
+      company_name
     } = this.props;
-    const client_name =
-      client_id !== null
-        ? this.props.clients.find(client => client.id === client_id).name
-        : "?";
     const orderButtons =
       this.props.status === "NEW" ? (
         <div className="user-profile__order-buttons">
@@ -106,6 +102,7 @@ class OrderListItem extends Component {
           startTimeOfCleaning={startTimeOfCleaning}
           cleaningFrequency={cleaningFrequency}
           phone={phone}
+          name={client_name}
           cost={cost}
           onOk={this.handleOk}
           onCancel={this.handleCancel}

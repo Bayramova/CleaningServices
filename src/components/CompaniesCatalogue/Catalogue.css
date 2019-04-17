@@ -11,6 +11,15 @@
   line-height: 1em;
 }
 
+.loader__container {
+  display: grid;
+}
+
+.inf__loader {
+  align-self: center;
+  justify-self: center;
+}
+
 .companies-list__description {
   color: #a6a6a6;
   font-size: 18px;

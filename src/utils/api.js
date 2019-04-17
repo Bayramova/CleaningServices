@@ -41,10 +41,6 @@ function fetchServices() {
   return fetchData("services");
 }
 
-function fetchClients() {
-  return fetchData("clients");
-}
-
 function signUpUser(userData) {
   return fetchData("signup", "POST", userData);
 }
@@ -69,7 +65,7 @@ function createOrder(orderData) {
   return fetchData("make_order", "POST", orderData);
 }
 
-function getOrders(id) {
+function fetchOrders(id) {
   return fetchProtectedData(`user/${id}/orders`);
 }
 
@@ -85,6 +81,10 @@ function postFeedback(feedback) {
   return fetchProtectedData("leave_feedback", "POST", feedback);
 }
 
+function fetchCompany(id) {
+  return fetchData(`company/${id}`);
+}
+
 function getFeedbacks(id) {
   return fetchData(`company/${id}/feedbacks`);
 }
@@ -93,21 +93,20 @@ function search(query) {
   return fetchData(`search?q=${query}`);
 }
 
-// TODO файлик растёт, есть смысл разбивать
 export {
   fetchCompanies,
   fetchServices,
-  fetchClients,
   signUpUser,
   signInUser,
   updateUser,
   getUser,
   getUserFromToken,
   createOrder,
-  getOrders,
+  fetchOrders,
   cancelOrder,
   changeStatus,
   postFeedback,
   getFeedbacks,
-  search
+  search,
+  fetchCompany
 };

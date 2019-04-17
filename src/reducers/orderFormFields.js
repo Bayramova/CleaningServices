@@ -1,5 +1,5 @@
 import { CHANGE_FIELDS } from "actions/updateFieldsState";
-import { SELECT_COMPANY } from "actions/makeOrder";
+import { SELECT_COMPANY } from "actions/orderActions";
 
 const initialState = {
   companyId: {
@@ -30,6 +30,9 @@ const initialState = {
     value: ""
   },
   phone: {
+    value: ""
+  },
+  name: {
     value: ""
   }
 };

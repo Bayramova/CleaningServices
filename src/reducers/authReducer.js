@@ -5,11 +5,15 @@ import {
   DELETE_ERRORS,
   GET_USER_DATA,
   UPDATE_USER_DATA,
-  USER_LOADING,
-  GET_ORDERS,
+  USER_LOADING
+} from "actions/userActions";
+import {
+  FETCH_ORDERS_REQUEST,
+  FETCH_ORDERS_SUCCESS,
   CANCEL_ORDER,
   CHANGE_ORDER_STATUS
-} from "actions/userActions";
+} from "actions/orderActions";
+import { FETCH_DATA_FAILURE } from "actions/receiveData";
 
 const initialState = {
   isAuthenticated: false,
@@ -21,7 +25,11 @@ const initialState = {
     role: ""
   },
   additionalUserData: {},
-  orders: []
+  userOrders: {
+    loadingOrders: true,
+    orders: [],
+    error: null
+  }
 };
 
 export default function(state = initialState, action) {
@@ -77,13 +85,34 @@ export default function(state = initialState, action) {
           services: action.updates.services
         }
       };
-    case GET_ORDERS:
+    case FETCH_ORDERS_REQUEST:
       return {
         ...state,
-        orders: action.orders
+        userOrders: {
+          ...state.userOrders,
+          loadingOrders: true
+        }
+      };
+    case FETCH_ORDERS_SUCCESS:
+      return {
+        ...state,
+        userOrders: {
+          ...state.userOrders,
+          loadingOrders: false,
+          orders: action.orders
+        }
+      };
+    case FETCH_DATA_FAILURE:
+      return {
+        ...state,
+        userOrders: {
+          ...state.userOrders,
+          loadingOrders: false,
+          error: action.message
+        }
       };
     case CANCEL_ORDER:
-      const updatedOrderList = state.orders.map(order => {
+      const updatedOrderList = state.userOrders.orders.map(order => {
         if (order.id === action.id) {
           order.status = "CANCELLED";
         }
@@ -94,7 +123,7 @@ export default function(state = initialState, action) {
         orders: updatedOrderList
       };
     case CHANGE_ORDER_STATUS:
-      const updatedOrdersList = state.orders.map(order => {
+      const updatedOrdersList = state.userOrders.orders.map(order => {
         if (order.id === action.id && order.status === "NEW") {
           order.status = "CONFIRMED";
         } else if (order.id === action.id && order.status === "CONFIRMED") {

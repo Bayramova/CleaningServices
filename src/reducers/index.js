@@ -1,17 +1,17 @@
 import { combineReducers } from "redux";
 
-import data from "./data";
+import servicesData from "./services";
+import companiesData from "./companies";
+import companyInfo from "./company";
 import orderFormFields from "./orderFormFields";
-import signInFormFields from "./signInFormFields";
-import signUpFormFields from "./signUpFormFields";
 import auth from "./authReducer";
 import socket from "./socket";
 
 export default combineReducers({
-  data,
+  servicesData,
+  companiesData,
+  companyInfo,
   orderFormFields,
-  signInFormFields,
-  signUpFormFields,
   auth,
   socket
 });

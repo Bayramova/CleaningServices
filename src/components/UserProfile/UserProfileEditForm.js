@@ -72,33 +72,6 @@ class UserProfileEditForm extends React.Component {
                   ]
                 })(<Input />)}
               </Form.Item>
-              {/* <Form.Item label="New password">
-                {getFieldDecorator("password", {
-                  rules: [
-                    {
-                      required: false,
-                      message: "Please input your password!"
-                    },
-                    {
-                      validator: this.validateToNextPassword
-                    }
-                  ]
-                })(<Input type="password" />)}
-              </Form.Item>
-              <Form.Item label="Confirm password">
-                {getFieldDecorator("confirm", {
-                  rules: [
-                    {
-                      required: false,
-                      message: "Please confirm your password!"
-                    },
-                    {
-                      validator: this.compareToFirstPassword
-                    }
-                  ]
-                })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
-              </Form.Item> */}
-
               {(() => {
                 switch (this.props.auth.userData.role) {
                   case "CLIENT":

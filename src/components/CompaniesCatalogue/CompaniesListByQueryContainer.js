@@ -52,8 +52,8 @@ class CompaniesListByQueryContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    services: state.data.services,
-    companies: state.data.companies,
+    services: state.servicesData,
+    companies: state.companiesDataData,
     loadingCompanies: state.data.loadingCompanies,
     error: state.data.error
   };

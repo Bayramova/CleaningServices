@@ -6,11 +6,7 @@ import { signOut } from "actions/userActions";
 class HeaderContainer extends Component {
   render() {
     return (
-      <Header
-        auth={this.props.auth}
-        signOutUser={this.props.signOutUser}
-        history={this.props.history}
-      />
+      <Header auth={this.props.auth} signOutUser={this.props.signOutUser} />
     );
   }
 }
