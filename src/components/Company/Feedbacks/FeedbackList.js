@@ -10,6 +10,7 @@ class FeedbackList extends Component {
             key={feedback.id}
             rate={feedback.rate}
             feedback={feedback.feedback}
+            client={feedback.order.name}
           />
         ))}
       </React.Fragment>

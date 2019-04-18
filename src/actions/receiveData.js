@@ -32,10 +32,11 @@ export const fetchCompaniesRequest = () => {
   };
 };
 
-export const fetchCompaniesSuccess = companies => {
+export const fetchCompaniesSuccess = (companies, hasMore) => {
   return {
     type: FETCH_COMPANIES_SUCCESS,
-    companies
+    companies,
+    hasMore
   };
 };
 
@@ -51,12 +52,12 @@ export const getServicesData = () => dispatch => {
     });
 };
 
-export const getCompaniesData = page => dispatch => {
+export const getCompaniesData = (page, limit) => dispatch => {
   dispatch(fetchCompaniesRequest());
 
-  fetchCompanies(page)
-    .then(companies => {
-      dispatch(fetchCompaniesSuccess(companies));
+  fetchCompanies(page, limit)
+    .then(res => {
+      dispatch(fetchCompaniesSuccess(res.companies, res.hasMore));
     })
     .catch(error => {
       dispatch(fetchDataFailure(error));

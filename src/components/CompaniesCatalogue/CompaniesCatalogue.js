@@ -19,44 +19,42 @@ class CompaniesCatalogue extends Component {
       service => service.id === matchPath
     );
     return (
-      <React.Fragment>
-        <div className="companies-list__container">
-          <section>
-            <CatalogueHeader
-              title={service.title}
-              description={service.description}
-            />
-          </section>
+      <div className="companies-list__container">
+        <section>
+          <CatalogueHeader
+            title={service.title}
+            description={service.description}
+          />
+        </section>
 
-          <section>
-            <div className="companies-list__navigation">
-              <Select
-                defaultValue="Sort by"
-                style={{ width: 120 }}
-                onChange={this.handleChange}
-              >
-                <Select.Option value="rating">Rating</Select.Option>
-                <Select.Option value="orders">Popularity</Select.Option>
-              </Select>
-            </div>
-          </section>
-
-          <section>
-            <InfiniteScroll
-              className="loader__container"
-              hasMore={this.props.hasMore}
-              loader={<Spin className="inf__loader" key={this.props.page} />}
-              loadMore={() => this.props.getCompaniesData(this.props.page)}
+        <section>
+          <div className="companies-list__navigation">
+            <Select
+              defaultValue="Sort by"
+              style={{ width: 120 }}
+              onChange={this.handleChange}
             >
-              <CompaniesList
-                companies={this.props.companies.filter(company =>
-                  company.services.includes(matchPath)
-                )}
-              />
-            </InfiniteScroll>
-          </section>
-        </div>
-      </React.Fragment>
+              <Select.Option value="rating">Rating</Select.Option>
+              <Select.Option value="orders">Popularity</Select.Option>
+            </Select>
+          </div>
+        </section>
+
+        <section>
+          <InfiniteScroll
+            className="loader__container"
+            hasMore={this.props.hasMore}
+            loader={<Spin className="inf__loader" key={this.props.page} />}
+            loadMore={() => this.props.getCompaniesData(this.props.page, 5)}
+          >
+            <CompaniesList
+              companies={this.props.companies.filter(company =>
+                company.services.includes(matchPath)
+              )}
+            />
+          </InfiniteScroll>
+        </section>
+      </div>
     );
   }
 }

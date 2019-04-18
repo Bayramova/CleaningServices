@@ -1,16 +1,25 @@
 import { search } from "utils/api";
-import {
-  fetchCompaniesRequest,
-  fetchCompaniesSuccess,
-  fetchDataFailure
-} from "./receiveData";
+import { fetchCompaniesRequest, fetchDataFailure } from "./receiveData";
 
-export const searchCompanies = query => dispatch => {
+export const SEARCH_COMPANIES_SUCCESS = "SEARCH_COMPANIES_SUCCESS";
+
+const searchCompaniesSuccess = (companies, hasMore, page) => {
+  return {
+    type: SEARCH_COMPANIES_SUCCESS,
+    companies,
+    hasMore,
+    page: parseInt(page)
+  };
+};
+
+export const searchCompanies = (query, page, limit) => dispatch => {
   dispatch(fetchCompaniesRequest());
 
-  search(query)
-    .then(companies => {
-      dispatch(fetchCompaniesSuccess(companies));
+  search(query, page, limit)
+    .then(res => {
+      dispatch(
+        searchCompaniesSuccess(res.companies, res.hasMore, res.currentPage)
+      );
     })
     .catch(error => {
       dispatch(fetchDataFailure(error));

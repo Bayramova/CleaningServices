@@ -13,7 +13,6 @@ class Company extends Component {
     const serviceTitles = this.props.company.services.map(
       id => this.props.services.find(service => service.id === id).title
     );
-    console.log(this.props.company);
     return (
       <div className="company-info__container">
         <div>
