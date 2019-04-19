@@ -1,5 +1,10 @@
 import { fetchDataFailure } from "./receiveData";
-import { createOrder, fetchOrders, cancelOrder, changeStatus } from "utils/api";
+import {
+  makeOrder,
+  fetchOrders,
+  cancelOrder,
+  changeStatus
+} from "utils/api/orders";
 
 export const SELECT_COMPANY = "SELECT_COMPANY";
 export const FETCH_ORDERS_REQUEST = "FETCH_ORDERS_REQUEST";
@@ -45,8 +50,8 @@ const changeOrderStatus = orderId => {
   };
 };
 
-export const makeOrder = (data, history) => dispatch => {
-  createOrder(data)
+export const order = (data, history) => dispatch => {
+  makeOrder(data)
     .then(res => {
       history.goBack();
     })

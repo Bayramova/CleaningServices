@@ -13,7 +13,6 @@ class CompaniesListByQueryContainer extends Component {
   };
 
   render() {
-    console.log(this.props.companies);
     return (
       <div className="companies-list__container">
         <section>

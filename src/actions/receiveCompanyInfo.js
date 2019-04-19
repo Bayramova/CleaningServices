@@ -1,4 +1,5 @@
-import { fetchCompany, getFeedbacks } from "utils/api";
+import { fetchCompany } from "utils/api/data";
+import { getFeedbacks } from "utils/api/feedbacks";
 import { fetchDataFailure } from "./receiveData";
 
 export const FETCH_COMPANY_REQUEST = "FETCH_COMPANY_REQUEST";

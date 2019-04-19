@@ -1,11 +1,6 @@
-import {
-  signUpUser,
-  signInUser,
-  updateUser,
-  getUser,
-  getUserFromToken,
-  postFeedback
-} from "utils/api";
+import { updateUser, getUser } from "utils/api/user";
+import { signUpUser, signInUser, getUserFromToken } from "utils/api/auth";
+import { postFeedback } from "utils/api/feedbacks";
 
 export const GET_ERRORS = "GET_ERRORS";
 export const DELETE_ERRORS = "DELETE_ERRORS";

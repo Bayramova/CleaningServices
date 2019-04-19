@@ -1,4 +1,4 @@
-import { search } from "utils/api";
+import { search } from "utils/api/search";
 import { fetchCompaniesRequest, fetchDataFailure } from "./receiveData";
 
 export const CLEAR_COMPANIES = "CLEAR_COMPANIES";

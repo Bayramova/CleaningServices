@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import OrderForm from "./OrderForm";
 import { handleFormChange } from "actions/updateFieldsState";
-import { makeOrder } from "actions/orderActions";
+import { order } from "actions/orderActions";
 
 class OrderFormContainer extends Component {
   render() {
@@ -33,7 +33,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   onChange: handleFormChange,
-  makeOrder
+  makeOrder: order
 };
 
 export default connect(
