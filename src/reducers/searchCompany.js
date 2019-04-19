@@ -2,7 +2,10 @@ import {
   FETCH_COMPANIES_REQUEST,
   FETCH_DATA_FAILURE
 } from "actions/receiveData";
-import { SEARCH_COMPANIES_SUCCESS } from "actions/searchCompanies";
+import {
+  CLEAR_COMPANIES,
+  SEARCH_COMPANIES_SUCCESS
+} from "actions/searchCompanies";
 
 const initialState = {
   loadingCompanies: true,
@@ -14,6 +17,13 @@ const initialState = {
 
 export default function data(state = initialState, action) {
   switch (action.type) {
+    case CLEAR_COMPANIES:
+      return {
+        ...state,
+        companies: [],
+        page: 1,
+        hasMore: true
+      };
     case FETCH_COMPANIES_REQUEST:
       return {
         ...state,
@@ -23,8 +33,8 @@ export default function data(state = initialState, action) {
       return {
         ...state,
         loadingCompanies: false,
-        companies: action.companies,
-        page: action.page,
+        companies: [...state.companies, ...action.companies],
+        page: state.page + 1,
         hasMore: action.hasMore,
         error: null
       };

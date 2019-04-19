@@ -13,6 +13,7 @@ class CompaniesListByQueryContainer extends Component {
   };
 
   render() {
+    console.log(this.props.companies);
     return (
       <div className="companies-list__container">
         <section>
@@ -43,7 +44,6 @@ class CompaniesListByQueryContainer extends Component {
           >
             <CompaniesList companies={this.props.companies} />
           </InfiniteScroll>
-          <CompaniesList companies={this.props.companies} />
         </section>
       </div>
     );
