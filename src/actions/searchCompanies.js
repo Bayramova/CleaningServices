@@ -9,6 +9,7 @@ const searchCompaniesSuccess = (companies, hasMore, page) => {
     type: SEARCH_COMPANIES_SUCCESS,
     companies,
     hasMore,
+    // имеет смысл сразу присылать числом в json
     page: parseInt(page)
   };
 };
@@ -29,6 +30,7 @@ export const searchCompanies = (query, page, limit) => dispatch => {
   search(query, page, limit)
     .then(res => {
       dispatch(
+        // res.currentPage вроде с бекенда не приходит
         searchCompaniesSuccess(res.companies, res.hasMore, res.currentPage)
       );
     })

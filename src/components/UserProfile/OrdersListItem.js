@@ -54,6 +54,7 @@ class OrderListItem extends Component {
       phone,
       cost,
       feedbackLeft,
+      // TODO придерживайся camelCase
       client_name,
       company_name
     } = this.props;

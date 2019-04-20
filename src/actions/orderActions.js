@@ -19,6 +19,14 @@ const updateFieldState = companyId => {
   };
 };
 
+/* TODO нужна ли здесь ф-ция updateFieldState, которая вызывается в  selectCompany ?
+const selectCompany = companyId => {
+  return {
+    type: SELECT_COMPANY,
+    companyId
+  };
+};
+*/
 export const selectCompany = companyId => dispatch => {
   dispatch(updateFieldState(companyId));
 };
@@ -56,6 +64,7 @@ export const order = (data, history) => dispatch => {
       history.goBack();
     })
     .catch(err => {
+      // СТоит выработать привычку обрабатывать все ошибку. Хотя бы показывать стандартную нотификашку на любую ошибку.
       console.log(err);
     });
 };
