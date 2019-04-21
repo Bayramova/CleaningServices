@@ -4,13 +4,11 @@ import { fetchCompaniesRequest, fetchDataFailure } from "./receiveData";
 export const CLEAR_COMPANIES = "CLEAR_COMPANIES";
 export const SEARCH_COMPANIES_SUCCESS = "SEARCH_COMPANIES_SUCCESS";
 
-const searchCompaniesSuccess = (companies, hasMore, page) => {
+const searchCompaniesSuccess = (companies, hasMore) => {
   return {
     type: SEARCH_COMPANIES_SUCCESS,
     companies,
-    hasMore,
-    // имеет смысл сразу присылать числом в json
-    page: parseInt(page)
+    hasMore
   };
 };
 
@@ -29,10 +27,7 @@ export const searchCompanies = (query, page, limit) => dispatch => {
 
   search(query, page, limit)
     .then(res => {
-      dispatch(
-        // res.currentPage вроде с бекенда не приходит
-        searchCompaniesSuccess(res.companies, res.hasMore, res.currentPage)
-      );
+      dispatch(searchCompaniesSuccess(res.companies, res.hasMore));
     })
     .catch(error => {
       dispatch(fetchDataFailure(error));

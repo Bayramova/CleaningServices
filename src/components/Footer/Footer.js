@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "./Footer.css";
-// import Toast from "popup-messages";
-// import "popup-messages/css/index.css";
 
 class Footer extends Component {
   render() {

@@ -54,9 +54,8 @@ class OrderListItem extends Component {
       phone,
       cost,
       feedbackLeft,
-      // TODO придерживайся camelCase
-      client_name,
-      company_name
+      clientName,
+      companyName
     } = this.props;
     const orderButtons =
       this.props.status === "NEW" ? (
@@ -84,9 +83,9 @@ class OrderListItem extends Component {
         </div>
         <div className="user-profile__info">
           {this.props.auth.userData.role === "CLIENT" ? (
-            <p className="user-profile__name">{`Company: ${company_name}`}</p>
+            <p className="user-profile__name">{`Company: ${companyName}`}</p>
           ) : (
-            <p className="user-profile__name">{`Client: ${client_name}`}</p>
+            <p className="user-profile__name">{`Client: ${clientName}`}</p>
           )}
           <p className="user-profile__name">
             {`Service: ${service.slice(0, service.indexOf("cleaning"))}`}
@@ -103,7 +102,7 @@ class OrderListItem extends Component {
           startTimeOfCleaning={startTimeOfCleaning}
           cleaningFrequency={cleaningFrequency}
           phone={phone}
-          name={client_name}
+          name={clientName}
           cost={cost}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
@@ -127,7 +126,7 @@ class OrderListItem extends Component {
                 pathname: "/feedback",
                 state: {
                   orderId: id,
-                  company_name
+                  companyName
                 }
               }}
             >

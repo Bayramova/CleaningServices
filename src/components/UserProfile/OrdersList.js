@@ -21,8 +21,8 @@ class OrdersList extends Component {
             phone={order.phone}
             cost={order.cost}
             feedbackLeft={order.feedbackLeft}
-            client_name={order.name}
-            company_name={order.company_name}
+            clientName={order.name}
+            companyName={order.company_name}
             cancelOrder={this.props.cancelOrder}
             changeOrderStatus={this.props.changeOrderStatus}
             auth={this.props.auth}

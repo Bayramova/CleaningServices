@@ -5,6 +5,8 @@ import {
   cancelOrder,
   changeStatus
 } from "utils/api/orders";
+import Toast from "popup-messages";
+import "popup-messages/css/index.css";
 
 export const SELECT_COMPANY = "SELECT_COMPANY";
 export const FETCH_ORDERS_REQUEST = "FETCH_ORDERS_REQUEST";
@@ -12,23 +14,11 @@ export const FETCH_ORDERS_SUCCESS = "FETCH_ORDERS_SUCCESS";
 export const CANCEL_ORDER = "CANCEL_ORDER";
 export const CHANGE_ORDER_STATUS = "CHANGE_ORDER_STATUS";
 
-const updateFieldState = companyId => {
+export const selectCompany = companyId => {
   return {
     type: SELECT_COMPANY,
     companyId
   };
-};
-
-/* TODO нужна ли здесь ф-ция updateFieldState, которая вызывается в  selectCompany ?
-const selectCompany = companyId => {
-  return {
-    type: SELECT_COMPANY,
-    companyId
-  };
-};
-*/
-export const selectCompany = companyId => dispatch => {
-  dispatch(updateFieldState(companyId));
 };
 
 const fetchOrdersRequest = () => {
@@ -64,8 +54,7 @@ export const order = (data, history) => dispatch => {
       history.goBack();
     })
     .catch(err => {
-      // СТоит выработать привычку обрабатывать все ошибку. Хотя бы показывать стандартную нотификашку на любую ошибку.
-      console.log(err);
+      new Toast(err, "error").show(Toast.toastsContainer);
     });
 };
 
@@ -87,7 +76,7 @@ export const cancelNewOrder = orderId => dispatch => {
       dispatch(changeOrderStatusToCancelled(orderId));
     })
     .catch(err => {
-      console.log(err);
+      new Toast(err, "error").show(Toast.toastsContainer);
     });
 };
 
@@ -97,6 +86,6 @@ export const editOrderStatus = orderId => dispatch => {
       dispatch(changeOrderStatus(orderId));
     })
     .catch(err => {
-      console.log(err);
+      new Toast(err, "error").show(Toast.toastsContainer);
     });
 };

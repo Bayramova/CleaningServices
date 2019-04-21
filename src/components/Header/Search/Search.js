@@ -20,7 +20,6 @@ class Search extends Component {
       pathname: "/search",
       search: `?q=${this.state.query}`
     });
-    console.log(this.props);
   };
 
   render() {

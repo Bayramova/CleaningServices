@@ -11,7 +11,7 @@ class FeedbackFormContainer extends Component {
         onChange={this.props.onChange}
         leaveFeedback={this.props.leaveFeedback}
         orderId={this.props.location.state.orderId}
-        company={this.props.location.state.company_name}
+        company={this.props.location.state.companyName}
         history={this.props.history}
       />
     );
