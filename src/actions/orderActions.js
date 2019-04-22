@@ -5,6 +5,7 @@ import {
   cancelOrder,
   changeStatus
 } from "utils/api/orders";
+import socket from "utils/socket";
 import Toast from "popup-messages";
 import "popup-messages/css/index.css";
 
