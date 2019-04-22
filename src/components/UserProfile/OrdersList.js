@@ -22,7 +22,7 @@ class OrdersList extends Component {
             cost={order.cost}
             feedbackLeft={order.feedbackLeft}
             clientName={order.name}
-            companyName={order.company_name}
+            companyName={order.company.name}
             cancelOrder={this.props.cancelOrder}
             changeOrderStatus={this.props.changeOrderStatus}
             auth={this.props.auth}

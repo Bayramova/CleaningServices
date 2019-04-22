@@ -23,7 +23,7 @@ class CompaniesListByQueryContainer extends Component {
               onChange={this.handleChange}
             >
               <Select.Option value="rating">Rating</Select.Option>
-              <Select.Option value="orders">Popularity</Select.Option>
+              <Select.Option value="ordersNumber">Popularity</Select.Option>
             </Select>
           </div>
         </section>

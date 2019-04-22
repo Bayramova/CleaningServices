@@ -100,9 +100,8 @@ export const getUserDataFromToken = () => dispatch => {
       });
     })
     .catch(err => {
-      err.json().then(errorMessage => {
-        dispatch(getErrors(errorMessage));
-      });
+      console.log(err);
+      new Toast(err, "error").show(Toast.toastsContainer);
     });
 };
 
