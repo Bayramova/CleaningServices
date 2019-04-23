@@ -1,7 +1,7 @@
 import { fetchData } from "./fetch";
 
-function fetchCompanies(page, limit) {
-  return fetchData(`companies/${page}/${limit}`);
+function fetchCompanies(page, limit, query = "") {
+  return fetchData(`companies/${page}/${limit}/?q=${query}`);
 }
 
 function fetchServices() {

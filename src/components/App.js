@@ -21,9 +21,15 @@ import ClientPrivateRoute from "./ClientPrivateRoute";
 import { getServicesData } from "actions/receiveData";
 import { signOut } from "actions/userActions";
 import { getUserDataFromToken } from "actions/userActions";
+import socket from "utils/socket";
+import Toast from "popup-messages";
+import "popup-messages/css/index.css";
 
 class App extends Component {
   componentDidMount() {
+    socket.on("show notification", () => {
+      new Toast("One new order", "success").show(Toast.toastsContainer);
+    });
     const { dispatch } = this.props;
     dispatch(getServicesData());
 
