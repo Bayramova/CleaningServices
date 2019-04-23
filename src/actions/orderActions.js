@@ -1,10 +1,5 @@
 import { fetchDataFailure } from "./receiveData";
-import {
-  makeOrder,
-  fetchOrders,
-  cancelOrder,
-  changeStatus
-} from "utils/api/orders";
+import { fetchOrders, cancelOrder, changeStatus } from "utils/api/orders";
 import socket from "utils/socket";
 import Toast from "popup-messages";
 import "popup-messages/css/index.css";
@@ -50,13 +45,10 @@ const changeOrderStatus = orderId => {
 };
 
 export const order = (data, history) => dispatch => {
-  makeOrder(data)
-    .then(res => {
-      history.goBack();
-    })
-    .catch(err => {
-      new Toast(err, "error").show(Toast.toastsContainer);
-    });
+  socket.emit("new order", data);
+  socket.on("error", error => {
+    new Toast(error, "error").show(Toast.toastsContainer);
+  });
 };
 
 export const getOrdersData = userId => dispatch => {
