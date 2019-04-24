@@ -13,6 +13,7 @@ const OrderDetails = props => {
     startTimeOfCleaning,
     cleaningFrequency,
     phone,
+    name,
     cost,
     onOk,
     onCancel,
@@ -31,10 +32,11 @@ const OrderDetails = props => {
       <p>Big rooms: {bigRooms}</p>
       <p>Small rooms: {smallRooms}</p>
       <p>Bathrooms: {bathrooms}</p>
-      <p>Day/days: {daysOfCleaning.join(", ")}</p>
+      <p>Day/days: {daysOfCleaning}</p>
       <p>Expected start time of cleaning: {startTimeOfCleaning}</p>
       <p>Cleaning frequency: {cleaningFrequency}</p>
       <p>Phone number: {phone}</p>
+      <p>Name: {name}</p>
       <h3> Total cost: {cost} $</h3>
     </Modal>
   );

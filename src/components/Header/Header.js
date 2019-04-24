@@ -23,7 +23,6 @@ class Header extends Component {
       visible: false
     });
   };
-
   render() {
     const { isAuthenticated } = this.props.auth;
     const guestLinks = (

@@ -13,7 +13,7 @@ class CompaniesList extends Component {
             logo={company.logo}
             name={company.name}
             address={company.address}
-            rating={company.rating}
+            rating={company.rating / company.reviewsNumber}
             orders={company.orders}
             services={company.services}
           />

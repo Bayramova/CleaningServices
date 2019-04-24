@@ -5,14 +5,14 @@ import "../CompanyInfo.css";
 
 class FeedbackListItem extends Component {
   render() {
-    const { rate, feedback, client_name } = this.props;
+    const { rate, feedback, client } = this.props;
     return (
       <div className="feedback-item">
         <div className="user-profile__header--order">
           <div>
             <Rate disabled defaultValue={rate} />
           </div>
-          {client_name}
+          {client}
         </div>
         <div className="user-profile__info">
           <p className="user-profile__name">{feedback}</p>

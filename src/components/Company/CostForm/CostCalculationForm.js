@@ -55,7 +55,7 @@ class CostCalculationForm extends Component {
           <div className="sign-up">
             <Form>
               <Form.Item label="Type of cleaning">
-                {getFieldDecorator("serviceType", {
+                {getFieldDecorator("servicetype", {
                   rules: [
                     {
                       required: true,

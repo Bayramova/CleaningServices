@@ -8,13 +8,9 @@ class FeedbackList extends Component {
         {this.props.feedbacks.map(feedback => (
           <FeedbackListItem
             key={feedback.id}
-            client_name={
-              this.props.clients.find(
-                client => client.id === feedback.order.client_id
-              ).name
-            }
             rate={feedback.rate}
             feedback={feedback.feedback}
+            client={feedback.order.name}
           />
         ))}
       </React.Fragment>

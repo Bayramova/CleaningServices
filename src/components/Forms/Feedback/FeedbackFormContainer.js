@@ -11,7 +11,7 @@ class FeedbackFormContainer extends Component {
         onChange={this.props.onChange}
         leaveFeedback={this.props.leaveFeedback}
         orderId={this.props.location.state.orderId}
-        company={this.props.location.state.company_name}
+        company={this.props.location.state.companyName}
         history={this.props.history}
       />
     );
@@ -22,8 +22,8 @@ const mapStateToProps = state => {
   return {
     orderFormFields: state.orderFormFields,
     auth: state.auth,
-    companies: state.data.companies,
-    services: state.data.services
+    companies: state.companiesDataData,
+    services: state.servicesData
   };
 };
 

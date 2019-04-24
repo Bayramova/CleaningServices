@@ -12,7 +12,6 @@ class SignUpFormContainer extends Component {
   render() {
     return (
       <SignUpForm
-        signUpFormFields={this.props.signUpFormFields}
         auth={this.props.auth}
         onChange={this.props.onChange}
         signUpUser={this.props.signUpUser}
@@ -24,7 +23,6 @@ class SignUpFormContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    signUpFormFields: state.signUpFormFields,
     auth: state.auth
   };
 };

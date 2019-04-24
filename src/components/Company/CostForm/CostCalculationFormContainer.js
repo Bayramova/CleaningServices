@@ -18,8 +18,7 @@ class CostCalculationFormContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    orderFormFields: state.orderFormFields,
-    auth: state.auth
+    orderFormFields: state.orderFormFields
   };
 };
 

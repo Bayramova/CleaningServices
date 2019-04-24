@@ -59,7 +59,7 @@ class PlaceOrderForm extends Component {
       visible: false
     });
     const values = {
-      address: this.props.address,
+      address: this.props.orderFormFields.address.value,
       service: this.props.orderFormFields.serviceType.value,
       bigRooms: this.props.orderFormFields.bigRooms.value,
       smallRooms: this.props.orderFormFields.smallRooms.value,
@@ -68,9 +68,12 @@ class PlaceOrderForm extends Component {
       startTimeOfCleaning: this.props.orderFormFields.startTimeOfCleaning.value,
       cleaningFrequency: this.props.orderFormFields.cleaningFrequency.value,
       phone: this.props.orderFormFields.phone.value,
+      name: this.props.orderFormFields.name.value,
       cost: this.state.cost,
       companyId: this.props.orderFormFields.companyId.value,
-      clientId: this.props.clientId
+      clientId: this.props.auth.isAuthenticated
+        ? this.props.auth.additionalUserData.id
+        : null
     };
     this.props.makeOrder(values, this.props.history);
   };
@@ -93,17 +96,13 @@ class PlaceOrderForm extends Component {
     const { getFieldDecorator } = this.props.form;
 
     const serviceTitles = this.props.orderFormFields.companyId.value ? (
-      this.props.companies
-        .find(
-          company => company.id == this.props.orderFormFields.companyId.value
-        )
-        .services.map(id => {
-          return (
-            <Option key={id} id={id}>
-              {this.props.services.find(service => service.id === id).title}
-            </Option>
-          );
-        })
+      this.props.company.services.map(id => {
+        return (
+          <Option key={id} id={id}>
+            {this.props.services.find(service => service.id === id).title}
+          </Option>
+        );
+      })
     ) : (
       <React.Fragment>
         <Option value="standardcleaning">Standard cleaning</Option>
@@ -127,10 +126,7 @@ class PlaceOrderForm extends Component {
               {this.props.orderFormFields.companyId.value ? (
                 <Form.Item label="Company">
                   {getFieldDecorator("company", {
-                    initialValue: this.props.companies.find(
-                      company =>
-                        company.id == this.props.orderFormFields.companyId.value
-                    ).name
+                    initialValue: this.props.company.name
                   })(<Input disabled />)}
                 </Form.Item>
               ) : (
@@ -139,7 +135,9 @@ class PlaceOrderForm extends Component {
 
               <Form.Item label="Address">
                 {getFieldDecorator("address", {
-                  initialValue: this.props.address,
+                  initialValue: this.props.auth.isAuthenticated
+                    ? this.props.auth.additionalUserData.address
+                    : this.props.orderFormFields.address.value,
                   rules: [
                     {
                       required: true,
@@ -327,6 +325,20 @@ class PlaceOrderForm extends Component {
                 )}
               </Form.Item>
 
+              <Form.Item label="Name">
+                {getFieldDecorator("name", {
+                  initialValue: this.props.auth.isAuthenticated
+                    ? this.props.auth.additionalUserData.name
+                    : this.props.orderFormFields.name.value,
+                  rules: [
+                    {
+                      required: true,
+                      message: "Please input your name!"
+                    }
+                  ]
+                })(<Input />)}
+              </Form.Item>
+
               {this.props.orderFormFields.companyId.value ? (
                 <div>
                   <Button type="primary" onClick={this.showModal}>
@@ -334,7 +346,7 @@ class PlaceOrderForm extends Component {
                   </Button>
                   <OrderDetails
                     visible={this.state.visible}
-                    address={this.props.address}
+                    address={this.props.orderFormFields.address.value}
                     service={this.props.orderFormFields.serviceType.value}
                     bigRooms={this.props.orderFormFields.bigRooms.value}
                     smallRooms={this.props.orderFormFields.smallRooms.value}
@@ -349,6 +361,7 @@ class PlaceOrderForm extends Component {
                       this.props.orderFormFields.cleaningFrequency.value
                     }
                     phone={this.props.orderFormFields.phone.value}
+                    name={this.props.orderFormFields.name.value}
                     cost={this.state.cost}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}

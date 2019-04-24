@@ -10,7 +10,7 @@ class ServiceCardsContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    services: state.data.services
+    services: state.servicesData.services
   };
 };
 

@@ -2,36 +2,30 @@ import React, { Component } from "react";
 import Company from "./Company";
 import "./CompanyInfo.css";
 import { connect } from "react-redux";
-import { selectCompany } from "actions/makeOrder";
-import { getCompaniesData, getClientsData } from "actions/receiveData";
-import { fetchFeedbacksInfo } from "actions/userActions";
+import { selectCompany } from "actions/orderActions";
+import { getCompanyData, fetchFeedbacksInfo } from "actions/receiveCompanyInfo";
 import { Spin, Alert } from "antd";
 
 class CompanyContainer extends Component {
   componentDidMount() {
-    this.props.getCompaniesData();
-    this.props.getClientsData();
+    this.props.getCompanyData(this.props.match.params.company);
     this.props.fetchFeedbacksInfo(this.props.match.params.company);
   }
   render() {
-    const { loadingCompanies, loadingClients, error } = this.props;
+    const { loadingCompany, loadingFeedbacks, error } = this.props;
     const matchPath = this.props.match.params.company;
-    const company = this.props.companies.find(
-      company => company.id === parseInt(this.props.match.params.company)
-    );
     return (
       <React.Fragment>
-        {loadingCompanies || loadingClients ? (
+        {loadingCompany || loadingFeedbacks ? (
           <Spin className="app__loader" size="large" tip="Loading..." />
         ) : error ? (
           <Alert className="error__message" message={error} type="error" />
         ) : (
           <div>
             <Company
-              company={company}
+              company={this.props.company}
               feedbacks={this.props.feedbacks}
               services={this.props.services}
-              clients={this.props.clients}
               matchPath={matchPath}
               selectCompany={this.props.selectCompany}
               role={this.props.role}
@@ -45,21 +39,19 @@ class CompanyContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    services: state.data.services,
-    companies: state.data.companies,
-    clients: state.data.clients,
-    feedbacks: state.data.feedbacks,
+    services: state.servicesData.services,
+    company: state.companyInfo.company,
+    feedbacks: state.companyInfo.feedbacks,
     role: state.auth.userData.role,
-    loadingCompanies: state.data.loadingCompanies,
-    loadingClients: state.data.loadingClients,
-    error: state.data.error
+    loadingCompany: state.companyInfo.loadingCompany,
+    loadingFeedbacks: state.companyInfo.loadingFeedbacks,
+    error: state.companyInfo.error
   };
 };
 
 const mapDispatchToProps = {
   selectCompany,
-  getCompaniesData,
-  getClientsData,
+  getCompanyData,
   fetchFeedbacksInfo
 };
 

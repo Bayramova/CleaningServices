@@ -54,13 +54,9 @@ class OrderListItem extends Component {
       phone,
       cost,
       feedbackLeft,
-      company_name,
-      client_id
+      clientName,
+      companyName
     } = this.props;
-    const client_name =
-      client_id !== null
-        ? this.props.clients.find(client => client.id === client_id).name
-        : "?";
     const orderButtons =
       this.props.status === "NEW" ? (
         <div className="user-profile__order-buttons">
@@ -87,9 +83,9 @@ class OrderListItem extends Component {
         </div>
         <div className="user-profile__info">
           {this.props.auth.userData.role === "CLIENT" ? (
-            <p className="user-profile__name">{`Company: ${company_name}`}</p>
+            <p className="user-profile__name">{`Company: ${companyName}`}</p>
           ) : (
-            <p className="user-profile__name">{`Client: ${client_name}`}</p>
+            <p className="user-profile__name">{`Client: ${clientName}`}</p>
           )}
           <p className="user-profile__name">
             {`Service: ${service.slice(0, service.indexOf("cleaning"))}`}
@@ -106,6 +102,7 @@ class OrderListItem extends Component {
           startTimeOfCleaning={startTimeOfCleaning}
           cleaningFrequency={cleaningFrequency}
           phone={phone}
+          name={clientName}
           cost={cost}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
@@ -129,7 +126,7 @@ class OrderListItem extends Component {
                 pathname: "/feedback",
                 state: {
                   orderId: id,
-                  company_name
+                  companyName
                 }
               }}
             >

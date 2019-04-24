@@ -14,7 +14,6 @@ class SignInFormContainer extends Component {
       <Redirect to="/" />
     ) : (
       <SignInForm
-        signInFormFields={this.props.signInFormFields}
         auth={this.props.auth}
         onChange={this.props.onChange}
         signInUser={this.props.signInUser}
@@ -25,7 +24,6 @@ class SignInFormContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    signInFormFields: state.signInFormFields,
     auth: state.auth
   };
 };

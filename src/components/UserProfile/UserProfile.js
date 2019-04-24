@@ -36,11 +36,8 @@ class UserProfile extends Component {
           </div>
           <OrdersList
             orders={this.props.orders}
-            companies={this.props.companies}
-            clients={this.props.clients}
             cancelOrder={this.props.cancelOrder}
             changeOrderStatus={this.props.changeOrderStatus}
-            history={this.props.history}
             auth={this.props.auth}
           />
         </div>

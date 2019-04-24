@@ -26,8 +26,7 @@ class UserProfileEditFormContainer extends Component {
 const mapStateToProps = state => {
   return {
     auth: state.auth,
-    errors: state.errors,
-    userData: state.userData
+    errors: state.errors
   };
 };
 

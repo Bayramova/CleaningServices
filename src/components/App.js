@@ -103,9 +103,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    loadingServices: state.data.loadingServices,
-    error: state.data.error,
-    auth: state.auth
+    loadingServices: state.servicesData.loadingServices,
+    error: state.servicesData.error
   };
 };
 
