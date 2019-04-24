@@ -3,6 +3,8 @@ import { signUpUser, signInUser, getUserFromToken } from "utils/api/auth";
 import { postFeedback } from "utils/api/feedbacks";
 import Toast from "popup-messages";
 import "popup-messages/css/index.css";
+import jwtDecode from "jwt-decode";
+import socket from "utils/socket";
 
 export const GET_ERRORS = "GET_ERRORS";
 export const DELETE_ERRORS = "DELETE_ERRORS";
@@ -73,6 +75,7 @@ export const signIn = userData => dispatch => {
   signInUser(userData)
     .then(res => {
       const { token, user } = res;
+      socket.emit("userId", jwtDecode(token).id);
       localStorage.setItem("token", token);
       dispatch(setCurrentUser(user));
       getUser(user.id).then(res => {

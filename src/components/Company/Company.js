@@ -21,7 +21,12 @@ class Company extends Component {
           </div>
           <div className="company-info__rating-and-orders">
             <div>
-              <Rate disabled defaultValue={this.props.company.rating} />
+              <Rate
+                disabled
+                defaultValue={
+                  this.props.company.rating / this.props.company.reviewsNumber
+                }
+              />
             </div>
             <span className="company-info__orders">{`${
               this.props.company.ordersNumber
