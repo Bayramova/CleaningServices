@@ -122,7 +122,7 @@
   .cost-form__content {
     display: grid;
     justify-items: left;
-    align-items: center;
+    align-items: flex-start;
     height: 100%;
   }
 

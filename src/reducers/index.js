@@ -15,5 +15,4 @@ export default combineReducers({
   searchCompaniesResult,
   orderFormFields,
   auth
-  //socket
 });

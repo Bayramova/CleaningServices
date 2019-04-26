@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./UserProfile.css";
 import OrdersList from "./OrdersList";
+import { Select } from "antd";
 
 class UserProfile extends Component {
+  handleChange = value => {
+    this.props.onChange(value);
+  };
+
   render() {
     return (
       <div className="user-profile__content">
@@ -34,6 +39,23 @@ class UserProfile extends Component {
               </div>
             </div>
           </div>
+
+          {this.props.orders.length ? (
+            <section>
+              <div className="orders-list__navigation">
+                <Select
+                  defaultValue="Sort by"
+                  style={{ width: 120 }}
+                  onChange={this.handleChange}
+                >
+                  <Select.Option value="newest">Newest first</Select.Option>
+                  <Select.Option value="oldest">Oldest first</Select.Option>
+                </Select>
+              </div>
+            </section>
+          ) : (
+            <React.Fragment />
+          )}
           <OrdersList
             orders={this.props.orders}
             cancelOrder={this.props.cancelOrder}

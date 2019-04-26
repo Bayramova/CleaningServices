@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { cancelNewOrder } from "actions/orderActions";
+import { cancelNewOrder, handleSortValueChange } from "actions/orderActions";
 import { editOrderStatus, getOrdersData } from "actions/orderActions";
 import UserProfile from "./UserProfile";
 import { Spin, Alert } from "antd";
@@ -24,6 +24,7 @@ class UserProfileContainer extends Component {
             orders={this.props.auth.userOrders.orders}
             cancelOrder={this.props.cancelOrder}
             changeOrderStatus={this.props.changeOrderStatus}
+            onChange={this.props.onChange}
             history={this.props.history}
           />
         )}
@@ -43,7 +44,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   cancelOrder: cancelNewOrder,
   changeOrderStatus: editOrderStatus,
-  getOrdersData
+  getOrdersData,
+  onChange: handleSortValueChange
 };
 
 export default connect(

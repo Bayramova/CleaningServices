@@ -44,6 +44,21 @@ const changeOrderStatus = orderId => {
   };
 };
 
+export const SORT_ORDERS = "SORT_ORDERS";
+
+const sortOrders = sortBy => {
+  return {
+    type: SORT_ORDERS,
+    sortBy
+  };
+};
+
+export const handleSortValueChange = sortBy => {
+  return dispatch => {
+    dispatch(sortOrders(sortBy));
+  };
+};
+
 export const order = (data, history) => dispatch => {
   socket.emit("new order", data);
   socket.on("error", error => {

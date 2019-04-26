@@ -75,7 +75,7 @@ export const signIn = userData => dispatch => {
   signInUser(userData)
     .then(res => {
       const { token, user } = res;
-      socket.emit("userId", jwtDecode(token).id);
+      socket.emit("join", jwtDecode(token).id);
       localStorage.setItem("token", token);
       dispatch(setCurrentUser(user));
       getUser(user.id).then(res => {
@@ -110,6 +110,7 @@ export const getUserDataFromToken = () => dispatch => {
 
 export const signOut = () => dispatch => {
   dispatch(unsetCurrentUser());
+  socket.emit("leave", jwtDecode(localStorage.token).id);
   localStorage.removeItem("token");
 };
 
