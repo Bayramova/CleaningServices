@@ -8,7 +8,7 @@ import {
 } from "actions/searchCompanies";
 
 const initialState = {
-  loadingCompanies: true,
+  loadingCompanies: false,
   companies: [],
   page: 1,
   hasMore: true,

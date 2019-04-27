@@ -27,7 +27,7 @@ const initialState = {
   },
   additionalUserData: {},
   userOrders: {
-    loadingOrders: true,
+    loadingOrders: false,
     orders: [],
     error: null
   }

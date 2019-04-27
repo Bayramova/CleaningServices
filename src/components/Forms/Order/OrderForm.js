@@ -59,6 +59,7 @@ class PlaceOrderForm extends Component {
       visible: false
     });
     const values = {
+      token: localStorage.token,
       address: this.props.orderFormFields.address.value,
       service: this.props.orderFormFields.serviceType.value,
       bigRooms: this.props.orderFormFields.bigRooms.value,

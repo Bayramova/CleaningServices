@@ -9,6 +9,7 @@ class OrdersList extends Component {
           <OrdersListItem
             key={order.id}
             id={order.id}
+            date={new Date(order.createdAt)}
             status={order.status}
             address={order.address}
             service={order.service}
