@@ -10,7 +10,6 @@ class Company extends Component {
     this.props.selectCompany(this.props.matchPath);
   };
   render() {
-    console.log(this.props);
     const serviceTitles = this.props.company.services.map(
       id => this.props.services.find(service => service.id === id).title
     );

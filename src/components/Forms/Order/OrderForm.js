@@ -7,7 +7,7 @@ import "./OrderForm.css";
 
 const { Option } = Select;
 
-class PlaceOrderForm extends Component {
+class OrderForm extends Component {
   state = {
     visible: false,
     cost: null
@@ -59,7 +59,7 @@ class PlaceOrderForm extends Component {
       visible: false
     });
     const values = {
-      token: localStorage.token,
+      token: localStorage.token.slice(7),
       address: this.props.orderFormFields.address.value,
       service: this.props.orderFormFields.serviceType.value,
       bigRooms: this.props.orderFormFields.bigRooms.value,
@@ -76,7 +76,7 @@ class PlaceOrderForm extends Component {
         ? this.props.auth.additionalUserData.id
         : null
     };
-    this.props.makeOrder(values, this.props.history);
+    this.props.makeOrder(values);
   };
 
   handleCancel = e => {
@@ -398,11 +398,9 @@ class PlaceOrderForm extends Component {
   }
 }
 
-const OrderForm = Form.create({
+export default Form.create({
   name: "global_state",
   onFieldsChange(props, changedFields) {
     props.onChange(changedFields);
   }
-})(PlaceOrderForm);
-
-export default OrderForm;
+})(OrderForm);

@@ -59,7 +59,7 @@ export const handleSortValueChange = sortBy => {
   };
 };
 
-export const order = (data, history) => dispatch => {
+export const order = data => dispatch => {
   socket.emit("new order", data);
   socket.on("error", error => {
     new Toast(error, "error").show(Toast.toastsContainer);
