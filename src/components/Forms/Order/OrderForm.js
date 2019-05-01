@@ -58,8 +58,12 @@ class OrderForm extends Component {
     this.setState({
       visible: false
     });
+    let token = "";
+    if (localStorage.token) {
+      token = localStorage.token.slice(7);
+    }
     const values = {
-      token: localStorage.token.slice(7),
+      token: token,
       address: this.props.orderFormFields.address.value,
       service: this.props.orderFormFields.serviceType.value,
       bigRooms: this.props.orderFormFields.bigRooms.value,
