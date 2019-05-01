@@ -1,11 +1,11 @@
 version: 0.2
 phases:
-  install:
+  pre_build:
     commands:
       - sudo npm install
-   build:
+  build:
     commands:
-      - "sudo npm run-scripts build"   
+      - sudo npm run build
 artifacts:
   files:
     - '**/*' #copy all build files to S3 location
