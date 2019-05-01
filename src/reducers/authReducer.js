@@ -11,7 +11,8 @@ import {
   FETCH_ORDERS_REQUEST,
   FETCH_ORDERS_SUCCESS,
   CANCEL_ORDER,
-  CHANGE_ORDER_STATUS
+  CHANGE_ORDER_STATUS,
+  SORT_ORDERS
 } from "actions/orderActions";
 import { FETCH_DATA_FAILURE } from "actions/receiveData";
 
@@ -26,7 +27,7 @@ const initialState = {
   },
   additionalUserData: {},
   userOrders: {
-    loadingOrders: true,
+    loadingOrders: false,
     orders: [],
     error: null
   }
@@ -120,7 +121,10 @@ export default function(state = initialState, action) {
       });
       return {
         ...state,
-        orders: updatedOrderList
+        userOrders: {
+          ...state.userOrders,
+          orders: updatedOrderList
+        }
       };
     case CHANGE_ORDER_STATUS:
       const updatedOrdersList = state.userOrders.orders.map(order => {
@@ -133,7 +137,24 @@ export default function(state = initialState, action) {
       });
       return {
         ...state,
-        orders: updatedOrdersList
+        userOrders: {
+          ...state.userOrders,
+          orders: updatedOrdersList
+        }
+      };
+    case SORT_ORDERS:
+      const sortedOrdersList = [...state.userOrders.orders].sort(
+        (order1, order2) =>
+          action.sortBy === "newest"
+            ? Date.parse(order2.createdAt) - Date.parse(order1.createdAt)
+            : Date.parse(order1.createdAt) - Date.parse(order2.createdAt)
+      );
+      return {
+        ...state,
+        userOrders: {
+          ...state.userOrders,
+          orders: sortedOrdersList
+        }
       };
     default:
       return state;

@@ -1,4 +1,4 @@
-import { search } from "utils/api/search";
+import { fetchCompanies } from "utils/api/data";
 import { fetchCompaniesRequest, fetchDataFailure } from "./receiveData";
 
 export const CLEAR_COMPANIES = "CLEAR_COMPANIES";
@@ -25,7 +25,7 @@ export const clearCompanies = () => dispatch => {
 export const searchCompanies = (query, page, limit) => dispatch => {
   dispatch(fetchCompaniesRequest());
 
-  search(query, page, limit)
+  fetchCompanies(page, limit, query)
     .then(res => {
       dispatch(searchCompaniesSuccess(res.companies, res.hasMore));
     })

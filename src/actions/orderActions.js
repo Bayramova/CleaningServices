@@ -1,10 +1,6 @@
 import { fetchDataFailure } from "./receiveData";
-import {
-  makeOrder,
-  fetchOrders,
-  cancelOrder,
-  changeStatus
-} from "utils/api/orders";
+import { fetchOrders, cancelOrder, changeStatus } from "utils/api/orders";
+import socket from "utils/socket";
 import Toast from "popup-messages";
 import "popup-messages/css/index.css";
 
@@ -48,14 +44,26 @@ const changeOrderStatus = orderId => {
   };
 };
 
-export const order = (data, history) => dispatch => {
-  makeOrder(data)
-    .then(res => {
-      history.goBack();
-    })
-    .catch(err => {
-      new Toast(err, "error").show(Toast.toastsContainer);
-    });
+export const SORT_ORDERS = "SORT_ORDERS";
+
+const sortOrders = sortBy => {
+  return {
+    type: SORT_ORDERS,
+    sortBy
+  };
+};
+
+export const handleSortValueChange = sortBy => {
+  return dispatch => {
+    dispatch(sortOrders(sortBy));
+  };
+};
+
+export const order = data => dispatch => {
+  socket.emit("new order", data);
+  socket.on("error", error => {
+    new Toast(error, "error").show(Toast.toastsContainer);
+  });
 };
 
 export const getOrdersData = userId => dispatch => {

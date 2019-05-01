@@ -42,6 +42,7 @@ class OrderListItem extends Component {
   render() {
     const {
       id,
+      date,
       status,
       address,
       service,
@@ -90,6 +91,7 @@ class OrderListItem extends Component {
           <p className="user-profile__name">
             {`Service: ${service.slice(0, service.indexOf("cleaning"))}`}
           </p>
+          <p className="user-profile__name">{`Date: ${date.toDateString()}`}</p>
         </div>
         <OrderDetails
           visible={this.state.visible}

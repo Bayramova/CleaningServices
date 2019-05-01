@@ -15,7 +15,6 @@ class OrderFormContainer extends Component {
         companies={this.props.companies}
         company={this.props.company}
         makeOrder={this.props.makeOrder}
-        history={this.props.history}
       />
     );
   }

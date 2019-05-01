@@ -6,7 +6,7 @@ import {
 import { SORT_COMPANIES } from "actions/sortCompanies";
 
 const initialState = {
-  loadingCompanies: true,
+  loadingCompanies: false,
   companies: [],
   page: 1,
   hasMore: true,
