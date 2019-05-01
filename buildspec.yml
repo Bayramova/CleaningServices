@@ -5,7 +5,7 @@ phases:
       - sudo npm install
   build:
     commands:
-      - npm run build
+      - sudo npm run build
 artifacts:
   files:
     - '**/*' #copy all build files to S3 location
