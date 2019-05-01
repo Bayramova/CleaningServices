@@ -28,6 +28,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
+    "deploy": "aws s3 sync build/ s3://cleaning-services-app",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "lint": "eslint --fix . --ext .js"
