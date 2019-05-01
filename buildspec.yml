@@ -2,10 +2,10 @@ version: 0.2
 phases:
   install:
     commands:
-      - sudo npm install --unsafe-perm=true
+      - sudo npm install
    build:
     commands:
-      - "sudo npm run build"   
+      - "sudo npm run-scripts build"   
 artifacts:
   files:
     - '**/*' #copy all build files to S3 location
