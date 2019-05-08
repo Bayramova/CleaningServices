@@ -20,7 +20,11 @@ class SignUpForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        this.props.signUpUser(values, this.props.history);
+        let signUpValues = values;
+        if (values.logo) {
+          signUpValues = { ...values, logo: values.logo[0].thumbUrl.slice(23) };
+        }
+        this.props.signUpUser(signUpValues, this.props.history);
       }
     });
   };
@@ -46,6 +50,45 @@ class SignUpForm extends React.Component {
     }
     callback();
   };
+
+  fileToBase64 = file => {
+    return new Promise(resolve => {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function(event) {
+        resolve(event.target.result);
+      };
+      reader.onerror = function(error) {
+        console.log("Error: ", error);
+      };
+    });
+  };
+
+  uploadFile = e => {
+    if (e.fileList.length > 1) {
+      e.fileList.shift();
+    }
+    console.log(e.file.originFileObj);
+    const file = e.file.originFileObj;
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      return {
+        name: file.name,
+        type: file.type,
+        size: Math.round(file.size / 1000) + " kB",
+        base64: reader.result,
+        file: file
+      };
+    };
+    return e && e.fileList;
+  };
+
+  dummyRequest({ file, onSuccess }) {
+    setTimeout(() => {
+      onSuccess("ok");
+    }, 0);
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -146,9 +189,13 @@ class SignUpForm extends React.Component {
                           <div className="dropbox">
                             {getFieldDecorator("logo", {
                               valuePropName: "fileList",
-                              getValueFromEvent: this.normFile
+                              getValueFromEvent: this.uploadFile
                             })(
-                              <Upload.Dragger name="files" action="/upload.do">
+                              <Upload.Dragger
+                                name="logo"
+                                customRequest={this.dummyRequest}
+                                listType="picture"
+                              >
                                 <p className="ant-upload-drag-icon">
                                   <Icon type="inbox" />
                                 </p>

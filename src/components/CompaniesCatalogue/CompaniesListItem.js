@@ -8,7 +8,7 @@ const Company = props => {
   return (
     <div className="company-card">
       <Link to={`/company/${id}`}>
-        <img className="company-card__image" alt="logo" src={`.${logo}`} />
+        <img className="company-card__image" alt="logo" src={logo} />
         <div className="company-card__content">
           <div className="company-card__title">{name}</div>
           <div className="company-card__rate">

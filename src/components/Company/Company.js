@@ -41,7 +41,7 @@ class Company extends Component {
                 <img
                   className="company-info__logo"
                   alt="logo"
-                  src={`.${this.props.company.logo}`}
+                  src={this.props.company.logo}
                 />
                 {this.props.role === "COMPANY" ? (
                   <React.Fragment />
