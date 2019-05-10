@@ -1,4 +1,7 @@
 import {
+  VALIDATE_EMAIL,
+  VALIDATE_EMAIL_SUCCESS,
+  VALIDATE_EMAIL_FAILURE,
   SET_CURRENT_USER,
   UNSET_CURRENT_USER,
   GET_ERRORS,
@@ -20,6 +23,7 @@ const initialState = {
   isAuthenticated: false,
   errors: {},
   loadingUser: false,
+  error: null,
   userData: {
     id: "",
     email: "",
@@ -35,6 +39,26 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case VALIDATE_EMAIL:
+      return {
+        ...state,
+        loadingUser: true
+      };
+    case VALIDATE_EMAIL_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: true,
+        loadingUser: false,
+        userData: action.user,
+        error: null
+      };
+    case VALIDATE_EMAIL_FAILURE:
+      const error = action.message;
+      return {
+        ...state,
+        loadingUser: false,
+        error: error
+      };
     case USER_LOADING:
       return {
         ...state,

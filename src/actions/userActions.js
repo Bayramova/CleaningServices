@@ -6,6 +6,9 @@ import "popup-messages/css/index.css";
 import jwtDecode from "jwt-decode";
 import socket from "utils/socket";
 
+export const VALIDATE_EMAIL = "VALIDATE_EMAIL";
+export const VALIDATE_EMAIL_SUCCESS = "VALIDATE_EMAIL_SUCCESS";
+export const VALIDATE_EMAIL_FAILURE = "VALIDATE_EMAIL_FAILURE";
 export const GET_ERRORS = "GET_ERRORS";
 export const DELETE_ERRORS = "DELETE_ERRORS";
 export const USER_LOADING = "USER_LOADING";
@@ -13,6 +16,27 @@ export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const UNSET_CURRENT_USER = "UNSET_CURRENT_USER";
 export const GET_USER_DATA = "GET_USER_DATA";
 export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
+
+// export const validateEmail = validateEmailToken => {
+//   return {
+//     type: VALIDATE_EMAIL,
+//     payload: request
+//   };
+// };
+
+export const validateEmailSuccess = currentUser => {
+  return {
+    type: VALIDATE_EMAIL_SUCCESS,
+    user: currentUser
+  };
+};
+
+export const validateEmailFailure = error => {
+  return {
+    type: VALIDATE_EMAIL_FAILURE,
+    message: error
+  };
+};
 
 const getErrors = error => {
   return {
