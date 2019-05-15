@@ -15,7 +15,6 @@ class SignUpFormContainer extends Component {
         auth={this.props.auth}
         onChange={this.props.onChange}
         signUpUser={this.props.signUpUser}
-        history={this.props.history}
       />
     );
   }

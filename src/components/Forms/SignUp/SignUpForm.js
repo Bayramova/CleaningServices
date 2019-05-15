@@ -24,7 +24,7 @@ class SignUpForm extends React.Component {
         if (values.logo) {
           signUpValues = { ...values, logo: values.logo[0].thumbUrl.slice(23) };
         }
-        this.props.signUpUser(signUpValues, this.props.history);
+        this.props.signUpUser(signUpValues);
       }
     });
   };
@@ -68,7 +68,6 @@ class SignUpForm extends React.Component {
     if (e.fileList.length > 1) {
       e.fileList.shift();
     }
-    console.log(e.file.originFileObj);
     const file = e.file.originFileObj;
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -278,8 +277,9 @@ class SignUpForm extends React.Component {
                   style={{ width: "50%" }}
                   type="primary"
                   htmlType="submit"
+                  disabled={this.props.auth.sendingEmail}
                 >
-                  Register
+                  Let's go
                 </Button>
               </Form.Item>
             </Form>

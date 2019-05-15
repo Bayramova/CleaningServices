@@ -1,7 +1,6 @@
 import {
-  VALIDATE_EMAIL,
-  VALIDATE_EMAIL_SUCCESS,
-  VALIDATE_EMAIL_FAILURE,
+  SIGNUP_USER_REQUEST,
+  SIGNUP_USER_SUCCESS,
   SET_CURRENT_USER,
   UNSET_CURRENT_USER,
   GET_ERRORS,
@@ -23,7 +22,7 @@ const initialState = {
   isAuthenticated: false,
   errors: {},
   loadingUser: false,
-  error: null,
+  sendingEmail: false,
   userData: {
     id: "",
     email: "",
@@ -39,25 +38,21 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case VALIDATE_EMAIL:
+    case SIGNUP_USER_REQUEST:
       return {
         ...state,
-        loadingUser: true
+        sendingEmail: true,
+        userData: {
+          id: "",
+          role: "",
+          email: ""
+        }
       };
-    case VALIDATE_EMAIL_SUCCESS:
+    case SIGNUP_USER_SUCCESS:
       return {
         ...state,
-        isAuthenticated: true,
-        loadingUser: false,
-        userData: action.user,
-        error: null
-      };
-    case VALIDATE_EMAIL_FAILURE:
-      const error = action.message;
-      return {
-        ...state,
-        loadingUser: false,
-        error: error
+        sendingEmail: false,
+        userData: action.user
       };
     case USER_LOADING:
       return {
@@ -84,6 +79,7 @@ export default function(state = initialState, action) {
     case GET_ERRORS:
       return {
         ...state,
+        sendingEmail: false,
         errors: action.error
       };
     case DELETE_ERRORS:

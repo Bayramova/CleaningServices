@@ -4,6 +4,10 @@ function signUpUser(userData) {
   return fetchData("signup", "POST", userData);
 }
 
+function verifyEmail(verificationToken) {
+  return fetchData(`verifyEmail/${verificationToken}`);
+}
+
 function signInUser(userData) {
   return fetchData("signin", "POST", userData);
 }
@@ -16,4 +20,4 @@ async function getUserFromToken() {
   return fetchProtectedData("user/from/token");
 }
 
-export { signUpUser, signInUser, getUser, getUserFromToken };
+export { signUpUser, verifyEmail, signInUser, getUser, getUserFromToken };

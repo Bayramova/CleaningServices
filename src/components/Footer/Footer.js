@@ -12,7 +12,7 @@ class Footer extends Component {
                 href="mailto:cleaningservices@gmail.com"
                 className="footer__contact--tel"
               >
-                cleaningservices@gmail.com
+                clnng.cleaningservices@gmail.com
               </a>
             </li>
           </ul>
