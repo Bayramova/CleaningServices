@@ -5,6 +5,7 @@ import "./SignInForm.css";
 
 class SignInForm extends Component {
   componentDidMount() {
+    console.log(this.props.form.getFieldValue("email"));
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/");
     }
@@ -19,6 +20,10 @@ class SignInForm extends Component {
     });
   };
 
+  handleResendClick = e => {
+    this.props.resendEmail({ email: this.props.form.getFieldValue("email") });
+  };
+
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
@@ -28,11 +33,7 @@ class SignInForm extends Component {
             <h1 className="sign-up__title">Sign in to your account</h1>
             <div className="sign-in__sign-up-info">
               Don't have an account?
-              <Link to={"/signup"} className="sign-in__sign-up-link">
-                {" "}
-                Create one
-              </Link>
-              .
+              <Link to={"/signup"}> Create one</Link>.
             </div>
             <Form onSubmit={this.handleSubmit}>
               <Form.Item help={this.props.auth.errors.emailincorrect}>
@@ -56,7 +57,15 @@ class SignInForm extends Component {
                   />
                 )}
               </Form.Item>
-              <Form.Item help={this.props.auth.errors.passwordincorrect}>
+              <Form.Item
+                help={this.props.auth.errors.passwordincorrect}
+                extra={
+                  <div className="sign-in__sign-up-info">
+                    Forgotten your password?
+                    <Link to={"/resetPassword"}> Click here</Link>.
+                  </div>
+                }
+              >
                 {getFieldDecorator("password", {
                   rules: [
                     { required: true, message: "Please input your password!" }
@@ -71,10 +80,21 @@ class SignInForm extends Component {
                   />
                 )}
               </Form.Item>
-              <div className="sign-in-form__buttons">
-                <Button type="primary" htmlType="submit">
-                  Sign in
-                </Button>
+              <div className="sign-up__buttons">
+                <Form.Item>
+                  <Button type="primary" htmlType="submit">
+                    Sign in
+                  </Button>
+                </Form.Item>
+                <Form.Item>
+                  <Button
+                    type="primary"
+                    onClick={this.handleResendClick}
+                    disabled={!this.props.form.getFieldValue("email")}
+                  >
+                    Resend confirm mail
+                  </Button>
+                </Form.Item>
               </div>
             </Form>
           </div>

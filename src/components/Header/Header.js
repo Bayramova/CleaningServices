@@ -66,6 +66,8 @@ class Header extends Component {
           closable={false}
           onClose={this.onClose}
           visible={this.state.visible}
+          className="drawer_background-color"
+          bodyStyle={{ background: "#282828", height: "100%" }}
         >
           <p>
             <Link to={"/make_order"} className="link button-links__link">

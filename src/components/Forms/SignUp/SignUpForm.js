@@ -29,6 +29,10 @@ class SignUpForm extends React.Component {
     });
   };
 
+  handleResendClick = e => {
+    this.props.resendEmail({ email: this.props.form.getFieldValue("email") });
+  };
+
   handleConfirmBlur = e => {
     const value = e.target.value;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
@@ -272,16 +276,26 @@ class SignUpForm extends React.Component {
                     return;
                 }
               })()}
-              <Form.Item>
-                <Button
-                  style={{ width: "50%" }}
-                  type="primary"
-                  htmlType="submit"
-                  disabled={this.props.auth.sendingEmail}
-                >
-                  Let's go
-                </Button>
-              </Form.Item>
+              <div className="sign-up__buttons">
+                <Form.Item>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    disabled={this.props.auth.isEmailSent}
+                  >
+                    Let's go
+                  </Button>
+                </Form.Item>
+                <Form.Item>
+                  <Button
+                    type="primary"
+                    onClick={this.handleResendClick}
+                    disabled={!this.props.auth.isEmailSent}
+                  >
+                    Resend
+                  </Button>
+                </Form.Item>
+              </div>
             </Form>
           </div>
         </div>

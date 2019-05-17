@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import SignInForm from "./SignInForm";
-import { signIn, deleteErrors } from "actions/userActions";
+import { signIn, resend, deleteErrors } from "actions/userActions";
 import { handleFormChange } from "actions/updateFieldsState";
 import { Redirect } from "react-router-dom";
 
@@ -17,6 +17,7 @@ class SignInFormContainer extends Component {
         auth={this.props.auth}
         onChange={this.props.onChange}
         signInUser={this.props.signInUser}
+        resendEmail={this.props.resendEmail}
       />
     );
   }
@@ -30,6 +31,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   signInUser: signIn,
+  resendEmail: resend,
   onChange: handleFormChange,
   deleteErrors: deleteErrors
 };

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import UserProfileEditForm from "./UserProfileEditForm";
-import { update, deleteErrors } from "actions/userActions";
+import { update, deleteErrors, signOut } from "actions/userActions";
 import { handleFormChange } from "actions/updateFieldsState";
 
 class UserProfileEditFormContainer extends Component {
@@ -16,6 +16,7 @@ class UserProfileEditFormContainer extends Component {
         onChange={this.props.onChange}
         auth={this.props.auth}
         updateUser={this.props.updateUser}
+        signOut={this.props.signOut}
         history={this.props.history}
         userData={this.props.auth.additionalUserData}
       />
@@ -33,7 +34,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   updateUser: update,
   onChange: handleFormChange,
-  deleteErrors: deleteErrors
+  deleteErrors: deleteErrors,
+  signOut: signOut
 };
 
 export default connect(
