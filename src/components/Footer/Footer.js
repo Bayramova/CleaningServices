@@ -8,8 +8,11 @@ class Footer extends Component {
         <div className="footer-left">
           <ul className="footer__contact">
             <li className="footer__contact__element">
-              <a href="tel:+375336393823" className="footer__contact--tel">
-                +375336393823
+              <a
+                href="mailto:cleaningservices@gmail.com"
+                className="footer__contact--tel"
+              >
+                cleaningservices@gmail.com
               </a>
             </li>
           </ul>
