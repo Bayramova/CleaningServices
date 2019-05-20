@@ -40,8 +40,7 @@ class App extends Component {
         dispatch(signOut());
         this.props.history.push("/signin");
       } else {
-        const token = localStorage.token;
-        dispatch(getUserDataFromToken(token));
+        dispatch(getUserDataFromToken());
       }
     }
   }

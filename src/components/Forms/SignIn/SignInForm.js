@@ -5,7 +5,6 @@ import "./SignInForm.css";
 
 class SignInForm extends Component {
   componentDidMount() {
-    console.log(this.props.form.getFieldValue("email"));
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/");
     }

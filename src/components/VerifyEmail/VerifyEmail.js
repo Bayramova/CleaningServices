@@ -13,10 +13,13 @@ class VerifyEmailNotificationContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.props.auth.errors.error ? (
+        {this.props.auth.errors.error || this.props.auth.errors.expiredError ? (
           <Alert
             className="error__message"
-            message={this.props.auth.errors.error}
+            message={
+              this.props.auth.errors.error ||
+              this.props.auth.errors.expiredError
+            }
             type="error"
           />
         ) : (

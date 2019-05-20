@@ -23,7 +23,7 @@ export const USER_LOADING = "USER_LOADING";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const UNSET_CURRENT_USER = "UNSET_CURRENT_USER";
 export const GET_USER_DATA = "GET_USER_DATA";
-export const UPDATE_USER_DATA_REQUEST = "UPDATE_USER_DATA";
+export const UPDATE_USER_DATA_REQUEST = "UPDATE_USER_DATA_REQUEST";
 export const UPDATE_USER_DATA_SUCCESS = "UPDATE_USER_DATA_SUCCESS";
 
 const signUpUserRequest = () => {
@@ -110,10 +110,11 @@ export const resend = userData => dispatch => {
       new Toast(res.message, "info").show(Toast.toastsContainer);
     })
     .catch(err => {
-      err.json().then(errorMessage => {
-        dispatch(getErrors(errorMessage));
-        new Toast(errorMessage, "error").show(Toast.toastsContainer);
-      });
+      // err.json().then(errorMessage => {
+      //   dispatch(getErrors(errorMessage));
+      //   new Toast(errorMessage, "error").show(Toast.toastsContainer);
+      // });
+      new Toast(err.message, "error").show(Toast.toastsContainer);
     });
 };
 
@@ -163,17 +164,20 @@ export const reset = userData => dispatch => {
   dispatch(updateUserDataRequest());
   resetPassword(userData)
     .then(res => {
-      dispatch(unsetCurrentUser());
-      socket.emit("leave", jwtDecode(localStorage.token).id);
-      localStorage.removeItem("token");
+      if (localStorage.token) {
+        dispatch(unsetCurrentUser());
+        socket.emit("leave", jwtDecode(localStorage.token).id);
+        localStorage.removeItem("token");
+      }
       dispatch(updateUserDataSuccess());
       new Toast(res.message, "info").show(Toast.toastsContainer);
     })
     .catch(err => {
-      err.json().then(errorMessage => {
-        dispatch(getErrors(errorMessage));
-      });
-      //new Toast(err.message, "error").show(Toast.toastsContainer);
+      console.log(err);
+      new Toast("Something went wrong", "error").show(Toast.toastsContainer);
+      // err.json().then(errorMessage => {
+      //   dispatch(getErrors(errorMessage));
+      // });
     });
 };
 
@@ -191,7 +195,10 @@ export const getUserDataFromToken = () => dispatch => {
     })
     .catch(err => {
       console.log(err);
-      new Toast(err, "error").show(Toast.toastsContainer);
+      // err.json().then(errorMessage => {
+      //   new Toast(errorMessage, "error").show(Toast.toastsContainer);
+      // });
+      new Toast(err.error, "error").show(Toast.toastsContainer);
     });
 };
 
