@@ -1,9 +1,0 @@
-version: 0.0
-os: linux
-files:
-  - source: /
-    destination: /home/ubuntu/client
-hooks:
-  ApplicationStart:
-    - location: scripts/application_start.sh
-      runas: ubuntu
