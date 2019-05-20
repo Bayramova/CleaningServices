@@ -43,15 +43,20 @@ class CompaniesCatalogue extends Component {
         <section>
           <InfiniteScroll
             className="loader__container"
-            hasMore={this.props.hasMore}
-            loader={<Spin className="inf__loader" key={this.props.page} />}
+            hasMore={!this.props.loading && this.props.hasMore}
             loadMore={() => this.props.getCompaniesData(this.props.page, 5)}
           >
             <CompaniesList
               companies={this.props.companies.filter(company =>
                 company.services.includes(matchPath)
               )}
-            />
+            >
+              {this.props.loading && this.props.hasMore && (
+                <div>
+                  <Spin className="inf__loader" key={this.props.page} />
+                </div>
+              )}
+            </CompaniesList>
           </InfiniteScroll>
         </section>
       </div>
@@ -63,6 +68,7 @@ const mapStateToProps = state => {
   return {
     services: state.servicesData.services,
     companies: state.companiesData.companies,
+    loading: state.companiesData.loadingCompanies,
     page: state.companiesData.page,
     hasMore: state.companiesData.hasMore,
     error: state.companiesData.error

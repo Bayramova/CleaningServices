@@ -31,8 +31,7 @@ class CompaniesListByQueryContainer extends Component {
         <section>
           <InfiniteScroll
             className="loader__container"
-            hasMore={this.props.hasMore}
-            loader={<Spin className="inf__loader" key={this.props.page} />}
+            hasMore={!this.props.loading && this.props.hasMore}
             loadMore={() =>
               this.props.searchCompanies(
                 queryString.parse(this.props.location.search).q.toLowerCase(),
@@ -41,7 +40,13 @@ class CompaniesListByQueryContainer extends Component {
               )
             }
           >
-            <CompaniesList companies={this.props.companies} />
+            <CompaniesList companies={this.props.companies}>
+              {this.props.loading && this.props.hasMore && (
+                <div>
+                  <Spin className="inf__loader" key={this.props.page} />
+                </div>
+              )}
+            </CompaniesList>
           </InfiniteScroll>
         </section>
       </div>
@@ -52,6 +57,7 @@ class CompaniesListByQueryContainer extends Component {
 const mapStateToProps = state => {
   return {
     companies: state.searchCompaniesResult.companies,
+    loading: state.searchCompaniesResult.loadingCompanies,
     page: state.searchCompaniesResult.page,
     hasMore: state.searchCompaniesResult.hasMore,
     error: state.searchCompaniesResult.error
