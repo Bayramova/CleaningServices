@@ -1,20 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import SignUpForm from "./SignUpForm";
-import { signUp, resend, deleteErrors } from "actions/userActions";
+import ResetPasswordForm from "./ResetPasswordForm";
+import { reset, resend, deleteErrors } from "actions/userActions";
 import { handleFormChange } from "actions/updateFieldsState";
 
-class SignUpFormContainer extends Component {
+class ResetPasswordFormContainer extends Component {
   componentWillUnmount() {
     this.props.deleteErrors();
   }
 
   render() {
     return (
-      <SignUpForm
+      <ResetPasswordForm
         auth={this.props.auth}
         onChange={this.props.onChange}
         signUpUser={this.props.signUpUser}
+        resetPassword={this.props.resetPassword}
         resendEmail={this.props.resendEmail}
       />
     );
@@ -28,7 +29,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  signUpUser: signUp,
+  resetPassword: reset,
   resendEmail: resend,
   onChange: handleFormChange,
   deleteErrors: deleteErrors
@@ -37,4 +38,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SignUpFormContainer);
+)(ResetPasswordFormContainer);

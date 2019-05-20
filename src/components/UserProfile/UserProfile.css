@@ -96,6 +96,17 @@
   min-height: 67px;
 }
 
+.edit-form__buttons {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+}
+
+.reset-link {
+  font-size: 15px;
+  font-weight: 450;
+}
+
 @media (min-width: 768px) {
   .user-profile__container {
     width: 80%;

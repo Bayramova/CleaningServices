@@ -24,9 +24,13 @@ class SignUpForm extends React.Component {
         if (values.logo) {
           signUpValues = { ...values, logo: values.logo[0].thumbUrl.slice(23) };
         }
-        this.props.signUpUser(signUpValues, this.props.history);
+        this.props.signUpUser(signUpValues);
       }
     });
+  };
+
+  handleResendClick = e => {
+    this.props.resendEmail({ email: this.props.form.getFieldValue("email") });
   };
 
   handleConfirmBlur = e => {
@@ -68,7 +72,6 @@ class SignUpForm extends React.Component {
     if (e.fileList.length > 1) {
       e.fileList.shift();
     }
-    console.log(e.file.originFileObj);
     const file = e.file.originFileObj;
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -273,15 +276,26 @@ class SignUpForm extends React.Component {
                     return;
                 }
               })()}
-              <Form.Item>
-                <Button
-                  style={{ width: "50%" }}
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Register
-                </Button>
-              </Form.Item>
+              <div className="sign-up__buttons">
+                <Form.Item>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    disabled={this.props.auth.isEmailSent}
+                  >
+                    Let's go
+                  </Button>
+                </Form.Item>
+                <Form.Item>
+                  <Button
+                    type="primary"
+                    onClick={this.handleResendClick}
+                    disabled={!this.props.auth.isEmailSent}
+                  >
+                    Resend
+                  </Button>
+                </Form.Item>
+              </div>
             </Form>
           </div>
         </div>

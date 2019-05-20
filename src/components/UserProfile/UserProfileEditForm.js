@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Form, Input, Select, Button, Upload, Icon } from "antd";
 import "./UserProfile";
 
@@ -14,15 +15,24 @@ class UserProfileEditForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        const userData = {
-          id: this.props.auth.userData.id,
-          ...values
-        };
-        this.props.updateUser(
-          this.props.auth.userData.id,
-          userData,
-          this.props.history
-        );
+        if (
+          this.props.auth.userData.email !== values.email ||
+          this.props.auth.additionalUserData.name !== values.name ||
+          this.props.auth.additionalUserData.address !== values.address
+        ) {
+          const userData = {
+            id: this.props.auth.userData.id,
+            ...values
+          };
+          this.props.updateUser(
+            this.props.auth.userData.id,
+            userData,
+            this.props.history
+          );
+          //this.props.signOut();
+        } else {
+          this.props.history.goBack();
+        }
       }
     });
   };
@@ -196,15 +206,19 @@ class UserProfileEditForm extends React.Component {
                     return;
                 }
               })()}
-              <Form.Item>
-                <Button
-                  style={{ width: "50%" }}
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Save
-                </Button>
-              </Form.Item>
+
+              <div className="edit-form__buttons">
+                <Form.Item>
+                  <Button type="primary" htmlType="submit">
+                    Save
+                  </Button>
+                </Form.Item>
+                <Form.Item>
+                  <Link to={"/resetPassword"} className="reset-link">
+                    Reset password
+                  </Link>
+                </Form.Item>
+              </div>
             </Form>
           </div>
         </div>

@@ -23,6 +23,13 @@
   color: #444444;
 }
 
+.sign-up__buttons {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 5px;
+  justify-content: start;
+}
+
 @media (min-width: 768px) {
   .sign-up-container {
     width: 80%;

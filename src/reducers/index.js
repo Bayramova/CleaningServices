@@ -6,7 +6,6 @@ import companyInfo from "./company";
 import searchCompaniesResult from "./searchCompany";
 import orderFormFields from "./orderFormFields";
 import auth from "./authReducer";
-// import socket from "./socket";
 
 export default combineReducers({
   servicesData,

@@ -1,10 +1,13 @@
 import {
+  SIGNUP_USER_REQUEST,
+  SIGNUP_USER_SUCCESS,
   SET_CURRENT_USER,
   UNSET_CURRENT_USER,
   GET_ERRORS,
   DELETE_ERRORS,
   GET_USER_DATA,
-  UPDATE_USER_DATA,
+  UPDATE_USER_DATA_REQUEST,
+  UPDATE_USER_DATA_SUCCESS,
   USER_LOADING
 } from "actions/userActions";
 import {
@@ -20,6 +23,8 @@ const initialState = {
   isAuthenticated: false,
   errors: {},
   loadingUser: false,
+  sendingEmail: false,
+  isEmailSent: false,
   userData: {
     id: "",
     email: "",
@@ -35,6 +40,23 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case SIGNUP_USER_REQUEST:
+      return {
+        ...state,
+        sendingEmail: true,
+        userData: {
+          id: "",
+          role: "",
+          email: ""
+        }
+      };
+    case SIGNUP_USER_SUCCESS:
+      return {
+        ...state,
+        sendingEmail: false,
+        isEmailSent: true,
+        userData: action.user
+      };
     case USER_LOADING:
       return {
         ...state,
@@ -60,6 +82,7 @@ export default function(state = initialState, action) {
     case GET_ERRORS:
       return {
         ...state,
+        sendingEmail: false,
         errors: action.error
       };
     case DELETE_ERRORS:
@@ -72,19 +95,17 @@ export default function(state = initialState, action) {
         ...state,
         additionalUserData: action.userData
       };
-    case UPDATE_USER_DATA:
+    case UPDATE_USER_DATA_REQUEST:
       return {
         ...state,
-        userData: {
-          ...state.userData,
-          email: action.updates.email
-        },
-        additionalUserData: {
-          ...state.userData,
-          name: action.updates.name,
-          address: action.updates.address,
-          services: action.updates.services
-        }
+        sendingEmail: true,
+        isEmailSent: false
+      };
+    case UPDATE_USER_DATA_SUCCESS:
+      return {
+        ...state,
+        sendingEmail: false,
+        isEmailSent: true
       };
     case FETCH_ORDERS_REQUEST:
       return {

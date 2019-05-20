@@ -10,6 +10,8 @@ import Footer from "./Footer/Footer";
 import OrderFormContainer from "./Forms/Order/OrderFormContainer";
 import SignInFormContainer from "./Forms/SignIn/SignInFormContainer";
 import SignUpFormContainer from "./Forms/SignUp/SignUpFormContainer";
+import ResetPasswordFormContainer from "./Forms/ResetPassword/ResetPasswordFormContainer";
+import VerifyEmail from "./VerifyEmail/VerifyEmail";
 import CompaniesCatalogue from "./CompaniesCatalogue/CompaniesCatalogue";
 import CompanyContainer from "./Company/CompanyContainer";
 import CompaniesListByQueryContainer from "./CompaniesCatalogue/CompaniesListByQueryContainer";
@@ -38,8 +40,7 @@ class App extends Component {
         dispatch(signOut());
         this.props.history.push("/signin");
       } else {
-        const token = localStorage.token;
-        dispatch(getUserDataFromToken(token));
+        dispatch(getUserDataFromToken());
       }
     }
   }
@@ -69,7 +70,17 @@ class App extends Component {
                   component={FeedbackFormContainer}
                 />
                 <Route exact path="/signin" component={SignInFormContainer} />
+                <Route
+                  exact
+                  path="/resetPassword"
+                  component={ResetPasswordFormContainer}
+                />
                 <Route exact path="/signup" component={SignUpFormContainer} />
+                <Route
+                  exact
+                  path="/verifyEmail/:verificationToken"
+                  component={VerifyEmail}
+                />
                 <Route
                   exact
                   path="/service/:titleId"
