@@ -6,8 +6,9 @@ import {
   GET_ERRORS,
   DELETE_ERRORS,
   GET_USER_DATA,
-  UPDATE_USER_DATA_REQUEST,
-  UPDATE_USER_DATA_SUCCESS,
+  UPDATE_USER_DATA,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
   USER_LOADING
 } from "actions/userActions";
 import {
@@ -95,13 +96,27 @@ export default function(state = initialState, action) {
         ...state,
         additionalUserData: action.userData
       };
-    case UPDATE_USER_DATA_REQUEST:
+    case UPDATE_USER_DATA:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          email: action.updates.email
+        },
+        additionalUserData: {
+          ...state.additionalUserData,
+          name: action.updates.name,
+          address: action.updates.address,
+          services: action.updates.services
+        }
+      };
+    case RESET_PASSWORD_REQUEST:
       return {
         ...state,
         sendingEmail: true,
         isEmailSent: false
       };
-    case UPDATE_USER_DATA_SUCCESS:
+    case RESET_PASSWORD_SUCCESS:
       return {
         ...state,
         sendingEmail: false,

@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { cancelNewOrder, handleSortValueChange } from "actions/orderActions";
-import { editOrderStatus, getOrdersData } from "actions/orderActions";
+import {
+  cancelNewOrder,
+  handleSortValueChange,
+  editOrderStatus,
+  getOrdersData
+} from "actions/orderActions";
 import UserProfile from "./UserProfile";
 import { Spin, Alert } from "antd";
 

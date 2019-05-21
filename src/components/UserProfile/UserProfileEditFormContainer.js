@@ -15,7 +15,7 @@ class UserProfileEditFormContainer extends Component {
         errors={this.props.auth.errors}
         onChange={this.props.onChange}
         auth={this.props.auth}
-        updateUser={this.props.updateUser}
+        updateUserData={this.props.updateUserData}
         signOut={this.props.signOut}
         history={this.props.history}
         userData={this.props.auth.additionalUserData}
@@ -32,7 +32,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  updateUser: update,
+  updateUserData: update,
   onChange: handleFormChange,
   deleteErrors: deleteErrors,
   signOut: signOut

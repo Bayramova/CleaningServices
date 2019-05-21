@@ -24,12 +24,11 @@ class UserProfileEditForm extends React.Component {
             id: this.props.auth.userData.id,
             ...values
           };
-          this.props.updateUser(
+          this.props.updateUserData(
             this.props.auth.userData.id,
             userData,
             this.props.history
           );
-          //this.props.signOut();
         } else {
           this.props.history.goBack();
         }
@@ -45,7 +44,7 @@ class UserProfileEditForm extends React.Component {
   compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue("password")) {
-      callback("Two passwords that you enter is inconsistent!");
+      callback("Passwords doesn't match!");
     } else {
       callback();
     }

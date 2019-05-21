@@ -23,8 +23,9 @@ export const USER_LOADING = "USER_LOADING";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const UNSET_CURRENT_USER = "UNSET_CURRENT_USER";
 export const GET_USER_DATA = "GET_USER_DATA";
-export const UPDATE_USER_DATA_REQUEST = "UPDATE_USER_DATA_REQUEST";
-export const UPDATE_USER_DATA_SUCCESS = "UPDATE_USER_DATA_SUCCESS";
+export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
+export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
+export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
 
 const signUpUserRequest = () => {
   return {
@@ -78,15 +79,23 @@ const getUserData = userData => {
   };
 };
 
-const updateUserDataRequest = () => {
+const updateUserData = (id, updates) => {
   return {
-    type: UPDATE_USER_DATA_REQUEST
+    type: UPDATE_USER_DATA,
+    id,
+    updates
   };
 };
 
-const updateUserDataSuccess = () => {
+const resetPasswordRequest = () => {
   return {
-    type: UPDATE_USER_DATA_SUCCESS
+    type: RESET_PASSWORD_REQUEST
+  };
+};
+
+const resetPasswordSuccess = () => {
+  return {
+    type: RESET_PASSWORD_SUCCESS
   };
 };
 
@@ -160,8 +169,20 @@ export const signIn = userData => dispatch => {
     });
 };
 
+export const update = (id, updates, history) => dispatch => {
+  updateUser(id, updates)
+    .then(res => {
+      dispatch(updateUserData(id, updates));
+    })
+    .then(res => history.goBack())
+    .catch(err => {
+      console.log(err);
+      new Toast("Something went wrong", "error").show(Toast.toastsContainer);
+    });
+};
+
 export const reset = userData => dispatch => {
-  dispatch(updateUserDataRequest());
+  dispatch(resetPasswordRequest());
   resetPassword(userData)
     .then(res => {
       if (localStorage.token) {
@@ -169,7 +190,7 @@ export const reset = userData => dispatch => {
         socket.emit("leave", jwtDecode(localStorage.token).id);
         localStorage.removeItem("token");
       }
-      dispatch(updateUserDataSuccess());
+      dispatch(resetPasswordSuccess());
       new Toast(res.message, "info").show(Toast.toastsContainer);
     })
     .catch(err => {
@@ -208,22 +229,22 @@ export const signOut = () => dispatch => {
   localStorage.removeItem("token");
 };
 
-export const update = (id, updates) => dispatch => {
-  dispatch(updateUserDataRequest());
-  updateUser(id, updates)
-    .then(res => {
-      dispatch(unsetCurrentUser());
-      socket.emit("leave", jwtDecode(localStorage.token).id);
-      localStorage.removeItem("token");
-      dispatch(updateUserDataSuccess());
-      new Toast(res.message, "info").show(Toast.toastsContainer);
-    })
-    .catch(err => {
-      err.json().then(errorMessage => {
-        dispatch(getErrors(errorMessage));
-      });
-    });
-};
+// export const update = (id, updates) => dispatch => {
+//   dispatch(updateUserDataRequest());
+//   updateUser(id, updates)
+//     .then(res => {
+//       dispatch(unsetCurrentUser());
+//       socket.emit("leave", jwtDecode(localStorage.token).id);
+//       localStorage.removeItem("token");
+//       dispatch(updateUserDataSuccess());
+//       new Toast(res.message, "info").show(Toast.toastsContainer);
+//     })
+//     .catch(err => {
+//       err.json().then(errorMessage => {
+//         dispatch(getErrors(errorMessage));
+//       });
+//     });
+// };
 
 export const leaveFeedback = (data, history) => dispatch => {
   postFeedback(data)
